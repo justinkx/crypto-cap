@@ -6,13 +6,15 @@ import {
 } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
+import DrawerNavigation from './Navigation/DrawerNavigation';
+
 const App = () => {
   return (
     <>
       <StatusBar translucent style="auto" />
       <SafeAreaProvider>
         <SafeAreaInsetsContext.Consumer>
-          {() => <AppNavigation />}
+          {() => <DrawerNavigation />}
         </SafeAreaInsetsContext.Consumer>
       </SafeAreaProvider>
     </>

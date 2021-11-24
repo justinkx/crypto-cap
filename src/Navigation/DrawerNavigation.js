@@ -14,10 +14,10 @@ const Drawer = createDrawerNavigator();
 
 function DrawerNavigation() {
   return (
-    <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Navigator initialRouteName={DASHBOARD_SCREEN}>
       <Drawer.Screen name={DASHBOARD_SCREEN} component={DashBoard} />
-      <Drawer.Screen name={TRANSACTIONS_SCREEN} component={Transactions} />
       <Drawer.Screen name={EXCHANGE_SCREEN} component={Exchange} />
+      <Drawer.Screen name={TRANSACTIONS_SCREEN} component={Transactions} />
     </Drawer.Navigator>
   );
 }
