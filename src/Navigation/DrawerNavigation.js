@@ -14,7 +14,12 @@ const Drawer = createDrawerNavigator();
 
 function DrawerNavigation() {
   return (
-    <Drawer.Navigator initialRouteName={DASHBOARD_SCREEN}>
+    <Drawer.Navigator
+      initialRouteName={DASHBOARD_SCREEN}
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Drawer.Screen name={DASHBOARD_SCREEN} component={DashBoard} />
       <Drawer.Screen name={EXCHANGE_SCREEN} component={Exchange} />
       <Drawer.Screen name={TRANSACTIONS_SCREEN} component={Transactions} />
