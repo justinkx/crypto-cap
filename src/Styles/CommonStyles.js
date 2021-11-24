@@ -4,7 +4,7 @@ import { StyleSheet, Platform } from 'react-native';
 export const isAndroid = Platform.OS === 'android';
 export const isIos = Platform.OS === 'ios';
 
-export const styles = StyleSheet.create({
+export const commonStyles = StyleSheet.create({
   flex: {
     flex: 1,
   },
@@ -22,5 +22,8 @@ export const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  page: {
+    paddingHorizontal: 15,
   },
 });

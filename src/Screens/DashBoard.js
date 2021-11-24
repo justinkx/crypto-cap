@@ -1,11 +1,13 @@
 import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Page from '../Components/Page';
+
 const DashBoard = () => {
   return (
-    <View>
+    <Page>
       <Text>DashBoard</Text>
-    </View>
+    </Page>
   );
 };
 

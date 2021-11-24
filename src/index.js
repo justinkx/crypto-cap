@@ -6,7 +6,7 @@ import AppNavigator from './Navigation/AppNavigation';
 const App = () => {
   return (
     <>
-      <StatusBar animated backgroundColor="#4c33ae" style="auto" />
+      <StatusBar animated backgroundColor="#4c33ae" style="light" />
       <AppNavigator />
     </>
   );
