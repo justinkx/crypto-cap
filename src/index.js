@@ -6,7 +6,7 @@ import {
 } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
-import DrawerNavigation from './Navigation/DrawerNavigation';
+import AppNavigator from './Navigation/AppNavigation';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
       <StatusBar translucent style="auto" />
       <SafeAreaProvider>
         <SafeAreaInsetsContext.Consumer>
-          {() => <DrawerNavigation />}
+          {() => <AppNavigator />}
         </SafeAreaInsetsContext.Consumer>
       </SafeAreaProvider>
     </>

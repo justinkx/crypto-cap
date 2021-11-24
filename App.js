@@ -1,7 +1,7 @@
 import React from 'react';
 
-import App from './src/index';
+import Entry from './src/index';
 
 export default function App() {
-  return <App />;
+  return <Entry />;
 }
