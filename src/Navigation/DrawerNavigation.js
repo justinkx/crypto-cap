@@ -6,9 +6,9 @@ import {
   TRANSACTIONS_SCREEN,
   EXCHANGE_SCREEN,
 } from './NavConstants';
-import DashBoard from '../Screens/DashBoard';
-import Transactions from '../Screens/Transactions';
-import Exchange from '../Screens/Exchange';
+import DashBoard from '../screens/DashBoard';
+import Transactions from '../screens/Transactions';
+import Exchange from '../screens/Exchange';
 
 const Drawer = createDrawerNavigator();
 

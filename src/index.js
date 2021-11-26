@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
-import AppNavigator from './Navigation/AppNavigation';
+import AppNavigator from './navigation/AppNavigation';
 
 const App = () => {
   return (

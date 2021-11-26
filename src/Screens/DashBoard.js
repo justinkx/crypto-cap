@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Page from '../Components/Page';
+import Page from '../components/Page';
 
 const DashBoard = () => {
   return (
