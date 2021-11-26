@@ -7,6 +7,9 @@ import {
 } from 'react-native-safe-area-context';
 
 import DrawerNavigator from './DrawerNavigation';
+import { commonStyles } from '../styles/CommonStyles';
+
+const BACKGROUND_IMAGE = require('../../assets/crypto-cap-bg.png');
 
 const AppNavigator = () => {
   const appTheme = useMemo(
@@ -22,8 +25,8 @@ const AppNavigator = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ImageBackground
-        source={require('../../assets/crypto-cap-bg.png')}
-        style={{ flex: 1 }}
+        source={BACKGROUND_IMAGE}
+        style={commonStyles.flex}
         resizeMode="cover"
       >
         <NavigationContainer theme={appTheme}>
