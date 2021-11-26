@@ -5,10 +5,12 @@ import {
   DASHBOARD_SCREEN,
   TRANSACTIONS_SCREEN,
   EXCHANGE_SCREEN,
+  BUY_SELL_SCREEN,
 } from './NavConstants';
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
 import Exchange from '../screens/Exchange';
+import BuySell from '../screens/BuySell';
 
 import DrawerContent from './DrawerContent';
 
@@ -25,6 +27,7 @@ function DrawerNavigation() {
     >
       <Drawer.Screen name={DASHBOARD_SCREEN} component={DashBoard} />
       <Drawer.Screen name={EXCHANGE_SCREEN} component={Exchange} />
+      <Drawer.Screen name={BUY_SELL_SCREEN} component={BuySell} />
       <Drawer.Screen name={TRANSACTIONS_SCREEN} component={Transactions} />
     </Drawer.Navigator>
   );
