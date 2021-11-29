@@ -4,6 +4,10 @@ import { StyleSheet, Platform } from 'react-native';
 export const isAndroid = Platform.OS === 'android';
 export const isIos = Platform.OS === 'ios';
 
+export const colours = {
+  white: '#ffffff',
+  black: '#000000',
+};
 export const commonStyles = StyleSheet.create({
   flex: {
     flex: 1,
