@@ -20,6 +20,7 @@
     "expo": "~43.0.2",
     "expo-font": "~10.0.3",
     "expo-linear-gradient": "~10.0.3",
+    "expo-splash-screen": "~0.13.5",
     "expo-status-bar": "~1.1.0",
     "lodash": "^4.17.21",
     "memoize-one": "^6.0.0",
