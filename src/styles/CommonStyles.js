@@ -37,4 +37,13 @@ export const commonStyles = StyleSheet.create({
   page: {
     paddingHorizontal: 15,
   },
+  fontMedium: {
+    fontFamily: FONT_MEDIUM,
+  },
+  fontSemibold: {
+    fontFamily: FONT_SEMI_BOLD,
+  },
+  fontBold: {
+    fontFamily: FONT_BOLD,
+  },
 });
