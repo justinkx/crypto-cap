@@ -8,7 +8,7 @@ import { CRYPTO_ASSETS } from '../../utils/api';
 const parseAssets = (accu, curr) => {
   return {
     ...accu,
-    [curr.symbol]: { ...curr },
+    [curr.id]: { ...curr },
   };
 };
 

@@ -8,7 +8,7 @@ import { CRYPTO_EXCHANGES } from '../../utils/api';
 const parseExchanges = (accu, curr) => {
   return {
     ...accu,
-    [curr.name]: { ...curr },
+    [curr.id]: { ...curr },
   };
 };
 
