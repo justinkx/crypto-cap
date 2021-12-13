@@ -8,7 +8,7 @@ import { CRYPTO_MARKETS } from '../../utils/api';
 const parseMarkets = (accu, curr) => {
   return {
     ...accu,
-    [curr.exchangeId]: { ...curr },
+    [curr.baseId]: { ...curr },
   };
 };
 

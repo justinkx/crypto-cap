@@ -8,7 +8,7 @@ import { CRYPTO_EXCHANGES } from '../../utils/api';
 const parseExchanges = (accu, curr) => {
   return {
     ...accu,
-    [curr.id]: { ...curr },
+    [curr.exchangeId]: { ...curr },
   };
 };
 
@@ -26,7 +26,9 @@ function* fetchExchangesSaga() {
     const { data = [] } = yield call(fetchExchanges);
     const parsedExchanges = data.reduce(parseExchanges, {});
     yield put(saveExchanges(parsedExchanges));
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default function* exchangesSaga() {
