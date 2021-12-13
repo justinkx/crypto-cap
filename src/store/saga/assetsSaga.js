@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 
-import { GET_ASSETS, saveAssets } from '../actions/assetActions';
+import { saveAssets, fetchAssetsSuccess } from '../actions/assetActions';
+import { FETCH_INITIAL_DATA } from '../actions/appActions';
 import { CRYPTO_ASSETS } from '../../utils/api';
 
 const parseAssets = (accu, curr) => {
@@ -25,9 +26,10 @@ function* fetchAssetsSaga() {
     const { data = [] } = yield call(fetchAssets);
     const parsedAssets = data.reduce(parseAssets, {});
     yield put(saveAssets(parsedAssets));
+    yield put(fetchAssetsSuccess());
   } catch (error) {}
 }
 
 export default function* assetsSaga() {
-  yield takeLatest(GET_ASSETS, fetchAssetsSaga);
+  yield takeLatest(FETCH_INITIAL_DATA, fetchAssetsSaga);
 }
