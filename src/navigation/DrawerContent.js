@@ -1,17 +1,24 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { ImageBackground, View, Image, StyleSheet, Text } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import { useDispatch } from 'react-redux';
 
 import { commonStyles, colours } from '../styles/CommonStyles';
 import { userData } from '../utils/data';
+import { fetchInitialData } from '../store/actions/appActions';
 
 const BACKGROUND_IMAGE = require('../../assets/crypto-cap-bg.png');
 const AVATAR_SIZE = 50;
 
 const DrawerContent = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchInitialData());
+  }, [dispatch]);
   return (
     <ImageBackground
       source={BACKGROUND_IMAGE}
