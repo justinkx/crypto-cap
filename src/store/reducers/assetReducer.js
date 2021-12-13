@@ -1,6 +1,6 @@
 import { SAVE_ASSETS } from '../actions/assetActions';
 
-export const initialState = {};
+const initialState = {};
 
 export default function assetReducer(state = initialState, action) {
   switch (action.type) {
@@ -12,6 +12,6 @@ export default function assetReducer(state = initialState, action) {
       };
 
     default:
-      state;
+      return state;
   }
 }
