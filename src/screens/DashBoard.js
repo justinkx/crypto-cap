@@ -2,11 +2,12 @@ import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Page from '../components/Page';
+import TotalBalance from '../components/TotalBalance';
 
 const DashBoard = () => {
   return (
-    <Page>
-      <Text>DashBoard</Text>
+    <Page padding>
+      <TotalBalance />
     </Page>
   );
 };

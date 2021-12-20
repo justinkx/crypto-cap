@@ -21,14 +21,31 @@ function DrawerNavigation() {
     <Drawer.Navigator
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
-        headerShown: false,
+        headerStyle: { backgroundColor: 'transparent' },
+        headerTitleStyle: { color: 'white' },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
     >
-      <Drawer.Screen name={DASHBOARD_SCREEN} component={DashBoard} />
-      <Drawer.Screen name={EXCHANGE_SCREEN} component={Exchange} />
-      <Drawer.Screen name={BUY_SELL_SCREEN} component={BuySell} />
-      <Drawer.Screen name={TRANSACTIONS_SCREEN} component={Transactions} />
+      <Drawer.Screen
+        options={{ title: 'Dashboard' }}
+        name={DASHBOARD_SCREEN}
+        component={DashBoard}
+      />
+      <Drawer.Screen
+        options={{ title: 'Exchange' }}
+        name={EXCHANGE_SCREEN}
+        component={Exchange}
+      />
+      <Drawer.Screen
+        options={{ title: 'Buy / Sell' }}
+        name={BUY_SELL_SCREEN}
+        component={BuySell}
+      />
+      <Drawer.Screen
+        options={{ title: 'Transactions' }}
+        name={TRANSACTIONS_SCREEN}
+        component={Transactions}
+      />
     </Drawer.Navigator>
   );
 }
