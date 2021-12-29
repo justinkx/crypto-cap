@@ -25,7 +25,6 @@ const TotalBalance = () => {
     []
   );
 
-  console.log(pieData);
   return (
     <View style={styles.container}>
       <View>
