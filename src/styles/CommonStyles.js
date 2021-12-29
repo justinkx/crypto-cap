@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 
 export const isAndroid = Platform.OS === 'android';
