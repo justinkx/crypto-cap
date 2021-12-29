@@ -11,7 +11,13 @@ import {
 const TotalBalance = () => {
   return (
     <View>
-      <Text style={[commonStyles.primaryTintColor, styles.title]}>
+      <Text
+        style={[
+          commonStyles.primaryTintColor,
+          styles.title,
+          commonStyles.fontMedium,
+        ]}
+      >
         Total Balance
       </Text>
       <Text style={[commonStyles.whiteColor, styles.balance]}>
@@ -37,11 +43,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   balance: {
-    fontSize: 22,
+    fontSize: 26,
     fontFamily: FONT_OUTFIT_BOLD,
     paddingBottom: 4,
   },
   btcEquivalent: {
     fontFamily: FONT_SEMI_BOLD,
+    fontSize: 18,
   },
 });

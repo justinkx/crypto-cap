@@ -15,7 +15,7 @@ export const colors = {
   white: '#ffffff',
   black: '#000000',
   primary: '#4f34b1',
-  primaryTint: '#8c7fe1',
+  primaryTint: '#a69aef',
 };
 export const commonStyles = StyleSheet.create({
   flex: {
