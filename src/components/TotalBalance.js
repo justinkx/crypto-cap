@@ -1,7 +1,12 @@
 import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, commonStyles, FONT_OUTFIT_BOLD } from '../styles/CommonStyles';
+import {
+  colors,
+  commonStyles,
+  FONT_OUTFIT_BOLD,
+  FONT_SEMI_BOLD,
+} from '../styles/CommonStyles';
 
 const TotalBalance = () => {
   return (
@@ -18,7 +23,7 @@ const TotalBalance = () => {
           .55
         </Text>
       </Text>
-      <Text style={commonStyles.whiteColor}>
+      <Text style={[commonStyles.whiteColor, styles.btcEquivalent]}>
         2.001234998 <Text style={commonStyles.primaryTintColor}>BTC</Text>
       </Text>
     </View>
@@ -35,5 +40,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: FONT_OUTFIT_BOLD,
     paddingBottom: 4,
+  },
+  btcEquivalent: {
+    fontFamily: FONT_SEMI_BOLD,
   },
 });

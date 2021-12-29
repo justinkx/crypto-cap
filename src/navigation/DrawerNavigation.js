@@ -13,7 +13,7 @@ import Exchange from '../screens/Exchange';
 import BuySell from '../screens/BuySell';
 
 import DrawerContent from './DrawerContent';
-
+import { FONT_SEMI_BOLD } from '../styles/CommonStyles';
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigation() {
@@ -22,7 +22,7 @@ function DrawerNavigation() {
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
         headerStyle: { backgroundColor: 'transparent' },
-        headerTitleStyle: { color: 'white' },
+        headerTitleStyle: { color: 'white', fontFamily: FONT_SEMI_BOLD },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
     >
