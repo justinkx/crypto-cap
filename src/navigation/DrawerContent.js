@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/drawer';
 import { useDispatch } from 'react-redux';
 
-import { commonStyles, colours } from '../styles/CommonStyles';
+import { commonStyles, colors } from '../styles/CommonStyles';
 import { userData } from '../utils/data';
 import { fetchInitialData } from '../store/actions/appActions';
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   name: {
-    color: colours.white,
+    color: colors.white,
     paddingLeft: 15,
   },
 });

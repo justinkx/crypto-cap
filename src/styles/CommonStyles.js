@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 
 export const isAndroid = Platform.OS === 'android';
@@ -11,9 +10,11 @@ export const FONT_BOLD = 'MontserratBold';
 export const FONT_OUTFIT_REGULAR = 'OutfitRegular';
 export const FONT_OUTFIT_BOLD = 'OutfitBold';
 
-export const colours = {
+export const colors = {
   white: '#ffffff',
   black: '#000000',
+  primary: '#4f34b1',
+  primaryTint: '#a69aef',
 };
 export const commonStyles = StyleSheet.create({
   flex: {
@@ -45,5 +46,14 @@ export const commonStyles = StyleSheet.create({
   },
   fontBold: {
     fontFamily: FONT_BOLD,
+  },
+  primaryColor: {
+    color: colors.primary,
+  },
+  primaryTintColor: {
+    color: colors.primaryTint,
+  },
+  whiteColor: {
+    color: colors.white,
   },
 });
