@@ -1,6 +1,18 @@
-import React, { memo, useCallback } from 'react';
-import { StyleSheet, Image, View, FlatList, Text } from 'react-native';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  Image,
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
+import axios from 'axios';
+import _size from 'lodash/size';
+import _get from 'lodash/get';
+import _map from 'lodash/map';
+import { LineChart } from 'react-native-svg-charts';
 
 import {
   commonStyles,
@@ -10,7 +22,7 @@ import {
 } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import { balanceCoins } from '../../utils/data';
-import { CRYPTO_ASSET_SMALL } from '../../utils/api';
+import { CRYPTO_ASSET_SMALL, CRYPTO_COIN_24HR_CHANGE } from '../../utils/api';
 
 const HEIGHT = 75;
 
@@ -22,7 +34,6 @@ const DashboardPriceChange = () => {
 
   const keyExtractor = useCallback((item) => item?.id, []);
 
-  console.log({ balanceMarketChanges });
   const renderItem = useCallback(({ item }) => <RenderBalance {...item} />, []);
   return (
     <View
@@ -37,59 +48,78 @@ const DashboardPriceChange = () => {
   );
 };
 
-const RenderBalance = memo(
-  ({
-    changePercent24Hr,
-    explorer,
-    id,
-    marketCapUsd,
-    name,
-    priceUsd,
-    volumeUsd24Hr,
-    symbol,
-  }) => {
-    const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
-    const isUp = change24Hr > 0;
+const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
+  const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
+  const isUp = change24Hr > 0;
+  const [prices, setPrices] = useState([]);
 
-    return (
+  useEffect(() => {
+    async function fetchPrices() {
+      try {
+        const { data } = await axios.get(CRYPTO_COIN_24HR_CHANGE(name));
+        const _prices24hr = _get(data, 'prices');
+        const _prices = _map(_prices24hr, ([_, price]) => parseInt(price));
+        setPrices(_prices);
+      } catch (error) {}
+    }
+    if (!_size(prices) && name) {
+      fetchPrices();
+    }
+  }, [name, prices]);
+
+  console.log({ name, prices });
+  return (
+    <View
+      style={[
+        commonStyles.row,
+        commonStyles.spaceBetween,
+        styles.cardContainer,
+      ]}
+    >
       <View
         style={[
+          styles.boxShadow,
+          styles.tickerCard,
           commonStyles.row,
           commonStyles.spaceBetween,
-          styles.cardContainer,
         ]}
       >
-        <View
-          style={[
-            styles.boxShadow,
-            styles.tickerCard,
-            commonStyles.row,
-            commonStyles.spaceBetween,
-          ]}
-        >
-          <View style={[styles.leftView, commonStyles.row]}>
-            <Image
-              style={styles.icon}
-              source={{ uri: CRYPTO_ASSET_SMALL(symbol) }}
-            />
-            <View>
-              <Text style={styles.name}>{name}</Text>
-              <Text style={styles.priceUsd}>
-                ${parseFloat(priceUsd).toFixed(2)}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.rightView}>
-            <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
-              {change24Hr}% {isUp ? '▲' : '▼'}
+        <View style={[styles.leftView, commonStyles.row]}>
+          <Image
+            style={styles.icon}
+            source={{ uri: CRYPTO_ASSET_SMALL(symbol) }}
+          />
+          <View>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.priceUsd}>
+              ${parseFloat(priceUsd).toFixed(2)}
             </Text>
           </View>
         </View>
-        <View style={[styles.boxShadow, styles.tickerBuy]}></View>
+        <View style={styles.rightView}>
+          {prices && (
+            <LineChart
+              style={{ height: 50 }}
+              data={prices}
+              svg={{ stroke: isUp ? colors.success : colors.error }}
+              contentInset={{ top: 20, bottom: 20 }}
+            />
+          )}
+          <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
+            {change24Hr}% {isUp ? '▲' : '▼'}
+          </Text>
+        </View>
       </View>
-    );
-  }
-);
+      <View style={[styles.boxShadow, styles.tickerBuy]}>
+        <TouchableOpacity style={[commonStyles.flex, commonStyles.center]}>
+          <Text style={[commonStyles.fontBold, commonStyles.primaryColor]}>
+            BUY
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+});
 
 export default memo(DashboardPriceChange);
 
@@ -108,7 +138,7 @@ const styles = StyleSheet.create({
     height: HEIGHT,
     backgroundColor: colors.white,
   },
-  tickerCard: { flex: 1, padding: 5, alignItems: 'center' },
+  tickerCard: { flex: 1, padding: 10, alignItems: 'center' },
   leftView: {},
   rightView: {},
   tickerBuy: { width: HEIGHT, height: HEIGHT, marginLeft: 15 },
