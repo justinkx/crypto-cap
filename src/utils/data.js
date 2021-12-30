@@ -10,17 +10,20 @@ export const balance = [
     name: 'Bitcoin',
     balance: 1.125,
     equivalentUsd: 53625.53,
+    volume: '91%',
   },
   {
     token: 'ETH',
     name: 'Ethereum',
     balance: 1.567,
     equivalentUsd: 5920.15,
+    volume: '4%',
   },
   {
     token: 'SOL',
     name: 'Solana',
     balance: 39.14,
     equivalentUsd: 6832.42,
+    volume: '5%',
   },
 ];

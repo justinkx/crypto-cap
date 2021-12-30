@@ -42,6 +42,9 @@ export const commonStyles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
+  col: {
+    flexDirection: 'column',
+  },
   page: {
     paddingHorizontal: 15,
   },
@@ -62,5 +65,8 @@ export const commonStyles = StyleSheet.create({
   },
   whiteColor: {
     color: colors.white,
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
   },
 });

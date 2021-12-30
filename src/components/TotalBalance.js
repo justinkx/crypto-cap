@@ -53,7 +53,7 @@ const TotalBalance = () => {
       <PieChart
         style={{ height: PIE_CHART_SIZE, width: PIE_CHART_SIZE }}
         data={pieData}
-        innerRadius={'70%'}
+        innerRadius={'75%'}
       />
     </View>
   );
