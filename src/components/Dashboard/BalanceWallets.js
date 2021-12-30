@@ -25,7 +25,13 @@ const BalanceWallets = () => {
           { width: width / 3 - 20, height: width / 3 - 20 },
         ]}
       >
-        <View style={[commonStyles.flex, commonStyles.spaceBetween]}>
+        <View
+          style={[
+            commonStyles.flex,
+            commonStyles.spaceBetween,
+            commonStyles.boxShadow,
+          ]}
+        >
           <View style={[commonStyles.row, commonStyles.spaceBetween]}>
             <Image
               style={styles.icon}

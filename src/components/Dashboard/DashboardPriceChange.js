@@ -13,6 +13,7 @@ import _size from 'lodash/size';
 import _get from 'lodash/get';
 import _map from 'lodash/map';
 import { LineChart } from 'react-native-svg-charts';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 import {
   commonStyles,
@@ -44,6 +45,35 @@ const DashboardPriceChange = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
+      <TouchableOpacity style={[styles.bottomButton, commonStyles.row]}>
+        <View style={[commonStyles.row, commonStyles.center]}>
+          <MaterialCommunityIcons
+            name="upload"
+            size={24}
+            color={colors.error}
+          />
+          <Text style={[commonStyles.whiteColor, commonStyles.fontBold]}>
+            SEND
+          </Text>
+        </View>
+        <View style={[styles.qrCode, commonStyles.center]}>
+          <MaterialIcons
+            name="qr-code-scanner"
+            size={22}
+            color={colors.white}
+          />
+        </View>
+        <View style={[commonStyles.row, commonStyles.center]}>
+          <MaterialCommunityIcons
+            name="download"
+            size={24}
+            color={colors.success}
+          />
+          <Text style={[commonStyles.whiteColor, commonStyles.fontBold]}>
+            REQUEST
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -148,4 +178,19 @@ const styles = StyleSheet.create({
   change24: { fontSize: 12, fontFamily: FONT_MEDIUM },
   up: { color: colors.success },
   down: { color: colors.error },
+  bottomButton: {
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: colors.primary,
+    marginHorizontal: 15,
+    paddingHorizontal: 15,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  qrCode: {
+    width: 35,
+    height: 35,
+    borderRadius: 35 / 2,
+    backgroundColor: colors.primaryFade,
+  },
 });
