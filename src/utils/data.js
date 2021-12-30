@@ -1,3 +1,6 @@
+import _map from 'lodash/map';
+import _toLower from 'lodash/toLower';
+
 export const userData = {
   name: 'Liam Oliver',
   image:
@@ -20,10 +23,12 @@ export const balance = [
     volume: '4%',
   },
   {
-    token: 'SOL',
-    name: 'Solana',
-    balance: 39.14,
+    token: 'AAVE',
+    name: 'Aave',
+    balance: 27.89,
     equivalentUsd: 6832.42,
     volume: '5%',
   },
 ];
+
+export const balanceCoins = _map(balance, (item) => _toLower(item.name));
