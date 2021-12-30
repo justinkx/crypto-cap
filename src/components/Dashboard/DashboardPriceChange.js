@@ -99,7 +99,6 @@ const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
     }
   }, [name, prices]);
 
-  console.log({ name, prices });
   return (
     <View
       style={[
