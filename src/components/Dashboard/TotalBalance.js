@@ -6,9 +6,9 @@ import {
   commonStyles,
   FONT_OUTFIT_BOLD,
   FONT_SEMI_BOLD,
-} from '../styles/CommonStyles';
-import { balance } from '../utils/data';
-import { pieColor } from '../utils/helpers';
+} from '../../styles/CommonStyles';
+import { balance } from '../../utils/data';
+import { pieColor } from '../../utils/helpers';
 
 const PIE_CHART_SIZE = 80;
 

@@ -9,15 +9,10 @@ import {
   Image,
 } from 'react-native';
 
-import {
-  commonStyles,
-  FONT_OUTFIT_BOLD,
-  FONT_SEMI_BOLD,
-  colors,
-} from '../styles/CommonStyles';
-import { balance } from '../utils/data';
-import { CRYPTO_ASSET_SMALL } from '../utils/api';
-import { chartColor } from '../utils/helpers';
+import { commonStyles, colors } from '../../styles/CommonStyles';
+import { balance } from '../../utils/data';
+import { CRYPTO_ASSET_SMALL } from '../../utils/api';
+import { chartColor } from '../../utils/helpers';
 
 const BalanceWallets = () => {
   const { width } = useWindowDimensions();
