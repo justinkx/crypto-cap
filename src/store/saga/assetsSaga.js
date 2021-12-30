@@ -4,6 +4,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { saveAssets, fetchAssetsSuccess } from '../actions/assetActions';
 import { FETCH_INITIAL_DATA } from '../actions/appActions';
 import { CRYPTO_ASSETS } from '../../utils/api';
+import { connectSocket } from '../actions/socketAction';
 
 const parseAssets = (accu, curr) => {
   return {
@@ -27,6 +28,7 @@ function* fetchAssetsSaga() {
     const parsedAssets = data.reduce(parseAssets, {});
     yield put(saveAssets(parsedAssets));
     yield put(fetchAssetsSuccess());
+    yield put(connectSocket());
   } catch (error) {}
 }
 

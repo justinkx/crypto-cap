@@ -11,3 +11,5 @@ export const CRYPTO_COIN_24HR_CHANGE = (token) =>
   `https://api.coingecko.com/api/v3/coins/${_toLower(
     token
   )}/market_chart?vs_currency=usd&days=1`;
+
+export const PRICES_SOCKET = 'wss://ws.coincap.io/prices?assets=ALL';

@@ -45,8 +45,8 @@ const DashboardPriceChange = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
-      <TouchableOpacity style={[styles.bottomButton, commonStyles.row]}>
-        <View style={[commonStyles.row, commonStyles.center]}>
+      <View style={[styles.bottomButton, commonStyles.row]}>
+        <TouchableOpacity style={[commonStyles.row, commonStyles.center]}>
           <MaterialCommunityIcons
             name="upload"
             size={24}
@@ -55,15 +55,15 @@ const DashboardPriceChange = () => {
           <Text style={[commonStyles.whiteColor, commonStyles.fontBold]}>
             SEND
           </Text>
-        </View>
-        <View style={[styles.qrCode, commonStyles.center]}>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.qrCode, commonStyles.center]}>
           <MaterialIcons
             name="qr-code-scanner"
             size={22}
             color={colors.white}
           />
-        </View>
-        <View style={[commonStyles.row, commonStyles.center]}>
+        </TouchableOpacity>
+        <TouchableOpacity style={[commonStyles.row, commonStyles.center]}>
           <MaterialCommunityIcons
             name="download"
             size={24}
@@ -72,8 +72,8 @@ const DashboardPriceChange = () => {
           <Text style={[commonStyles.whiteColor, commonStyles.fontBold]}>
             REQUEST
           </Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -99,7 +99,6 @@ const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
     }
   }, [name, prices]);
 
-  console.log({ name, prices });
   return (
     <View
       style={[
