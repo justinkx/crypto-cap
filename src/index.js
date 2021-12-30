@@ -9,21 +9,22 @@ import { customFonts, typography } from './utils/Typography';
 import store from './store/index';
 
 const App = () => {
+  const [loaded] = Font.useFonts(customFonts);
+
   useEffect(() => {
-    async function loadFontsAsync() {
-      await SplashScreen.preventAutoHideAsync();
-      await Font.loadAsync(customFonts);
+    async function init() {
       typography();
       await SplashScreen.hideAsync();
     }
-
-    loadFontsAsync();
-  }, []);
+    if (loaded) {
+      init();
+    }
+  }, [loaded]);
 
   return (
     <Provider store={store}>
       <StatusBar animated backgroundColor="#4c33ae" style="light" />
-      <AppNavigator />
+      {loaded && <AppNavigator />}
     </Provider>
   );
 };

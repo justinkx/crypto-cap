@@ -6,9 +6,9 @@ import {
   commonStyles,
   FONT_OUTFIT_BOLD,
   FONT_SEMI_BOLD,
-} from '../styles/CommonStyles';
-import { balance } from '../utils/data';
-import { pieColor } from '../utils/helpers';
+} from '../../styles/CommonStyles';
+import { balance } from '../../utils/data';
+import { pieColor } from '../../utils/helpers';
 
 const PIE_CHART_SIZE = 80;
 
@@ -53,7 +53,7 @@ const TotalBalance = () => {
       <PieChart
         style={{ height: PIE_CHART_SIZE, width: PIE_CHART_SIZE }}
         data={pieData}
-        innerRadius={'70%'}
+        innerRadius={'75%'}
       />
     </View>
   );

@@ -15,6 +15,13 @@ export const colors = {
   black: '#000000',
   primary: '#4f34b1',
   primaryTint: '#a69aef',
+  primaryFade: '#4e4fb1',
+  wallet: '#44aff8',
+  walletTint: '#7ad2f8',
+  exchange: '#f87600',
+  exchangeTint: '#fe9e36',
+  success: '#02c766',
+  error: '#ff5b5a',
 };
 export const commonStyles = StyleSheet.create({
   flex: {
@@ -34,6 +41,9 @@ export const commonStyles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  col: {
+    flexDirection: 'column',
   },
   page: {
     paddingHorizontal: 15,
@@ -55,5 +65,18 @@ export const commonStyles = StyleSheet.create({
   },
   whiteColor: {
     color: colors.white,
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
+  },
+  boxShadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
 });
