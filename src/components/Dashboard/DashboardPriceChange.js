@@ -83,6 +83,8 @@ const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
   const isUp = change24Hr > 0;
   const [prices, setPrices] = useState([]);
 
+  /* eslint-disable radix */
+
   useEffect(() => {
     async function fetchPrices() {
       try {

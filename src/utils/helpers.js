@@ -1,3 +1,5 @@
+/* eslint-disable no-bitwise */
+
 export const chartColor = [
   '#AFB42B',
   '#FFC107',

@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 const BuySell = () => {
   return (
@@ -10,5 +10,3 @@ const BuySell = () => {
 };
 
 export default memo(BuySell);
-
-const styles = StyleSheet.create({});

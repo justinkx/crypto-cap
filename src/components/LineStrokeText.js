@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { commonStyles, colors } from '../styles/CommonStyles';
+import { commonStyles } from '../styles/CommonStyles';
 
 const LineStrokeText = ({
   message = '',
