@@ -45,8 +45,15 @@ const RenderBalance = memo(
     volumeUsd24Hr,
   }) => {
     return (
-      <View>
-        <Text> Asset</Text>
+      <View
+        style={[
+          commonStyles.row,
+          commonStyles.spaceBetween,
+          styles.cardContainer,
+        ]}
+      >
+        <View style={[styles.boxShadow, styles.tickerCard]}></View>
+        <View style={[styles.boxShadow, styles.tickerBuy]}></View>
       </View>
     );
   }
@@ -54,4 +61,21 @@ const RenderBalance = memo(
 
 export default memo(DashboardPriceChange);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  cardContainer: { padding: 10 },
+  boxShadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 10,
+    height: 70,
+    backgroundColor: colors.white,
+  },
+  tickerCard: { width: '80%' },
+  tickerBuy: { width: '15%' },
+});
