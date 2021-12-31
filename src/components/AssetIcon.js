@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { Image } from 'react-native';
 
 import { CRYPTO_ASSET_SMALL } from '../utils/api';
 
@@ -25,5 +25,3 @@ const AssetIcon = ({ symbol, iconStyle }) => {
 };
 
 export default memo(AssetIcon);
-
-const styles = StyleSheet.create({});

@@ -1,4 +1,4 @@
-import React, { memo, useRef, useMemo } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _isEqual from 'react-fast-compare';
 

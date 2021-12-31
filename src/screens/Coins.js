@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -37,5 +37,3 @@ const Coins = () => {
 };
 
 export default memo(Coins);
-
-const styles = StyleSheet.create({});
