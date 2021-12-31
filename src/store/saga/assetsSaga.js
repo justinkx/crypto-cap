@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, delay } from 'redux-saga/effects';
 
 import { saveAssets, fetchAssetsSuccess } from '../actions/assetActions';
 import { FETCH_INITIAL_DATA } from '../actions/appActions';
@@ -23,13 +23,16 @@ async function fetchAssets() {
 }
 
 function* fetchAssetsSaga() {
-  try {
-    const { data = [] } = yield call(fetchAssets);
-    const parsedAssets = data.reduce(parseAssets, {});
-    yield put(saveAssets(parsedAssets));
-    yield put(fetchAssetsSuccess());
-    yield put(connectSocket());
-  } catch (error) {}
+  while (true) {
+    try {
+      const { data = [] } = yield call(fetchAssets);
+      const parsedAssets = data.reduce(parseAssets, {});
+      yield put(saveAssets(parsedAssets));
+      yield put(fetchAssetsSuccess());
+      yield put(connectSocket());
+    } catch (error) {}
+    yield delay(10000);
+  }
 }
 
 export default function* assetsSaga() {
