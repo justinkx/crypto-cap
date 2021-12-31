@@ -13,6 +13,11 @@ export const getCryptoAssets = createSelector(assetReducer, (assets) =>
 
 export const getCryptoCoins = createSelector(assetReducer, (assets) =>
   memoizeOne((name = '') =>
-    _filter(assets, (asset) => _toLower(asset.name).includes(_toLower(name)))
+    _filter(
+      assets,
+      (asset) =>
+        _toLower(asset.name).includes(_toLower(name)) ||
+        _toLower(asset.symbol).includes(_toLower(name))
+    )
   )
 );
