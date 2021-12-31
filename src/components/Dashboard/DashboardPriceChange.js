@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   leftView: {},
   rightView: {},
   tickerBuy: { width: HEIGHT, height: HEIGHT, marginLeft: 15 },
-  icon: { width: 35, height: 35, marginRight: 5 },
+  icon: { width: 35, height: 35, marginRight: 10 },
   name: { fontFamily: FONT_MEDIUM, fontSize: 13 },
   priceUsd: { fontFamily: FONT_BOLD, fontSize: 14, paddingTop: 2 },
   change24: { fontSize: 12, fontFamily: FONT_MEDIUM },

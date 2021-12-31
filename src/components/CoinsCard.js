@@ -1,5 +1,6 @@
 import React, { memo, useRef, useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import _isEqual from 'react-fast-compare';
 
 import {
   commonStyles,
@@ -61,7 +62,11 @@ const CoinsCard = ({
   );
 };
 
-export default memo(CoinsCard);
+export default memo(
+  CoinsCard,
+  (prevProps, nextProps) =>
+    !nextProps.isFocused || _isEqual(nextProps, prevProps)
+);
 
 const styles = StyleSheet.create({
   container: {
