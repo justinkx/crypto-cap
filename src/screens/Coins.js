@@ -7,6 +7,7 @@ import Page from '../components/Page';
 import { getCryptoCoins } from '../store/selectors/assetSelector';
 import CoinsCard from '../components/CoinsCard';
 import { commonStyles } from '../styles/CommonStyles';
+import SearchBar from '../components/SearchBar';
 
 const Coins = () => {
   const isFocused = useIsFocused();
@@ -25,6 +26,11 @@ const Coins = () => {
 
   return (
     <Page scroll={false}>
+      <SearchBar
+        value={searchValue}
+        onChange={setSearchValue}
+        placeholder={'Search Coin'}
+      />
       <FlatList
         data={coins}
         keyExtractor={keyExtractor}
