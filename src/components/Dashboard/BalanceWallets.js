@@ -6,13 +6,12 @@ import {
   FlatList,
   TouchableOpacity,
   useWindowDimensions,
-  Image,
 } from 'react-native';
 
 import { commonStyles, colors } from '../../styles/CommonStyles';
 import { balance } from '../../utils/data';
-import { CRYPTO_ASSET_SMALL } from '../../utils/api';
 import { chartColor } from '../../utils/helpers';
+import AssetIcon from '../AssetIcon';
 
 const BalanceWallets = () => {
   const { width } = useWindowDimensions();
@@ -33,10 +32,7 @@ const BalanceWallets = () => {
           ]}
         >
           <View style={[commonStyles.row, commonStyles.spaceBetween]}>
-            <Image
-              style={styles.icon}
-              source={{ uri: CRYPTO_ASSET_SMALL(item?.token) }}
-            />
+            <AssetIcon symbol={item?.token} iconStyle={styles.icon} />
             <View style={[commonStyles.row, commonStyles.center]}>
               <View
                 style={[styles.badge, { backgroundColor: chartColor[index] }]}

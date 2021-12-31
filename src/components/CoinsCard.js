@@ -1,5 +1,5 @@
 import React, { memo, useRef, useMemo } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import {
   commonStyles,
@@ -8,22 +8,16 @@ import {
   FONT_MEDIUM,
   FONT_SEMI_BOLD,
 } from '../styles/CommonStyles';
-import { CRYPTO_ASSET_SMALL } from '../utils/api';
 import { NumbFormat } from '../utils/helpers';
+import AssetIcon from './AssetIcon';
 
 const CoinsCard = ({
   changePercent24Hr,
-  explorer,
-  id,
   marketCapUsd,
-  maxSupply,
   name,
   priceUsd,
   rank,
-  supply,
   symbol,
-  volumeUsd24Hr,
-  vwap24Hr,
 }) => {
   const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
   const isUp = change24Hr > 0;
@@ -32,10 +26,7 @@ const CoinsCard = ({
       <TouchableOpacity style={[commonStyles.row, styles.card]}>
         <View style={[commonStyles.row, styles.nameView]}>
           <Text style={styles.index}>{rank}</Text>
-          <Image
-            style={styles.icon}
-            source={{ uri: CRYPTO_ASSET_SMALL(symbol) }}
-          />
+          <AssetIcon symbol={symbol} iconStyle={styles.icon} />
           <View style={styles.symbolView}>
             <Text
               textBreakStrategy={'highQuality'}
