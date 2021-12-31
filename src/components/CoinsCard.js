@@ -10,6 +10,7 @@ import {
 } from '../styles/CommonStyles';
 import { NumbFormat } from '../utils/helpers';
 import AssetIcon from './AssetIcon';
+import PriceDirection from './PriceDirection';
 
 const CoinsCard = ({
   changePercent24Hr,
@@ -61,31 +62,6 @@ const CoinsCard = ({
 };
 
 export default memo(CoinsCard);
-
-const PriceDirection = memo(({ price }) => {
-  const lastPriceRef = useRef(0);
-
-  const { symbol = '', textStyle = {} } = useMemo(() => {
-    if (price && lastPriceRef?.current !== price) {
-      if (price > lastPriceRef.current) {
-        lastPriceRef.current = price;
-        return {
-          symbol: '\u25B2',
-          textStyle: styles.up,
-        };
-      } else if (price < lastPriceRef.current) {
-        lastPriceRef.current = price;
-        return {
-          symbol: '\u25BC',
-          textStyle: styles.down,
-        };
-      }
-    }
-    return { symbol: '', textStyle: {} };
-  }, [price]);
-
-  return <Text style={[textStyle, styles.direction]}>{symbol}</Text>;
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -142,8 +118,5 @@ const styles = StyleSheet.create({
     fontFamily: FONT_BOLD,
     color: colors.black,
     fontSize: 11,
-  },
-  direction: {
-    fontSize: 18,
   },
 });
