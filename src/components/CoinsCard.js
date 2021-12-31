@@ -75,29 +75,31 @@ const PriceDirection = memo(({ price }) => {
   const lastPriceRef = useRef(0);
 
   const { symbol = '', textStyle = {} } = useMemo(() => {
-    if (lastPriceRef?.current !== price) {
+    console.log('price >>>', price);
+    if (price && lastPriceRef?.current !== price) {
       if (price > lastPriceRef.current) {
         lastPriceRef.current = price;
         return {
           symbol: '\u25B2',
-          style: styles.up,
+          textStyle: styles.up,
         };
       } else if (price < lastPriceRef.current) {
         lastPriceRef.current = price;
         return {
           symbol: '\u25BC',
-          style: styles.down,
+          textStyle: styles.down,
         };
       }
     }
+    return { symbol: '', textStyle: {} };
   }, [price]);
 
-  return <Text style={textStyle}>{symbol}</Text>;
+  return <Text style={[textStyle, styles.direction]}>{symbol}</Text>;
 });
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginBottom: 15,
     height: 60,
     backgroundColor: colors.white,
     borderRadius: 10,
@@ -151,4 +153,5 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 11,
   },
+  direction: {},
 });
