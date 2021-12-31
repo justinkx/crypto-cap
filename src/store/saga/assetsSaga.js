@@ -26,10 +26,12 @@ function* fetchAssetsSaga() {
   while (true) {
     try {
       const { data = [] } = yield call(fetchAssets);
-      const parsedAssets = data.reduce(parseAssets, {});
-      yield put(saveAssets(parsedAssets));
-      yield put(fetchAssetsSuccess());
-      yield put(connectSocket());
+      if (data) {
+        const parsedAssets = data.reduce(parseAssets, {});
+        yield put(saveAssets(parsedAssets));
+        yield put(fetchAssetsSuccess());
+        yield put(connectSocket());
+      }
     } catch (error) {}
     yield delay(10000);
   }

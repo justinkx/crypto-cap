@@ -9,7 +9,7 @@ import {
 } from './NavConstants';
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
-import Exchange from '../screens/Exchange';
+import Exchanges from '../screens/Exchanges';
 import BuySell from '../screens/BuySell';
 
 import DrawerContent from './DrawerContent';
@@ -32,9 +32,9 @@ function DrawerNavigation() {
         component={DashBoard}
       />
       <Drawer.Screen
-        options={{ title: 'Exchange' }}
+        options={{ title: 'Exchanges' }}
         name={EXCHANGE_SCREEN}
-        component={Exchange}
+        component={Exchanges}
       />
       <Drawer.Screen
         options={{ title: 'Buy / Sell' }}

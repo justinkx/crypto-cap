@@ -1,5 +1,4 @@
 import { put, select, takeEvery, all } from 'redux-saga/effects';
-import _assign from 'lodash/assign';
 import _keys from 'lodash/keys';
 
 import { MESSAGE } from '../actions/socketAction';
