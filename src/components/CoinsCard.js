@@ -75,7 +75,6 @@ const PriceDirection = memo(({ price }) => {
   const lastPriceRef = useRef(0);
 
   const { symbol = '', textStyle = {} } = useMemo(() => {
-    console.log('price >>>', price);
     if (price && lastPriceRef?.current !== price) {
       if (price > lastPriceRef.current) {
         lastPriceRef.current = price;

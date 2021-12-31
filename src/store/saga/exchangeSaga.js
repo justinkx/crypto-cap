@@ -26,9 +26,7 @@ function* fetchExchangesSaga() {
     const { data = [] } = yield call(fetchExchanges);
     const parsedExchanges = data.reduce(parseExchanges, {});
     yield put(saveExchanges(parsedExchanges));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 export default function* exchangesSaga() {
