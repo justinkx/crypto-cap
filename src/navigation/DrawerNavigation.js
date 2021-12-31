@@ -6,11 +6,13 @@ import {
   TRANSACTIONS_SCREEN,
   EXCHANGE_SCREEN,
   BUY_SELL_SCREEN,
+  COINS_SCREEN,
 } from './NavConstants';
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
-import Exchange from '../screens/Exchange';
+import Exchanges from '../screens/Exchanges';
 import BuySell from '../screens/BuySell';
+import Coins from '../screens/Coins';
 
 import DrawerContent from './DrawerContent';
 import { FONT_SEMI_BOLD } from '../styles/CommonStyles';
@@ -25,6 +27,7 @@ function DrawerNavigation() {
         headerTitleStyle: { color: 'white', fontFamily: FONT_SEMI_BOLD },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
+      detachInactiveScreens
     >
       <Drawer.Screen
         options={{ title: 'Dashboard' }}
@@ -32,9 +35,14 @@ function DrawerNavigation() {
         component={DashBoard}
       />
       <Drawer.Screen
-        options={{ title: 'Exchange' }}
+        options={{ title: 'Coins' }}
+        name={COINS_SCREEN}
+        component={Coins}
+      />
+      <Drawer.Screen
+        options={{ title: 'Exchanges' }}
         name={EXCHANGE_SCREEN}
-        component={Exchange}
+        component={Exchanges}
       />
       <Drawer.Screen
         options={{ title: 'Buy / Sell' }}

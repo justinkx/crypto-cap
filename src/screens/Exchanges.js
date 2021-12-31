@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import { Text, View } from 'react-native';
 
-const Exchange = () => {
+const Exchanges = () => {
   return (
     <View>
-      <Text>Exchange</Text>
+      <Text>Exchanges</Text>
     </View>
   );
 };
 
-export default memo(Exchange);
+export default memo(Exchanges);

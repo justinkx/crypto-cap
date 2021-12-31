@@ -79,4 +79,7 @@ export const commonStyles = StyleSheet.create({
     shadowRadius: 1.41,
     elevation: 2,
   },
+  listPadding: {
+    padding: 10,
+  },
 });

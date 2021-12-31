@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import {
   StyleSheet,
-  Image,
   View,
   FlatList,
   Text,
@@ -23,7 +22,9 @@ import {
 } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import { balanceCoins } from '../../utils/data';
-import { CRYPTO_ASSET_SMALL, CRYPTO_COIN_24HR_CHANGE } from '../../utils/api';
+import { CRYPTO_COIN_24HR_CHANGE } from '../../utils/api';
+import PriceDirection from '../PriceDirection';
+import AssetIcon from '../AssetIcon';
 
 const HEIGHT = 75;
 
@@ -116,14 +117,12 @@ const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
         ]}
       >
         <View style={[styles.leftView, commonStyles.row]}>
-          <Image
-            style={styles.icon}
-            source={{ uri: CRYPTO_ASSET_SMALL(symbol) }}
-          />
+          <AssetIcon symbol={symbol} iconStyle={styles.icon} />
           <View>
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.priceUsd}>
               ${parseFloat(priceUsd).toFixed(2)}
+              <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
             </Text>
           </View>
         </View>
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
   leftView: {},
   rightView: {},
   tickerBuy: { width: HEIGHT, height: HEIGHT, marginLeft: 15 },
-  icon: { width: 35, height: 35, marginRight: 5 },
+  icon: { width: 35, height: 35, marginRight: 10 },
   name: { fontFamily: FONT_MEDIUM, fontSize: 13 },
   priceUsd: { fontFamily: FONT_BOLD, fontSize: 14, paddingTop: 2 },
   change24: { fontSize: 12, fontFamily: FONT_MEDIUM },
