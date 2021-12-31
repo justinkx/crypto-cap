@@ -153,5 +153,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 11,
   },
-  direction: {},
+  direction: {
+    fontSize: 18,
+  },
 });

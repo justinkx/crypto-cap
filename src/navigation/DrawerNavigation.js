@@ -27,6 +27,7 @@ function DrawerNavigation() {
         headerTitleStyle: { color: 'white', fontFamily: FONT_SEMI_BOLD },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
+      detachInactiveScreens
     >
       <Drawer.Screen
         options={{ title: 'Dashboard' }}
