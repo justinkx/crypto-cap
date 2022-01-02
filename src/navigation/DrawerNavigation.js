@@ -23,10 +23,23 @@ import { FONT_SEMI_BOLD, colors } from '../styles/CommonStyles';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+const transparentHeader = {
+  backgroundColor: 'transparent',
+  elevation: 0,
+  shadowOpacity: 0,
+};
+
 function CoinStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={COINS_SCREEN} component={Coins} />
+      <Stack.Screen
+        options={{
+          headerStyle: transparentHeader,
+          title: 'Coins',
+        }}
+        name={COINS_SCREEN}
+        component={Coins}
+      />
       <Stack.Screen name={COIN_DETAILS_SCREEN} component={CoinDetails} />
     </Stack.Navigator>
   );
@@ -36,11 +49,7 @@ function DrawerNavigation() {
     <Drawer.Navigator
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
-        headerStyle: {
-          backgroundColor: 'transparent',
-          elevation: 0,
-          shadowOpacity: 0,
-        },
+        headerStyle: transparentHeader,
         headerTitleStyle: { color: colors.white, fontFamily: FONT_SEMI_BOLD },
         headerTintColor: colors.white,
       }}
@@ -53,7 +62,7 @@ function DrawerNavigation() {
         component={DashBoard}
       />
       <Drawer.Screen
-        options={{ title: 'Coins' }}
+        options={{ title: 'Coins', headerShown: false }}
         name={COINS_STACK}
         component={CoinStack}
       />

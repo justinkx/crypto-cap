@@ -1,4 +1,4 @@
-import React, { memo, useRef, useEffect } from 'react';
+import React, { memo, useRef, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _isEqual from 'react-fast-compare';
 import Animated, {
@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   commonStyles,
@@ -17,6 +18,7 @@ import {
 import { NumbFormat } from '../utils/helpers';
 import AssetIcon from './AssetIcon';
 import PriceDirection from './PriceDirection';
+import { COIN_DETAILS_SCREEN } from '../navigation/NavConstants';
 
 const CoinsCard = ({
   changePercent24Hr,
@@ -25,11 +27,13 @@ const CoinsCard = ({
   priceUsd,
   rank,
   symbol,
+  id,
 }) => {
   const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
   const isUp = change24Hr > 0;
   const priceChange = useSharedValue(colors.white);
   const prevPriceUsd = useRef(0);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const animateWorklet = (priceUsd, prevPriceUsd) => {
@@ -56,9 +60,17 @@ const CoinsCard = ({
     };
   });
 
+  const handleNavigation = useCallback(
+    () => navigation.navigate(COIN_DETAILS_SCREEN, { id, name }),
+    [navigation, id, name]
+  );
+
   return (
     <Animated.View style={[styles.container, animatedStyles]}>
-      <TouchableOpacity style={[commonStyles.row, styles.card]}>
+      <TouchableOpacity
+        style={[commonStyles.row, styles.card]}
+        onPress={handleNavigation}
+      >
         <View style={[commonStyles.row, styles.nameView]}>
           <Text style={styles.index}>{rank}</Text>
           <AssetIcon symbol={symbol} iconStyle={styles.icon} />
