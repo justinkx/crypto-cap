@@ -17,9 +17,11 @@ import Exchanges from '../screens/Exchanges';
 import BuySell from '../screens/BuySell';
 import Coins from '../screens/Coins';
 import CoinDetails from '../screens/CoinDetails';
+import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
 import { FONT_SEMI_BOLD, colors } from '../styles/CommonStyles';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -36,11 +38,20 @@ function CoinStack() {
         options={{
           headerStyle: transparentHeader,
           title: 'Coins',
+          headerLeft: (props) => <HamburgerIcon {...props} />,
+          headerTintColor: colors.white,
         }}
         name={COINS_SCREEN}
         component={Coins}
       />
-      <Stack.Screen name={COIN_DETAILS_SCREEN} component={CoinDetails} />
+      <Stack.Screen
+        options={{
+          headerStyle: transparentHeader,
+          headerTintColor: colors.white,
+        }}
+        name={COIN_DETAILS_SCREEN}
+        component={CoinDetails}
+      />
     </Stack.Navigator>
   );
 }
