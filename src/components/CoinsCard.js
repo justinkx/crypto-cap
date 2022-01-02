@@ -1,6 +1,11 @@
-import React, { memo } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _isEqual from 'react-fast-compare';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 
 import {
   commonStyles,
@@ -23,8 +28,36 @@ const CoinsCard = ({
 }) => {
   const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
   const isUp = change24Hr > 0;
+  const priceChange = useSharedValue(colors.white);
+  const prevPriceUsd = useRef(0);
+
+  useEffect(() => {
+    const animateWorklet = (priceUsd, prevPriceUsd) => {
+      'worklet';
+      if (priceUsd > prevPriceUsd.current) {
+        priceChange.value = withTiming(colors.successTint, {}, () => {
+          priceChange.value = withTiming(colors.white);
+        });
+      } else {
+        priceChange.value = withTiming(colors.errorTint, {}, () => {
+          priceChange.value = withTiming(colors.white);
+        });
+      }
+      prevPriceUsd.current = priceUsd;
+    };
+    if (priceUsd && prevPriceUsd.current !== priceUsd) {
+      animateWorklet(priceUsd, prevPriceUsd);
+    }
+  }, [priceUsd, priceChange]);
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: priceChange.value,
+    };
+  });
+
   return (
-    <View style={[styles.container, commonStyles.boxShadow]}>
+    <Animated.View style={[styles.container, animatedStyles]}>
       <TouchableOpacity style={[commonStyles.row, styles.card]}>
         <View style={[commonStyles.row, styles.nameView]}>
           <Text style={styles.index}>{rank}</Text>
@@ -58,7 +91,7 @@ const CoinsCard = ({
           </Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -72,7 +105,6 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 15,
     height: 60,
-    backgroundColor: colors.white,
     borderRadius: 10,
     padding: 10,
     flex: 1,
@@ -110,7 +142,7 @@ const styles = StyleSheet.create({
   priceUsd: {
     fontFamily: FONT_BOLD,
     color: colors.black,
-    fontSize: 13,
+    fontSize: 12,
   },
   marketCapUsd: {
     fontFamily: FONT_BOLD,
