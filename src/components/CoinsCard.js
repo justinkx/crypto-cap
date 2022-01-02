@@ -61,7 +61,7 @@ const CoinsCard = ({
   });
 
   const handleNavigation = useCallback(
-    () => navigation.navigate(COIN_DETAILS_SCREEN, { id, name }),
+    () => navigation.navigate(COIN_DETAILS_SCREEN, { id, title: name }),
     [navigation, id, name]
   );
 

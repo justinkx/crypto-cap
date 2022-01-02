@@ -31,6 +31,12 @@ const transparentHeader = {
   shadowOpacity: 0,
 };
 
+const titleFromParamsOptions = ({ route }) => ({
+  title: route?.params?.title || '',
+  headerStyle: transparentHeader,
+  headerTintColor: colors.white,
+});
+
 function CoinStack() {
   return (
     <Stack.Navigator>
@@ -45,10 +51,7 @@ function CoinStack() {
         component={Coins}
       />
       <Stack.Screen
-        options={{
-          headerStyle: transparentHeader,
-          headerTintColor: colors.white,
-        }}
+        options={titleFromParamsOptions}
         name={COIN_DETAILS_SCREEN}
         component={CoinDetails}
       />
