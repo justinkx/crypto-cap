@@ -68,7 +68,7 @@ const Header = ({
         <View style={styles.shield}>
           <MaterialCommunityIcons
             name="shield"
-            size={24}
+            size={20}
             color={colors.wallet}
           />
           <Text style={[commonStyles.fontBold, styles.rank]}>{rank}</Text>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   rank: {
     position: 'absolute',
     color: colors.white,
-    fontSize: 12,
+    fontSize: 10,
   },
   title: {
     color: colors.primaryTint,

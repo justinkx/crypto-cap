@@ -49,3 +49,5 @@ export function NumbFormat(options) {
 
   return _number;
 }
+
+export const parseCandles = (candles) => {};
