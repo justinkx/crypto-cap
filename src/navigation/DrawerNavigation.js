@@ -23,7 +23,11 @@ function DrawerNavigation() {
     <Drawer.Navigator
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
-        headerStyle: { backgroundColor: 'transparent' },
+        headerStyle: {
+          backgroundColor: 'transparent',
+          elevation: 0,
+          shadowOpacity: 0,
+        },
         headerTitleStyle: { color: 'white', fontFamily: FONT_SEMI_BOLD },
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
