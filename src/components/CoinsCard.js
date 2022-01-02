@@ -95,11 +95,7 @@ const CoinsCard = ({
   );
 };
 
-export default memo(
-  CoinsCard,
-  (prevProps, nextProps) =>
-    !nextProps.isFocused || _isEqual(nextProps, prevProps)
-);
+export default memo(CoinsCard);
 
 const styles = StyleSheet.create({
   container: {
