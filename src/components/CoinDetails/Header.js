@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _toLower from 'lodash/toLower';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { commonStyles, colors } from '../../styles/CommonStyles';
 import AssetIcon from '../AssetIcon';
@@ -29,7 +30,12 @@ const Header = ({
         <AssetIcon symbol={symbol} iconStyle={styles.iconStyle} />
         <View style={styles.nameView}>
           <Text style={[styles.name, commonStyles.fontBold]}>{name}</Text>
-          <Text style={styles.symbol}>{symbol}</Text>
+          <View style={commonStyles.row}>
+            <Text style={styles.symbol}>{symbol}</Text>
+            <TouchableOpacity>
+              <MaterialIcons name="info" size={16} color={colors.white} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <View>
