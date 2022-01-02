@@ -1,5 +1,11 @@
 import React, { memo, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+  TouchableOpacity,
+} from 'react-native';
 import axios from 'axios';
 import {
   ChartDot,
@@ -11,7 +17,7 @@ import {
 } from '@rainbow-me/animated-charts';
 
 import { CANDLES } from '../utils/api';
-import { colors, commonStyles } from '../styles/CommonStyles';
+import { colors, commonStyles, FONT_BOLD } from '../styles/CommonStyles';
 import { parseCandles } from '../utils/helpers';
 
 const CandlesChart = ({ coin, containerStyle }) => {
@@ -37,34 +43,83 @@ const CandlesChart = ({ coin, containerStyle }) => {
   }, [coin]);
 
   return (
-    <View style={containerStyle}>
-      <ChartPathProvider
-        data={{
-          points: monotoneCubicInterpolation({
-            data: showPrice ? priceCandles : marketCapCandles,
-            range: 40,
-          }),
-          smoothingStrategy: 'bezier',
-        }}
+    <>
+      <View
+        style={[
+          commonStyles.row,
+          commonStyles.center,
+          commonStyles.spaceBetween,
+          commonStyles.page,
+          styles.chipContainer,
+        ]}
       >
-        <ChartPath height={SIZE / 2} stroke={colors.white} width={SIZE} />
-        <ChartDot style={{ backgroundColor: 'blue' }} />
-        <OpeningPositionHorizontalLine
-          color={colors.primaryTint}
-          length={SIZE}
+        <Chip
+          isActive={showPrice}
+          name={'Prices'}
+          onPress={() => setShowPrice(true)}
         />
-        <CurrentPositionVerticalLine
-          color={colors.errorTint}
-          length={SIZE / 2}
+        <Chip
+          isActive={!showPrice}
+          name={'Market Cap'}
+          onPress={() => setShowPrice(false)}
         />
-      </ChartPathProvider>
-      <View>
-        <View style={commonStyles.row}></View>
       </View>
-    </View>
+
+      <View style={containerStyle}>
+        <ChartPathProvider
+          data={{
+            points: monotoneCubicInterpolation({
+              data: showPrice ? priceCandles : marketCapCandles,
+              range: 40,
+            }),
+            smoothingStrategy: 'bezier',
+          }}
+        >
+          <ChartPath height={SIZE / 2} stroke={colors.white} width={SIZE} />
+          <ChartDot style={{ backgroundColor: 'blue' }} />
+          <OpeningPositionHorizontalLine
+            color={colors.primaryTint}
+            length={SIZE}
+          />
+          <CurrentPositionVerticalLine
+            color={colors.errorTint}
+            length={SIZE / 2}
+          />
+        </ChartPathProvider>
+      </View>
+    </>
   );
 };
 
+const Chip = memo(({ onPress, name, textStyle, isActive }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={[styles.chip, commonStyles.center, isActive && styles.activeChip]}
+  >
+    <Text
+      style={[styles.chipName, textStyle, isActive && styles.activeChipName]}
+    >
+      {name}
+    </Text>
+  </TouchableOpacity>
+));
 export default memo(CandlesChart);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  chipContainer: { marginTop: 20 },
+  chipName: {
+    fontSize: 12,
+  },
+  activeChipName: {
+    fontFamily: FONT_BOLD,
+  },
+  chip: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    backgroundColor: colors.white,
+  },
+  activeChip: {
+    backgroundColor: colors.wallet,
+  },
+});
