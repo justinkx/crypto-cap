@@ -1,8 +1,9 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _toLower from 'lodash/toLower';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import * as Linking from 'expo-linking';
 
 import { commonStyles, colors } from '../../styles/CommonStyles';
 import AssetIcon from '../AssetIcon';
@@ -17,6 +18,11 @@ const Header = ({
   marketCapUsd,
   volumeUsd24Hr,
 }) => {
+  const openInfo = useCallback(
+    () =>
+      Linking.openURL(`https://www.coingecko.com/en/coins/${_toLower(name)}`),
+    [name]
+  );
   return (
     <View
       style={[
@@ -32,8 +38,8 @@ const Header = ({
           <Text style={[styles.name, commonStyles.fontBold]}>{name}</Text>
           <View style={commonStyles.row}>
             <Text style={styles.symbol}>{symbol}</Text>
-            <TouchableOpacity>
-              <MaterialIcons name="info" size={16} color={colors.white} />
+            <TouchableOpacity style={styles.info} onPress={openInfo}>
+              <MaterialIcons name="info" size={14} color={colors.white} />
             </TouchableOpacity>
           </View>
         </View>
@@ -105,4 +111,5 @@ const styles = StyleSheet.create({
     color: colors.primaryTint,
     fontSize: 12,
   },
+  info: { marginLeft: 4 },
 });

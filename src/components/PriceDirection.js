@@ -1,7 +1,7 @@
 import React, { memo, useRef, useMemo } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { colors } from '../styles/CommonStyles';
+import { colors, isAndroid } from '../styles/CommonStyles';
 
 const PriceDirection = memo(({ price }) => {
   const lastPriceRef = useRef(0);
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
   up: { color: colors.success },
   down: { color: colors.error },
   direction: {
-    fontSize: 12,
+    fontSize: isAndroid ? 12 : 18,
   },
 });
