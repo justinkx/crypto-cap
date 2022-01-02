@@ -15,7 +15,7 @@ import BuySell from '../screens/BuySell';
 import Coins from '../screens/Coins';
 
 import DrawerContent from './DrawerContent';
-import { FONT_SEMI_BOLD } from '../styles/CommonStyles';
+import { FONT_SEMI_BOLD, colors } from '../styles/CommonStyles';
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigation() {
@@ -28,7 +28,8 @@ function DrawerNavigation() {
           elevation: 0,
           shadowOpacity: 0,
         },
-        headerTitleStyle: { color: 'white', fontFamily: FONT_SEMI_BOLD },
+        headerTitleStyle: { color: colors.white, fontFamily: FONT_SEMI_BOLD },
+        headerTintColor: colors.white,
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       detachInactiveScreens
