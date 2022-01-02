@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Freeze } from 'react-freeze';
 
 import Page from '../components/Page';
 import TotalBalance from '../components/Dashboard/TotalBalance';
@@ -13,23 +14,25 @@ const DashBoard = () => {
   const insets = useSafeAreaInsets();
   return (
     <Page scroll={false}>
-      <View style={commonStyles.page}>
-        <TotalBalance />
-        <BalanceWallets />
-      </View>
-      <View
-        style={[
-          commonStyles.flex,
-          styles.priceChangeContainer,
-          { paddingBottom: insets.bottom },
-        ]}
-      >
-        <LineStrokeText
-          containerStyle={styles.lineStrokeText}
-          message={'24h price changes'}
-        />
-        <DashboardPriceChange />
-      </View>
+      <Freeze>
+        <View style={commonStyles.page}>
+          <TotalBalance />
+          <BalanceWallets />
+        </View>
+        <View
+          style={[
+            commonStyles.flex,
+            styles.priceChangeContainer,
+            { paddingBottom: insets.bottom },
+          ]}
+        >
+          <LineStrokeText
+            containerStyle={styles.lineStrokeText}
+            message={'24h price changes'}
+          />
+          <DashboardPriceChange />
+        </View>
+      </Freeze>
     </Page>
   );
 };
