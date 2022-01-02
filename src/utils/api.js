@@ -13,3 +13,6 @@ export const CRYPTO_COIN_24HR_CHANGE = (token) =>
   )}/market_chart?vs_currency=usd&days=1`;
 
 export const PRICES_SOCKET = 'wss://ws.coincap.io/prices?assets=ALL';
+
+export const CANDLES = (coin = '') =>
+  `api.coincap.io/v2/candles?exchange=poloniex&interval=h8&baseId=usd&quoteId=${coin}`;

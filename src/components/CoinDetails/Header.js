@@ -59,10 +59,12 @@ const Header = ({
         </Text>
       </View>
       <View style={{ alignItems: 'flex-end', paddingLeft: 10 }}>
-        <Text style={[styles.priceUsd, commonStyles.fontSemibold]}>
-          {parseFloat(priceUsd).toFixed(2)}
+        <View style={commonStyles.row}>
+          <Text style={[styles.priceUsd, commonStyles.fontSemibold]}>
+            {parseFloat(priceUsd).toFixed(2)}
+          </Text>
           <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
-        </Text>
+        </View>
         <View style={styles.shield}>
           <MaterialCommunityIcons
             name="shield"
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     color: colors.primaryTint,
     fontSize: 12,
   },
-  priceUsd: { fontSize: 12, lineHeight: 12, color: colors.white },
+  priceUsd: { fontSize: 12, color: colors.white, textAlign: 'auto' },
   shield: {
     position: 'relative',
     justifyContent: 'center',

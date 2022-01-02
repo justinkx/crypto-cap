@@ -87,11 +87,14 @@ const CoinsCard = ({
           </View>
         </View>
         <View style={styles.priceView}>
-          <Text style={styles.priceUsd}>
-            <Text style={styles.price}>Price: </Text>$
-            {parseFloat(priceUsd).toFixed(2)}
+          <View style={commonStyles.row}>
+            <Text style={styles.priceUsd}>
+              <Text style={styles.price}>Price: </Text>$
+              {parseFloat(priceUsd).toFixed(2)}
+            </Text>
             <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
-          </Text>
+          </View>
+
           <Text style={styles.marketCapUsd}>
             <Text style={styles.marketCap}>Market Cap: </Text>$
             {NumbFormat({ number: marketCapUsd })}
