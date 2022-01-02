@@ -5,15 +5,27 @@ import { Freeze } from 'react-freeze';
 
 import Page from '../components/Page';
 import { getCryptoAssets } from '../store/selectors/assetSelector';
+import Header from '../components/CoinDetails/Header';
 
-const CoinDetails = ({ id }) => {
-  const assetDetails = useSelector(
-    (state) => getCryptoAssets(state)([id]),
+const CoinDetails = ({ route }) => {
+  const [
+    { name = '', symbol = '', priceUsd, rank, volumeUsd24Hr, marketCapUsd },
+  ] = useSelector(
+    (state) => getCryptoAssets(state)([route?.params?.id]),
     shallowEqual
   );
   return (
-    <Page scroll={false}>
-      <Freeze></Freeze>
+    <Page scroll>
+      <Freeze>
+        <Header
+          name={name}
+          symbol={symbol}
+          priceUsd={priceUsd}
+          rank={rank}
+          volumeUsd24Hr={volumeUsd24Hr}
+          marketCapUsd={marketCapUsd}
+        />
+      </Freeze>
     </Page>
   );
 };
