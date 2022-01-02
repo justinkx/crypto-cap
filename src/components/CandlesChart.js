@@ -6,39 +6,29 @@ import {
   ChartPath,
   ChartPathProvider,
   monotoneCubicInterpolation,
+  OpeningPositionHorizontalLine,
+  CurrentPositionVerticalLine,
 } from '@rainbow-me/animated-charts';
 
 import { CANDLES } from '../utils/api';
+import { colors, commonStyles } from '../styles/CommonStyles';
+import { parseCandles } from '../utils/helpers';
 
-const data = [
-  { x: 1453075200, y: 1.47 },
-  { x: 1453161600, y: 1.37 },
-  { x: 1453248000, y: 1.53 },
-  { x: 1453334400, y: 1.54 },
-  { x: 1453420800, y: 1.52 },
-  { x: 1453507200, y: 2.03 },
-  { x: 1453593600, y: 2.1 },
-  { x: 1453680000, y: 2.5 },
-  { x: 1453766400, y: 2.3 },
-  { x: 1453852800, y: 2.42 },
-  { x: 1453939200, y: 2.55 },
-  { x: 1454025600, y: 2.41 },
-  { x: 1454112000, y: 2.43 },
-  { x: 1454198400, y: 2.2 },
-];
-
-const points = monotoneCubicInterpolation({ data, range: 40 });
-
-const CandlesChart = ({ coin }) => {
+const CandlesChart = ({ coin, containerStyle }) => {
   const { width } = useWindowDimensions();
   const SIZE = width - 20;
 
-  const [candles, setCandles] = useState([]);
+  const [priceCandles, setPriceCandles] = useState([]);
+  const [marketCapCandles, setMarketCapCandles] = useState([]);
+  const [showPrice, setShowPrice] = useState(true);
+
   useEffect(() => {
     async function fetch() {
       try {
         const { data } = await axios.get(CANDLES({ coin }));
-        const { market_caps = [] } = data;
+        const { market_caps = [], prices = [] } = data;
+        setPriceCandles(parseCandles(prices));
+        setMarketCapCandles(parseCandles(market_caps));
       } catch (error) {}
     }
     if (coin) {
@@ -47,11 +37,30 @@ const CandlesChart = ({ coin }) => {
   }, [coin]);
 
   return (
-    <View>
-      <ChartPathProvider data={{ points, smoothingStrategy: 'bezier' }}>
-        <ChartPath height={SIZE / 2} stroke="yellow" width={SIZE} />
+    <View style={containerStyle}>
+      <ChartPathProvider
+        data={{
+          points: monotoneCubicInterpolation({
+            data: showPrice ? priceCandles : marketCapCandles,
+            range: 40,
+          }),
+          smoothingStrategy: 'bezier',
+        }}
+      >
+        <ChartPath height={SIZE / 2} stroke={colors.white} width={SIZE} />
         <ChartDot style={{ backgroundColor: 'blue' }} />
+        <OpeningPositionHorizontalLine
+          color={colors.primaryTint}
+          length={SIZE}
+        />
+        <CurrentPositionVerticalLine
+          color={colors.errorTint}
+          length={SIZE / 2}
+        />
       </ChartPathProvider>
+      <View>
+        <View style={commonStyles.row}></View>
+      </View>
     </View>
   );
 };

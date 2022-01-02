@@ -1348,10 +1348,9 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@rainbow-me/animated-charts@^1.0.0-alpha.6":
+"@rainbow-me/animated-charts@https://github.com/rainbow-me/react-native-animated-charts.git":
   version "1.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@rainbow-me/animated-charts/-/animated-charts-1.0.0-alpha.6.tgz#b21a6886d4f662b7c12c10d3d2398f9e0d73d5bc"
-  integrity sha512-mJMKiHLxuU5FPIn/WR+klzA4Ug68zI+eCaqiBjd+s1QGfO2EF/za1PgN0GtCmm5iFDqdnE8FEoRk8RAI5p9WtQ==
+  resolved "https://github.com/rainbow-me/react-native-animated-charts.git#1a623fbc5d6eca1a19c4ed37833c8d9677285ea8"
   dependencies:
     react-native-gesture-handler "^1.7.0"
     react-native-haptic-feedback "^1.10.0"

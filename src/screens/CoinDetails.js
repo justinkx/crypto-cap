@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import { FlatList } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { Freeze } from 'react-freeze';
+import { StyleSheet } from 'react-native';
 
 import Page from '../components/Page';
 import { getCryptoAssets } from '../store/selectors/assetSelector';
@@ -27,10 +27,14 @@ const CoinDetails = ({ route }) => {
           volumeUsd24Hr={volumeUsd24Hr}
           marketCapUsd={marketCapUsd}
         />
-        <CandlesChart coin={name} />
+        <CandlesChart coin={name} containerStyle={styles.chartStyle} />
       </Freeze>
     </Page>
   );
 };
 
 export default memo(CoinDetails);
+
+const styles = StyleSheet.create({
+  chartStyle: { marginTop: 20 },
+});

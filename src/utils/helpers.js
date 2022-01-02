@@ -50,4 +50,9 @@ export function NumbFormat(options) {
   return _number;
 }
 
-export const parseCandles = (candles) => {};
+export const parseCandles = (candles = []) =>
+  candles.reduce((acc, curr) => {
+    const [x, _y] = curr;
+    acc.push({ x, y: parseFloat(_y).toFixed(2) });
+    return acc;
+  }, []);
