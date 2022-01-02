@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
   up: { color: colors.success },
   down: { color: colors.error },
   direction: {
-    fontSize: 14,
+    fontSize: 12,
   },
 });
