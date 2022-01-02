@@ -26,7 +26,7 @@ const SearchBar = ({
         style={[styles.input, commonStyles.fontBold, inputStyle]}
         placeholder={placeholder}
       />
-      <AntDesign name="search1" size={20} color={colors.primaryFade} />
+      <AntDesign name="search1" size={18} color={colors.primaryFade} />
     </View>
   );
 };

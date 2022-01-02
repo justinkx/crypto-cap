@@ -120,10 +120,12 @@ const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
           <AssetIcon symbol={symbol} iconStyle={styles.icon} />
           <View>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.priceUsd}>
-              ${parseFloat(priceUsd).toFixed(2)}
+            <View style={commonStyles.row}>
+              <Text style={styles.priceUsd}>
+                ${parseFloat(priceUsd).toFixed(2)}
+              </Text>
               <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
-            </Text>
+            </View>
           </View>
         </View>
         <View style={styles.rightView}>

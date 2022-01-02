@@ -21,8 +21,11 @@ export const colors = {
   exchange: '#f87600',
   exchangeTint: '#fe9e36',
   success: '#02c766',
+  successTint: '#8cf5c2',
   error: '#ff5b5a',
+  errorTint: '#f39292',
 };
+
 export const commonStyles = StyleSheet.create({
   flex: {
     flex: 1,
