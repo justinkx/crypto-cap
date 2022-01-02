@@ -1,6 +1,5 @@
 import React, { memo, useRef, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import _isEqual from 'react-fast-compare';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
