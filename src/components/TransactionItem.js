@@ -74,10 +74,10 @@ const TransactionItem = ({
           <Text
             style={[styles.value, { color: TransactionStatus[status].color }]}
           >
-            {TransactionDirection[type]} {value} {coin}
+            {TransactionDirection[type]}
+            {value} {coin}
           </Text>
           <Text style={styles.priceUsd}>
-            {' '}
             {getCurrentUsdPrice(coin, value)} USD
           </Text>
         </View>
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
   },
   time: { color: colors.primaryFade, fontSize: 11, fontFamily: FONT_SEMI_BOLD },
   status: { fontFamily: FONT_BOLD, fontSize: 15, paddingBottom: 5 },
-  statusView: { width: '45%' },
+  statusView: { width: '45%', justifyContent: 'flex-start' },
   value: {
     fontFamily: FONT_BOLD,
-    fontSize: 14,
+    fontSize: 15,
     paddingBottom: 5,
   },
   priceUsd: { color: colors.black, fontSize: 13, fontFamily: FONT_SEMI_BOLD },
