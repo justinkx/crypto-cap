@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { colors } from '../styles/CommonStyles';
 
-const HamburgerIcon = () => {
+const HamburgerIcon = ({ size = 26 }) => {
   const navigation = useNavigation();
   const handleToggle = useCallback(
     () => navigation.dispatch(DrawerActions.toggleDrawer()),
@@ -15,7 +15,7 @@ const HamburgerIcon = () => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={handleToggle}>
-      <MaterialIcons name="menu" size={26} color={colors.white} />
+      <MaterialIcons name="menu" size={size} color={colors.white} />
     </TouchableOpacity>
   );
 };

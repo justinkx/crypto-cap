@@ -12,6 +12,10 @@ export const getCryptoAssets = createSelector(assetReducer, (assets) =>
   memoizeOne((coins = []) => _values(_pick(assets, coins)))
 );
 
+export const getAllCryptoAssets = createSelector(assetReducer, (assets) =>
+  _values(assets)
+);
+
 export const getCryptoCoins = createSelector(assetReducer, (assets) =>
   memoizeOne((name = '', sortBy = 'rank') =>
     _sortBy(
