@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 
 import {
   DASHBOARD_SCREEN,
@@ -20,7 +21,7 @@ import CoinDetails from '../screens/CoinDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
-import { FONT_SEMI_BOLD, colors } from '../styles/CommonStyles';
+import { FONT_SEMI_BOLD, colors, FONT_BOLD } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -36,6 +37,12 @@ const titleFromParamsOptions = ({ route }) => ({
   headerStyle: transparentHeader,
   headerTintColor: colors.white,
 });
+
+const drawerIconOption = {
+  headerLeft: ({ focused, size }) => (
+    <HamburgerIcon size={size} focused={focused} />
+  ),
+};
 
 function CoinStack() {
   return (
@@ -66,32 +73,87 @@ function DrawerNavigation() {
         headerStyle: transparentHeader,
         headerTitleStyle: { color: colors.white, fontFamily: FONT_SEMI_BOLD },
         headerTintColor: colors.white,
+        drawerActiveTintColor: colors.white,
+        drawerInactiveTintColor: 'gray',
+        drawerLabelStyle: { fontFamily: FONT_BOLD },
+        drawerActiveBackgroundColor: colors.primaryFade,
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       detachInactiveScreens
     >
       <Drawer.Screen
-        options={{ title: 'Dashboard' }}
+        options={{
+          title: 'Dashboard',
+          ...drawerIconOption,
+          drawerIcon: ({ focused, size }) => (
+            <MaterialIcons
+              name="dashboard"
+              size={size}
+              color={focused ? colors.white : 'gray'}
+            />
+          ),
+        }}
         name={DASHBOARD_SCREEN}
         component={DashBoard}
       />
       <Drawer.Screen
-        options={{ title: 'Coins', headerShown: false }}
+        options={{
+          title: 'Coins',
+          headerShown: false,
+          ...drawerIconOption,
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome5
+              name="coins"
+              size={size}
+              color={focused ? colors.white : 'gray'}
+            />
+          ),
+        }}
         name={COINS_STACK}
         component={CoinStack}
       />
       <Drawer.Screen
-        options={{ title: 'Exchanges' }}
+        options={{
+          title: 'Exchanges',
+          ...drawerIconOption,
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome
+              name="bank"
+              size={size}
+              color={focused ? colors.white : 'gray'}
+            />
+          ),
+        }}
         name={EXCHANGE_SCREEN}
         component={Exchanges}
       />
       <Drawer.Screen
-        options={{ title: 'Buy / Sell' }}
+        options={{
+          title: 'Buy / Sell',
+          ...drawerIconOption,
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome5
+              name="exchange-alt"
+              size={size}
+              color={focused ? colors.white : 'gray'}
+            />
+          ),
+        }}
         name={BUY_SELL_SCREEN}
         component={BuySell}
       />
       <Drawer.Screen
-        options={{ title: 'Transactions' }}
+        options={{
+          title: 'Transactions',
+          ...drawerIconOption,
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome5
+              name="hands-helping"
+              size={size}
+              color={focused ? colors.white : 'gray'}
+            />
+          ),
+        }}
         name={TRANSACTIONS_SCREEN}
         component={Transactions}
       />
