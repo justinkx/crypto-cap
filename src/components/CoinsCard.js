@@ -4,6 +4,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withDelay,
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
@@ -39,11 +40,11 @@ const CoinsCard = ({
       'worklet';
       if (priceUsd > prevPriceUsd.current) {
         priceChange.value = withTiming(colors.successTint, {}, () => {
-          priceChange.value = withTiming(colors.white);
+          priceChange.value = withDelay(200, withTiming(colors.white));
         });
       } else {
         priceChange.value = withTiming(colors.errorTint, {}, () => {
-          priceChange.value = withTiming(colors.white);
+          priceChange.value = withDelay(200, withTiming(colors.white));
         });
       }
       prevPriceUsd.current = priceUsd;
