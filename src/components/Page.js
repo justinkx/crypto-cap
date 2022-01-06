@@ -21,7 +21,7 @@ const Page = ({
           {children}
         </ScrollView>
       ) : (
-        <>{children}</>
+        <View style={commonStyles.flex}>{children}</View>
       )}
     </SafeAreaView>
   ) : (
@@ -34,7 +34,7 @@ const Page = ({
           {children}
         </ScrollView>
       ) : (
-        <>{children}</>
+        <View style={commonStyles.flex}>{children}</View>
       )}
     </View>
   );

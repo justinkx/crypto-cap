@@ -29,11 +29,13 @@ const Coins = () => {
           placeholder={'Search Coin'}
         />
         <FlatList
+          style={commonStyles.flex}
           data={coins}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           contentContainerStyle={commonStyles.listPadding}
-          showsVerticalScrollIndicator={false}
+          initialNumToRender={5}
+          removeClippedSubviews
         />
       </Freeze>
     </Page>

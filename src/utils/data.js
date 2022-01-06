@@ -33,7 +33,7 @@ export const balance = [
 
 export const balanceCoins = _map(balance, (item) => _toLower(item.name));
 
-export const Transactions = [
+export const transactions = [
   {
     type: 'BID',
     status: 'ORDER_SUCCESSFUL',
