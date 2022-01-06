@@ -34,7 +34,7 @@ const Coins = () => {
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           contentContainerStyle={commonStyles.listPadding}
-          initialNumToRender={5}
+          initialNumToRender={10}
           removeClippedSubviews
         />
       </Freeze>
