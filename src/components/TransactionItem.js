@@ -16,6 +16,7 @@ import {
   BID,
   ASK,
 } from '../utils/constants';
+import { getCurrentUsdPrice } from '../helpers/price';
 
 const TransactionIcon = {
   [BID]: { label: 'arrow-up-circle-sharp', color: colors.success },
@@ -32,6 +33,7 @@ const TransactionDirection = {
   [BID]: '+',
   [ASK]: '-',
 };
+
 const TransactionItem = ({
   type = 'BID',
   status = 'ORDER_SUCCESSFUL',
@@ -74,7 +76,10 @@ const TransactionItem = ({
           >
             {TransactionDirection[type]} {value} {coin}
           </Text>
-          <Text style={styles.priceUsd}> USD</Text>
+          <Text style={styles.priceUsd}>
+            {' '}
+            {getCurrentUsdPrice(coin, value)} USD
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
