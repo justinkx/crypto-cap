@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { Text, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 
 import Page from '../components/Page';
 import { commonStyles } from '../styles/CommonStyles';

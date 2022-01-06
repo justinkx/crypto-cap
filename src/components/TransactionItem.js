@@ -7,7 +7,6 @@ import {
   commonStyles,
   colors,
   FONT_BOLD,
-  FONT_MEDIUM,
   FONT_SEMI_BOLD,
 } from '../styles/CommonStyles';
 import {
