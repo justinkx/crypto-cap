@@ -56,7 +56,9 @@ const drawerIconOption = {
 
 function CoinStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerTitleStyle }}>
+    <Stack.Navigator
+      screenOptions={{ headerTitleStyle, animationEnabled: false }}
+    >
       <Stack.Screen
         options={{
           headerStyle: transparentHeader,
@@ -78,7 +80,9 @@ function CoinStack() {
 
 function ExchangeStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerTitleStyle }}>
+    <Stack.Navigator
+      screenOptions={{ headerTitleStyle, animationEnabled: false }}
+    >
       <Stack.Screen
         options={{
           headerStyle: transparentHeader,
