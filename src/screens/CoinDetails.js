@@ -10,7 +10,14 @@ import CandlesChart from '../components/CandlesChart';
 
 const CoinDetails = ({ route }) => {
   const [
-    { name = '', symbol = '', priceUsd, rank, volumeUsd24Hr, marketCapUsd },
+    {
+      name = '',
+      symbol = '',
+      current_price,
+      market_cap_rank,
+      total_volume,
+      market_cap,
+    },
   ] = useSelector(
     (state) => getCryptoAssets(state)([route?.params?.id]),
     shallowEqual
@@ -22,10 +29,10 @@ const CoinDetails = ({ route }) => {
         <Header
           name={name}
           symbol={symbol}
-          priceUsd={priceUsd}
-          rank={rank}
-          volumeUsd24Hr={volumeUsd24Hr}
-          marketCapUsd={marketCapUsd}
+          current_price={current_price}
+          market_cap_rank={market_cap_rank}
+          total_volume={total_volume}
+          market_cap={market_cap}
         />
         <CandlesChart coin={name} containerStyle={styles.chartStyle} />
       </Freeze>

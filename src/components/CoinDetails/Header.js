@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import _toLower from 'lodash/toLower';
+import _toUpper from 'lodash/toUpper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
@@ -20,7 +20,7 @@ const Header = ({
 }) => {
   const openInfo = useCallback(
     () =>
-      Linking.openURL(`https://www.coingecko.com/en/coins/${_toLower(name)}`),
+      Linking.openURL(`https://www.coingecko.com/en/coins/${_toUpper(name)}`),
     [name]
   );
   return (
@@ -37,7 +37,7 @@ const Header = ({
         <View style={styles.nameView}>
           <Text style={[styles.name, commonStyles.fontBold]}>{name}</Text>
           <View style={commonStyles.row}>
-            <Text style={styles.symbol}>{symbol}</Text>
+            <Text style={styles.symbol}>{_toUpper(symbol)}</Text>
             <TouchableOpacity style={styles.info} onPress={openInfo}>
               <MaterialIcons name="info" size={14} color={colors.white} />
             </TouchableOpacity>

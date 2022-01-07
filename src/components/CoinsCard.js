@@ -7,6 +7,7 @@ import Animated, {
   withDelay,
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import _toUpper from 'lodash/toUpper';
 
 import {
   commonStyles,
@@ -84,7 +85,7 @@ const CoinsCard = ({
             >
               {name}
             </Text>
-            <Text style={styles.symbol}>{symbol}</Text>
+            <Text style={styles.symbol}>{_toUpper(symbol)}</Text>
           </View>
         </View>
         <View style={styles.priceView}>
