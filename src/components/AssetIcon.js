@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 import { CRYPTO_ASSET_SMALL } from '../utils/api';
 
-const AssetIcon = ({ symbol, iconStyle }) => {
+const AssetIcon = ({ symbol, iconStyle, url }) => {
   const [loadError, setLoadError] = useState(false);
   const handleOnError = useCallback(() => setLoadError(true), []);
   return (
@@ -16,7 +16,7 @@ const AssetIcon = ({ symbol, iconStyle }) => {
       ) : (
         <Image
           style={iconStyle}
-          source={{ uri: CRYPTO_ASSET_SMALL(symbol) }}
+          source={{ uri: url ?? CRYPTO_ASSET_SMALL(symbol) }}
           onError={handleOnError}
         />
       )}

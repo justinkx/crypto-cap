@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import _toLower from 'lodash/toLower';
+import _toUpper from 'lodash/toUpper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
@@ -13,14 +13,14 @@ import { NumbFormat } from '../../utils/helpers';
 const Header = ({
   name,
   symbol,
-  priceUsd,
-  rank,
-  marketCapUsd,
-  volumeUsd24Hr,
+  current_price,
+  market_cap_rank,
+  market_cap,
+  total_volume,
 }) => {
   const openInfo = useCallback(
     () =>
-      Linking.openURL(`https://www.coingecko.com/en/coins/${_toLower(name)}`),
+      Linking.openURL(`https://www.coingecko.com/en/coins/${_toUpper(name)}`),
     [name]
   );
   return (
@@ -35,9 +35,11 @@ const Header = ({
       <View style={commonStyles.row}>
         <AssetIcon symbol={symbol} iconStyle={styles.iconStyle} />
         <View style={styles.nameView}>
-          <Text style={[styles.name, commonStyles.fontBold]}>{name}</Text>
+          <Text style={[styles.name, commonStyles.fontBold, styles.padBottom]}>
+            {name}
+          </Text>
           <View style={commonStyles.row}>
-            <Text style={styles.symbol}>{symbol}</Text>
+            <Text style={styles.symbol}>{_toUpper(symbol)}</Text>
             <TouchableOpacity style={styles.info} onPress={openInfo}>
               <MaterialIcons name="info" size={14} color={colors.white} />
             </TouchableOpacity>
@@ -45,25 +47,25 @@ const Header = ({
         </View>
       </View>
       <View>
-        <Text style={[styles.title]}>
+        <Text style={[styles.title, styles.padBottom]}>
           Market Cap:{' '}
-          <Text style={[styles.priceUsd, commonStyles.fontSemibold]}>
-            {NumbFormat({ number: marketCapUsd })}
+          <Text style={[styles.current_price, commonStyles.fontSemibold]}>
+            {NumbFormat({ number: market_cap })}
           </Text>
         </Text>
         <Text style={[styles.title]}>
           Volume (24hr):{' '}
-          <Text style={[styles.priceUsd, commonStyles.fontSemibold]}>
-            {NumbFormat({ number: volumeUsd24Hr })}
+          <Text style={[styles.current_price, commonStyles.fontSemibold]}>
+            {NumbFormat({ number: total_volume })}
           </Text>
         </Text>
       </View>
       <View style={{ alignItems: 'flex-end', paddingLeft: 10 }}>
         <View style={commonStyles.row}>
-          <Text style={[styles.priceUsd, commonStyles.fontSemibold]}>
-            {parseFloat(priceUsd).toFixed(2)}
+          <Text style={[styles.current_price, commonStyles.fontSemibold]}>
+            {parseFloat(current_price).toFixed(2)}
           </Text>
-          <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
+          <PriceDirection price={parseFloat(current_price).toFixed(2)} />
         </View>
         <View style={styles.shield}>
           <MaterialCommunityIcons
@@ -71,7 +73,9 @@ const Header = ({
             size={20}
             color={colors.wallet}
           />
-          <Text style={[commonStyles.fontBold, styles.rank]}>{rank}</Text>
+          <Text style={[commonStyles.fontBold, styles.market_cap_rank]}>
+            {market_cap_rank}
+          </Text>
         </View>
       </View>
     </View>
@@ -97,14 +101,14 @@ const styles = StyleSheet.create({
     color: colors.primaryTint,
     fontSize: 12,
   },
-  priceUsd: { fontSize: 12, color: colors.white, textAlign: 'auto' },
+  current_price: { fontSize: 12, color: colors.white, textAlign: 'auto' },
   shield: {
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 4,
   },
-  rank: {
+  market_cap_rank: {
     position: 'absolute',
     color: colors.white,
     fontSize: 10,
@@ -114,4 +118,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   info: { marginLeft: 4 },
+  padBottom: { paddingBottom: 4 },
 });

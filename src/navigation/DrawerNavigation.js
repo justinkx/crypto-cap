@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {
   DASHBOARD_SCREEN,
@@ -11,6 +11,8 @@ import {
   BUY_SELL_SCREEN,
   COINS_SCREEN,
   COIN_DETAILS_SCREEN,
+  EXCHANGE_DETAILS_SCREEN,
+  EXCHANGE_STACK,
 } from './NavConstants';
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
@@ -18,60 +20,104 @@ import Exchanges from '../screens/Exchanges';
 import BuySell from '../screens/BuySell';
 import Coins from '../screens/Coins';
 import CoinDetails from '../screens/CoinDetails';
+import ExchangeDetails from '../screens/ExchangeDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
-import { FONT_SEMI_BOLD, colors, FONT_BOLD } from '../styles/CommonStyles';
+import { colors, FONT_BOLD } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+const NativeStack = createNativeStackNavigator();
 
 const transparentHeader = {
   backgroundColor: 'transparent',
   elevation: 0,
   shadowOpacity: 0,
 };
+const headerTitleStyle = {
+  color: colors.white,
+  fontFamily: FONT_BOLD,
+  fontSize: 20,
+};
+
+const menuHeaderLeftStyle = { marginLeft: 15 };
 
 const titleFromParamsOptions = ({ route }) => ({
   title: route?.params?.title || '',
   headerStyle: transparentHeader,
   headerTintColor: colors.white,
+  headerBackTitleVisible: false,
+  animation: 'none',
 });
 
 const drawerIconOption = {
   headerLeft: ({ focused, size }) => (
-    <HamburgerIcon size={size} focused={focused} />
+    <HamburgerIcon
+      size={size}
+      focused={focused}
+      containerStyle={menuHeaderLeftStyle}
+    />
   ),
+  headerBackTitleVisible: false,
 };
 
 function CoinStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <NativeStack.Navigator
+      screenOptions={{
+        headerTitleStyle,
+      }}
+    >
+      <NativeStack.Screen
         options={{
           headerStyle: transparentHeader,
           title: 'Coins',
           headerLeft: (props) => <HamburgerIcon {...props} />,
           headerTintColor: colors.white,
+          headerLeftContainerStyle: { justifyContent: 'flex-start' },
         }}
         name={COINS_SCREEN}
         component={Coins}
       />
-      <Stack.Screen
+      <NativeStack.Screen
         options={titleFromParamsOptions}
         name={COIN_DETAILS_SCREEN}
         component={CoinDetails}
       />
-    </Stack.Navigator>
+    </NativeStack.Navigator>
   );
 }
+
+function ExchangeStack() {
+  return (
+    <NativeStack.Navigator screenOptions={{ headerTitleStyle }}>
+      <NativeStack.Screen
+        options={{
+          headerStyle: transparentHeader,
+          title: 'Exchanges',
+          headerLeft: (props) => <HamburgerIcon {...props} />,
+          headerLeftContainerStyle: { justifyContent: 'flex-start' },
+          headerTintColor: colors.white,
+        }}
+        name={EXCHANGE_SCREEN}
+        component={Exchanges}
+      />
+      <NativeStack.Screen
+        options={titleFromParamsOptions}
+        name={EXCHANGE_DETAILS_SCREEN}
+        component={ExchangeDetails}
+      />
+    </NativeStack.Navigator>
+  );
+}
+
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
         headerStyle: transparentHeader,
-        headerTitleStyle: { color: colors.white, fontFamily: FONT_SEMI_BOLD },
+        headerTitleStyle,
         headerTintColor: colors.white,
         drawerActiveTintColor: colors.white,
         drawerInactiveTintColor: 'gray',
@@ -115,6 +161,7 @@ function DrawerNavigation() {
       <Drawer.Screen
         options={{
           title: 'Exchanges',
+          headerShown: false,
           ...drawerIconOption,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome
@@ -124,8 +171,8 @@ function DrawerNavigation() {
             />
           ),
         }}
-        name={EXCHANGE_SCREEN}
-        component={Exchanges}
+        name={EXCHANGE_STACK}
+        component={ExchangeStack}
       />
       <Drawer.Screen
         options={{

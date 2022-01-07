@@ -7,10 +7,21 @@ import Page from '../components/Page';
 import { getCryptoAssets } from '../store/selectors/assetSelector';
 import Header from '../components/CoinDetails/Header';
 import CandlesChart from '../components/CandlesChart';
+import { useAfterInteractions } from '../hoc/useAfterInteractions';
 
 const CoinDetails = ({ route }) => {
+  const { shouldRender } = useAfterInteractions();
+
   const [
-    { name = '', symbol = '', priceUsd, rank, volumeUsd24Hr, marketCapUsd },
+    {
+      name = '',
+      symbol = '',
+      current_price,
+      market_cap_rank,
+      total_volume,
+      market_cap,
+      id,
+    },
   ] = useSelector(
     (state) => getCryptoAssets(state)([route?.params?.id]),
     shallowEqual
@@ -19,15 +30,19 @@ const CoinDetails = ({ route }) => {
   return (
     <Page scroll>
       <Freeze>
-        <Header
-          name={name}
-          symbol={symbol}
-          priceUsd={priceUsd}
-          rank={rank}
-          volumeUsd24Hr={volumeUsd24Hr}
-          marketCapUsd={marketCapUsd}
-        />
-        <CandlesChart coin={name} containerStyle={styles.chartStyle} />
+        {shouldRender && (
+          <>
+            <Header
+              name={name}
+              symbol={symbol}
+              current_price={current_price}
+              market_cap_rank={market_cap_rank}
+              total_volume={total_volume}
+              market_cap={market_cap}
+            />
+            <CandlesChart coin={id} containerStyle={styles.chartStyle} />
+          </>
+        )}
       </Freeze>
     </Page>
   );

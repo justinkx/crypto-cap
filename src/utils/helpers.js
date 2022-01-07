@@ -56,3 +56,13 @@ export const parseCandles = (candles = []) =>
     acc.push({ x, y: parseFloat(_y).toFixed(2) });
     return acc;
   }, []);
+
+export const apiChain = async (promises = []) => {
+  try {
+    const res = await Promise.all(promises);
+    const data = await Promise.all(res.map((r) => r.json()));
+    return data.flat();
+  } catch (error) {
+    throw error;
+  }
+};

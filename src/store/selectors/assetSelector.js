@@ -17,7 +17,7 @@ export const getAllCryptoAssets = createSelector(assetReducer, (assets) =>
 );
 
 export const getCryptoCoins = createSelector(assetReducer, (assets) =>
-  memoizeOne((name = '', sortBy = 'rank') =>
+  memoizeOne((name = '', sortBy = 'market_cap_rank') =>
     _sortBy(
       _filter(
         assets,

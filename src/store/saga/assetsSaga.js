@@ -25,7 +25,7 @@ async function fetchAssets() {
 function* fetchAssetsSaga() {
   while (true) {
     try {
-      const { data = [] } = yield call(fetchAssets);
+      const data = yield call(fetchAssets) || [];
       if (data) {
         const parsedAssets = data.reduce(parseAssets, {});
         yield put(saveAssets(parsedAssets));
