@@ -11,6 +11,8 @@ import {
   BUY_SELL_SCREEN,
   COINS_SCREEN,
   COIN_DETAILS_SCREEN,
+  EXCHANGE_DETAILS_SCREEN,
+  EXCHANGE_STACK,
 } from './NavConstants';
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
@@ -18,6 +20,7 @@ import Exchanges from '../screens/Exchanges';
 import BuySell from '../screens/BuySell';
 import Coins from '../screens/Coins';
 import CoinDetails from '../screens/CoinDetails';
+import ExchangeDetails from '../screens/ExchangeDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
@@ -70,6 +73,29 @@ function CoinStack() {
     </Stack.Navigator>
   );
 }
+
+function ExchangeStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerTitleStyle }}>
+      <Stack.Screen
+        options={{
+          headerStyle: transparentHeader,
+          title: 'Exchanges',
+          headerLeft: (props) => <HamburgerIcon {...props} />,
+          headerTintColor: colors.white,
+        }}
+        name={EXCHANGE_SCREEN}
+        component={Exchanges}
+      />
+      <Stack.Screen
+        options={titleFromParamsOptions}
+        name={EXCHANGE_DETAILS_SCREEN}
+        component={ExchangeDetails}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
@@ -120,6 +146,7 @@ function DrawerNavigation() {
       <Drawer.Screen
         options={{
           title: 'Exchanges',
+          headerShown: false,
           ...drawerIconOption,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome
@@ -129,8 +156,8 @@ function DrawerNavigation() {
             />
           ),
         }}
-        name={EXCHANGE_SCREEN}
-        component={Exchanges}
+        name={EXCHANGE_STACK}
+        component={ExchangeStack}
       />
       <Drawer.Screen
         options={{

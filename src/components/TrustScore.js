@@ -7,7 +7,7 @@ const WIDTH = 120;
 
 const TrustScore = ({ trust_score }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={[commonStyles.fontSemibold, styles.score]}>
         Trust Score: {trust_score}
       </Text>
@@ -36,7 +36,10 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 13,
-    color: colors.black,
+    color: colors.wallet,
     marginBottom: 5,
+  },
+  container: {
+    alignItems: 'flex-end',
   },
 });
