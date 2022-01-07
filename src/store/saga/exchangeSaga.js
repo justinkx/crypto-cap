@@ -23,7 +23,7 @@ async function fetchExchanges() {
 
 function* fetchExchangesSaga() {
   try {
-    const { data = [] } = yield call(fetchExchanges);
+    const data = yield call(fetchExchanges) || [];
     const parsedExchanges = data.reduce(parseExchanges, {});
     yield put(saveExchanges(parsedExchanges));
   } catch (error) {}
