@@ -3,18 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   Image,
   useWindowDimensions,
 } from 'react-native';
 
-import {
-  commonStyles,
-  colors,
-  FONT_BOLD,
-  FONT_SEMI_BOLD,
-} from '../styles/CommonStyles';
+import { commonStyles, colors, FONT_SEMI_BOLD } from '../styles/CommonStyles';
 import TrustScore from './TrustScore';
 import ScrollRow from './ScrollRow';
 import { NumbFormat } from '../utils/helpers';
