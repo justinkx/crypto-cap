@@ -21,7 +21,7 @@ import CoinDetails from '../screens/CoinDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
-import { FONT_SEMI_BOLD, colors, FONT_BOLD } from '../styles/CommonStyles';
+import { colors, FONT_BOLD } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
