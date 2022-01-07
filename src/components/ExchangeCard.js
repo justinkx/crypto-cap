@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  useWindowDimensions,
 } from 'react-native';
 
 import {
@@ -14,6 +15,8 @@ import {
   FONT_BOLD,
   FONT_SEMI_BOLD,
 } from '../styles/CommonStyles';
+import TrustScore from './TrustScore';
+import ScrollRow from './ScrollRow';
 
 const ExchangeCard = ({
   id,
@@ -26,29 +29,38 @@ const ExchangeCard = ({
   trade_volume_24h_btc,
   trade_volume_24h_btc_normalized,
 }) => {
+  const { width } = useWindowDimensions();
+
+  const handleClick = useCallback(() => {}, []);
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <ScrollView horizontal showsHorizontalScrollIndicator>
-          <View
-            style={[
-              commonStyles.row,
-              commonStyles.center,
-              commonStyles.spaceBetween,
-            ]}
-          >
-            <View style={[commonStyles.row, commonStyles.center]}>
-              <Text style={styles.rank}>{trust_score_rank}</Text>
-              <Image source={{ url: image }} style={styles.image} />
-              <View>
-                <Text style={[commonStyles.fontBold, styles.name]}>{name}</Text>
-                <Text style={styles.year}>Year Est: {year_established}</Text>
-              </View>
+      <ScrollView
+        bounces
+        horizontal
+        snapToInterval={width}
+        snapToAlignment={'start'}
+        scrollEventThrottle={100}
+        showsHorizontalScrollIndicator
+        pagingEnabled
+      >
+        <ScrollRow
+          onClick={handleClick}
+          width={width}
+          rowStyle={[commonStyles.row]}
+        >
+          <View style={[commonStyles.row, styles.nameView]}>
+            <Text style={styles.rank}>{trust_score_rank}</Text>
+            <Image source={{ url: image }} style={styles.image} />
+            <View>
+              <Text style={[commonStyles.fontBold, styles.name]}>{name}</Text>
+              <Text style={styles.year}>Year Est: {year_established}</Text>
             </View>
-            <View></View>
           </View>
-        </ScrollView>
-      </TouchableOpacity>
+          <View style={styles.trustView}>
+            <TrustScore trust_score={trust_score} />
+          </View>
+        </ScrollRow>
+      </ScrollView>
     </View>
   );
 };
@@ -60,8 +72,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     height: 60,
     borderRadius: 10,
-    padding: 10,
-    flex: 1,
     backgroundColor: colors.white,
   },
   rank: {
@@ -76,11 +86,16 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.primary,
-    fontSize: 16,
+    fontSize: 15,
   },
   year: {
     fontFamily: FONT_SEMI_BOLD,
     color: colors.black,
     fontSize: 14,
+  },
+  nameView: { width: '60%' },
+  trustView: {
+    width: '40%',
+    marginHorizontal: 15,
   },
 });
