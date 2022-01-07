@@ -12,10 +12,10 @@ function* reduxWebsocketMessage(action) {
   const assetKeys = _keys(parsedMessage);
   for (let i = 0; i < assetKeys.length; i++) {
     const assetKey = assetKeys[i];
-    if (assets[assetKey] && assets[assetKey].priceUsd) {
+    if (assets[assetKey] && assets[assetKey].current_price) {
       assets[assetKey] = {
         ...assets[assetKey],
-        priceUsd: parsedMessage[assetKey],
+        current_price: parsedMessage[assetKey],
       };
     }
   }

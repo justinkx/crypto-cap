@@ -79,79 +79,81 @@ const DashboardPriceChange = () => {
   );
 };
 
-const RenderBalance = memo(({ changePercent24Hr, name, priceUsd, symbol }) => {
-  const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
-  const isUp = change24Hr > 0;
-  const [prices, setPrices] = useState([]);
+const RenderBalance = memo(
+  ({ price_change_percentage_24h, name, current_price, symbol, image }) => {
+    const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
+    const isUp = change24Hr > 0;
+    const [prices, setPrices] = useState([]);
 
-  /* eslint-disable radix */
+    /* eslint-disable radix */
 
-  useEffect(() => {
-    async function fetchPrices() {
-      try {
-        const { data } = await axios.get(CRYPTO_COIN_24HR_CHANGE(name));
-        const _prices24hr = _get(data, 'prices');
-        const _prices = _map(_prices24hr, ([_, price]) => parseInt(price));
-        setPrices(_prices);
-      } catch (error) {}
-    }
-    if (!_size(prices) && name) {
-      fetchPrices();
-    }
-  }, [name, prices]);
+    useEffect(() => {
+      async function fetchPrices() {
+        try {
+          const { data } = await axios.get(CRYPTO_COIN_24HR_CHANGE(name));
+          const _prices24hr = _get(data, 'prices');
+          const _prices = _map(_prices24hr, ([_, price]) => parseInt(price));
+          setPrices(_prices);
+        } catch (error) {}
+      }
+      if (!_size(prices) && name) {
+        fetchPrices();
+      }
+    }, [name, prices]);
 
-  return (
-    <View
-      style={[
-        commonStyles.row,
-        commonStyles.spaceBetween,
-        styles.cardContainer,
-      ]}
-    >
+    return (
       <View
         style={[
-          styles.boxShadow,
-          styles.tickerCard,
           commonStyles.row,
           commonStyles.spaceBetween,
+          styles.cardContainer,
         ]}
       >
-        <View style={[styles.leftView, commonStyles.row]}>
-          <AssetIcon symbol={symbol} iconStyle={styles.icon} />
-          <View>
-            <Text style={styles.name}>{name}</Text>
-            <View style={commonStyles.row}>
-              <Text style={styles.priceUsd}>
-                ${parseFloat(priceUsd).toFixed(2)}
-              </Text>
-              <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
+        <View
+          style={[
+            styles.boxShadow,
+            styles.tickerCard,
+            commonStyles.row,
+            commonStyles.spaceBetween,
+          ]}
+        >
+          <View style={[styles.leftView, commonStyles.row]}>
+            <AssetIcon symbol={symbol} iconStyle={styles.icon} url={image} />
+            <View>
+              <Text style={styles.name}>{name}</Text>
+              <View style={commonStyles.row}>
+                <Text style={styles.current_price}>
+                  ${parseFloat(current_price).toFixed(2)}
+                </Text>
+                <PriceDirection price={parseFloat(current_price).toFixed(2)} />
+              </View>
             </View>
           </View>
+          <View style={styles.rightView}>
+            {prices && (
+              <LineChart
+                style={{ height: 50 }}
+                data={prices}
+                svg={{ stroke: isUp ? colors.success : colors.error }}
+                contentInset={{ top: 20, bottom: 20 }}
+              />
+            )}
+            <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
+              {change24Hr}% {isUp ? '▲' : '▼'}
+            </Text>
+          </View>
         </View>
-        <View style={styles.rightView}>
-          {prices && (
-            <LineChart
-              style={{ height: 50 }}
-              data={prices}
-              svg={{ stroke: isUp ? colors.success : colors.error }}
-              contentInset={{ top: 20, bottom: 20 }}
-            />
-          )}
-          <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
-            {change24Hr}% {isUp ? '▲' : '▼'}
-          </Text>
+        <View style={[styles.boxShadow, styles.tickerBuy]}>
+          <TouchableOpacity style={[commonStyles.flex, commonStyles.center]}>
+            <Text style={[commonStyles.fontBold, commonStyles.primaryColor]}>
+              BUY
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={[styles.boxShadow, styles.tickerBuy]}>
-        <TouchableOpacity style={[commonStyles.flex, commonStyles.center]}>
-          <Text style={[commonStyles.fontBold, commonStyles.primaryColor]}>
-            BUY
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-});
+    );
+  }
+);
 
 export default memo(DashboardPriceChange);
 
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
   tickerBuy: { width: HEIGHT, height: HEIGHT, marginLeft: 15 },
   icon: { width: 35, height: 35, marginRight: 10 },
   name: { fontFamily: FONT_MEDIUM, fontSize: 13 },
-  priceUsd: { fontFamily: FONT_BOLD, fontSize: 14, paddingTop: 2 },
+  current_price: { fontFamily: FONT_BOLD, fontSize: 14, paddingTop: 2 },
   change24: { fontSize: 12, fontFamily: FONT_MEDIUM },
   up: { color: colors.success },
   down: { color: colors.error },

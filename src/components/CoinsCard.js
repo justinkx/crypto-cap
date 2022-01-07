@@ -21,24 +21,25 @@ import PriceDirection from './PriceDirection';
 import { COIN_DETAILS_SCREEN } from '../navigation/NavConstants';
 
 const CoinsCard = ({
-  changePercent24Hr,
-  marketCapUsd,
+  price_change_percentage_24h,
+  market_cap,
   name,
-  priceUsd,
-  rank,
+  current_price,
+  market_cap_rank,
   symbol,
   id,
+  image,
 }) => {
-  const change24Hr = parseFloat(changePercent24Hr).toFixed(2);
+  const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
   const isUp = change24Hr > 0;
   const priceChange = useSharedValue(colors.white);
-  const prevPriceUsd = useRef(0);
+  const prevcurrent_price = useRef(0);
   const navigation = useNavigation();
 
   useEffect(() => {
-    const animateWorklet = (priceUsd, prevPriceUsd) => {
+    const animateWorklet = (current_price, prevcurrent_price) => {
       'worklet';
-      if (priceUsd > prevPriceUsd.current) {
+      if (current_price > prevcurrent_price.current) {
         priceChange.value = withTiming(colors.successTint, {}, () => {
           priceChange.value = withDelay(200, withTiming(colors.white));
         });
@@ -47,12 +48,12 @@ const CoinsCard = ({
           priceChange.value = withDelay(200, withTiming(colors.white));
         });
       }
-      prevPriceUsd.current = priceUsd;
+      prevcurrent_price.current = current_price;
     };
-    if (priceUsd && prevPriceUsd.current !== priceUsd) {
-      animateWorklet(priceUsd, prevPriceUsd);
+    if (current_price && prevcurrent_price.current !== current_price) {
+      animateWorklet(current_price, prevcurrent_price);
     }
-  }, [priceUsd, priceChange]);
+  }, [current_price, priceChange]);
 
   const animatedStyles = useAnimatedStyle(() => {
     return {
@@ -72,8 +73,8 @@ const CoinsCard = ({
         onPress={handleNavigation}
       >
         <View style={[commonStyles.row, styles.nameView]}>
-          <Text style={styles.index}>{rank}</Text>
-          <AssetIcon symbol={symbol} iconStyle={styles.icon} />
+          <Text style={styles.index}>{market_cap_rank}</Text>
+          <AssetIcon symbol={symbol} url={image} iconStyle={styles.icon} />
           <View style={styles.symbolView}>
             <Text
               textBreakStrategy={'highQuality'}
@@ -88,16 +89,16 @@ const CoinsCard = ({
         </View>
         <View style={styles.priceView}>
           <View style={commonStyles.row}>
-            <Text style={styles.priceUsd}>
+            <Text style={styles.current_price}>
               <Text style={styles.price}>Price: </Text>$
-              {parseFloat(priceUsd).toFixed(2)}
+              {parseFloat(current_price).toFixed(2)}
             </Text>
-            <PriceDirection price={parseFloat(priceUsd).toFixed(2)} />
+            <PriceDirection price={parseFloat(current_price).toFixed(2)} />
           </View>
 
-          <Text style={styles.marketCapUsd}>
+          <Text style={styles.market_cap}>
             <Text style={styles.marketCap}>Market Cap: </Text>$
-            {NumbFormat({ number: marketCapUsd })}
+            {NumbFormat({ number: market_cap })}
           </Text>
         </View>
         <View style={styles.priceChangeView}>
@@ -150,12 +151,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     opacity: 0.5,
   },
-  priceUsd: {
+  current_price: {
     fontFamily: FONT_BOLD,
     color: colors.black,
     fontSize: 12,
   },
-  marketCapUsd: {
+  market_cap: {
     fontFamily: FONT_BOLD,
     color: colors.black,
     fontSize: 10,
