@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {
   DASHBOARD_SCREEN,
@@ -27,7 +27,7 @@ import DrawerContent from './DrawerContent';
 import { colors, FONT_BOLD } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+const NativeStack = createNativeStackNavigator();
 
 const transparentHeader = {
   backgroundColor: 'transparent',
@@ -40,65 +40,74 @@ const headerTitleStyle = {
   fontSize: 20,
 };
 
+const menuHeaderLeftStyle = { marginLeft: 15 };
+
 const titleFromParamsOptions = ({ route }) => ({
   title: route?.params?.title || '',
   headerStyle: transparentHeader,
   headerTintColor: colors.white,
   headerBackTitleVisible: false,
+  animation: 'none',
 });
 
 const drawerIconOption = {
   headerLeft: ({ focused, size }) => (
-    <HamburgerIcon size={size} focused={focused} />
+    <HamburgerIcon
+      size={size}
+      focused={focused}
+      containerStyle={menuHeaderLeftStyle}
+    />
   ),
   headerBackTitleVisible: false,
 };
 
 function CoinStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerTitleStyle, animationEnabled: false }}
+    <NativeStack.Navigator
+      screenOptions={{
+        headerTitleStyle,
+      }}
     >
-      <Stack.Screen
+      <NativeStack.Screen
         options={{
           headerStyle: transparentHeader,
           title: 'Coins',
           headerLeft: (props) => <HamburgerIcon {...props} />,
           headerTintColor: colors.white,
+          headerLeftContainerStyle: { justifyContent: 'flex-start' },
         }}
         name={COINS_SCREEN}
         component={Coins}
       />
-      <Stack.Screen
+      <NativeStack.Screen
         options={titleFromParamsOptions}
         name={COIN_DETAILS_SCREEN}
         component={CoinDetails}
       />
-    </Stack.Navigator>
+    </NativeStack.Navigator>
   );
 }
 
 function ExchangeStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerTitleStyle, animationEnabled: false }}
-    >
-      <Stack.Screen
+    <NativeStack.Navigator screenOptions={{ headerTitleStyle }}>
+      <NativeStack.Screen
         options={{
           headerStyle: transparentHeader,
           title: 'Exchanges',
           headerLeft: (props) => <HamburgerIcon {...props} />,
+          headerLeftContainerStyle: { justifyContent: 'flex-start' },
           headerTintColor: colors.white,
         }}
         name={EXCHANGE_SCREEN}
         component={Exchanges}
       />
-      <Stack.Screen
+      <NativeStack.Screen
         options={titleFromParamsOptions}
         name={EXCHANGE_DETAILS_SCREEN}
         component={ExchangeDetails}
       />
-    </Stack.Navigator>
+    </NativeStack.Navigator>
   );
 }
 
