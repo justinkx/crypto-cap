@@ -8,8 +8,11 @@ import { getCryptoCoins } from '../store/selectors/assetSelector';
 import CoinsCard from '../components/CoinsCard';
 import { commonStyles } from '../styles/CommonStyles';
 import SearchBar from '../components/SearchBar';
+import { useAfterInteractions } from '../hoc/useAfterInteractions';
 
 const Coins = () => {
+  const { shouldRender } = useAfterInteractions();
+
   const [searchValue, setSearchValue] = useState('');
   const coins = useSelector(
     (state) => getCryptoCoins(state)(searchValue),
@@ -23,20 +26,24 @@ const Coins = () => {
   return (
     <Page scroll={false}>
       <Freeze>
-        <SearchBar
-          value={searchValue}
-          onChange={setSearchValue}
-          placeholder={'Search Coin'}
-        />
-        <FlatList
-          style={commonStyles.flex}
-          data={coins}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          contentContainerStyle={commonStyles.listPadding}
-          initialNumToRender={10}
-          removeClippedSubviews
-        />
+        {shouldRender && (
+          <>
+            <SearchBar
+              value={searchValue}
+              onChange={setSearchValue}
+              placeholder={'Search Coin'}
+            />
+            <FlatList
+              style={commonStyles.flex}
+              data={coins}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
+              contentContainerStyle={commonStyles.listPadding}
+              initialNumToRender={10}
+              removeClippedSubviews
+            />
+          </>
+        )}
       </Freeze>
     </Page>
   );

@@ -8,8 +8,10 @@ import Page from '../components/Page';
 import { commonStyles } from '../styles/CommonStyles';
 import SearchBar from '../components/SearchBar';
 import ExchangeCard from '../components/ExchangeCard';
+import { useAfterInteractions } from '../hoc/useAfterInteractions';
 
 const Exchanges = () => {
+  const { shouldRender } = useAfterInteractions();
   const [searchValue, setSearchValue] = useState('');
 
   const exchanges = useSelector(
@@ -24,20 +26,24 @@ const Exchanges = () => {
   return (
     <Page scroll={false}>
       <Freeze>
-        <SearchBar
-          value={searchValue}
-          onChange={setSearchValue}
-          placeholder={'Search Exchange'}
-        />
-        <FlatList
-          style={commonStyles.flex}
-          data={exchanges}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          contentContainerStyle={commonStyles.listPadding}
-          initialNumToRender={10}
-          removeClippedSubviews
-        />
+        {shouldRender && (
+          <>
+            <SearchBar
+              value={searchValue}
+              onChange={setSearchValue}
+              placeholder={'Search Exchange'}
+            />
+            <FlatList
+              style={commonStyles.flex}
+              data={exchanges}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
+              contentContainerStyle={commonStyles.listPadding}
+              initialNumToRender={10}
+              removeClippedSubviews
+            />
+          </>
+        )}
       </Freeze>
     </Page>
   );

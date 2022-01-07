@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.white,
     flex: 1,
+    paddingRight: 5,
   },
   rank: {
     fontSize: 14,
