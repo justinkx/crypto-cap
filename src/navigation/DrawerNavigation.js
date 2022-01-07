@@ -31,6 +31,11 @@ const transparentHeader = {
   elevation: 0,
   shadowOpacity: 0,
 };
+const headerTitleStyle = {
+  color: colors.white,
+  fontFamily: FONT_BOLD,
+  fontSize: 20,
+};
 
 const titleFromParamsOptions = ({ route }) => ({
   title: route?.params?.title || '',
@@ -46,7 +51,7 @@ const drawerIconOption = {
 
 function CoinStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerTitleStyle }}>
       <Stack.Screen
         options={{
           headerStyle: transparentHeader,
@@ -71,7 +76,7 @@ function DrawerNavigation() {
       initialRouteName={DASHBOARD_SCREEN}
       screenOptions={{
         headerStyle: transparentHeader,
-        headerTitleStyle: { color: colors.white, fontFamily: FONT_SEMI_BOLD },
+        headerTitleStyle,
         headerTintColor: colors.white,
         drawerActiveTintColor: colors.white,
         drawerInactiveTintColor: 'gray',

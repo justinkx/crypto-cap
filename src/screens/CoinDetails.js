@@ -17,6 +17,7 @@ const CoinDetails = ({ route }) => {
       market_cap_rank,
       total_volume,
       market_cap,
+      id,
     },
   ] = useSelector(
     (state) => getCryptoAssets(state)([route?.params?.id]),
@@ -34,7 +35,7 @@ const CoinDetails = ({ route }) => {
           total_volume={total_volume}
           market_cap={market_cap}
         />
-        <CandlesChart coin={name} containerStyle={styles.chartStyle} />
+        <CandlesChart coin={id} containerStyle={styles.chartStyle} />
       </Freeze>
     </Page>
   );

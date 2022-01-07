@@ -35,7 +35,9 @@ const Header = ({
       <View style={commonStyles.row}>
         <AssetIcon symbol={symbol} iconStyle={styles.iconStyle} />
         <View style={styles.nameView}>
-          <Text style={[styles.name, commonStyles.fontBold]}>{name}</Text>
+          <Text style={[styles.name, commonStyles.fontBold, styles.padBottom]}>
+            {name}
+          </Text>
           <View style={commonStyles.row}>
             <Text style={styles.symbol}>{_toUpper(symbol)}</Text>
             <TouchableOpacity style={styles.info} onPress={openInfo}>
@@ -45,7 +47,7 @@ const Header = ({
         </View>
       </View>
       <View>
-        <Text style={[styles.title]}>
+        <Text style={[styles.title, styles.padBottom]}>
           Market Cap:{' '}
           <Text style={[styles.current_price, commonStyles.fontSemibold]}>
             {NumbFormat({ number: market_cap })}
@@ -116,4 +118,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   info: { marginLeft: 4 },
+  padBottom: { paddingBottom: 4 },
 });
