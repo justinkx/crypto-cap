@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
-const ScrollRow = ({ width, rowStyle = {}, children, onClick }) => {
+const ScrollRow = ({ rowStyle = {}, children, onClick }) => {
   return (
-    <View style={[styles.wrapper, { width }]}>
+    <View style={styles.wrapper}>
       <TouchableOpacity onPress={onClick}>
         <View style={[styles.container, rowStyle]}>{children}</View>
       </TouchableOpacity>

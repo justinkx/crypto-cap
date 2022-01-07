@@ -121,7 +121,7 @@ const RenderBalance = memo(
             <AssetIcon symbol={symbol} iconStyle={styles.icon} url={image} />
             <View>
               <Text style={styles.name}>{name}</Text>
-              <View style={commonStyles.row}>
+              <View style={[commonStyles.row, commonStyles.center]}>
                 <Text style={styles.current_price}>
                   ${parseFloat(current_price).toFixed(2)}
                 </Text>

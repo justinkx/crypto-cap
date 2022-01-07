@@ -17,9 +17,9 @@ import {
 } from '../styles/CommonStyles';
 import TrustScore from './TrustScore';
 import ScrollRow from './ScrollRow';
+import { NumbFormat } from '../utils/helpers';
 
 const ExchangeCard = ({
-  id,
   name,
   year_established,
   country,
@@ -27,7 +27,6 @@ const ExchangeCard = ({
   trust_score,
   trust_score_rank,
   trade_volume_24h_btc,
-  trade_volume_24h_btc_normalized,
 }) => {
   const { width } = useWindowDimensions();
 
@@ -35,20 +34,15 @@ const ExchangeCard = ({
   return (
     <View style={styles.container}>
       <ScrollView
+        pagingEnabled
+        showsHorizontalScrollIndicator
         bounces
         horizontal
-        snapToInterval={width}
-        snapToAlignment={'start'}
+        snapToAlignment={'center'}
         scrollEventThrottle={100}
-        showsHorizontalScrollIndicator
-        pagingEnabled
       >
-        <ScrollRow
-          onClick={handleClick}
-          width={width}
-          rowStyle={[commonStyles.row]}
-        >
-          <View style={[commonStyles.row, styles.nameView]}>
+        <ScrollRow onClick={handleClick} rowStyle={[commonStyles.row]}>
+          <View style={[commonStyles.row, { width: width / 1.7 }]}>
             <Text style={styles.rank}>{trust_score_rank}</Text>
             <Image source={{ url: image }} style={styles.image} />
             <View>
@@ -56,7 +50,15 @@ const ExchangeCard = ({
               <Text style={styles.year}>Year Est: {year_established}</Text>
             </View>
           </View>
-          <View style={styles.trustView}>
+          <View style={{ width: width / 2 }}>
+            <Text style={[styles.volume, { paddingBottom: 4 }]}>
+              Country: {country}
+            </Text>
+            <Text style={styles.volume}>
+              Volume: {NumbFormat({ number: trade_volume_24h_btc })} BTC
+            </Text>
+          </View>
+          <View style={{ width: width / 2 }}>
             <TrustScore trust_score={trust_score} />
           </View>
         </ScrollRow>
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
     backgroundColor: colors.white,
+    flex: 1,
   },
   rank: {
     fontSize: 14,
@@ -87,15 +90,16 @@ const styles = StyleSheet.create({
   name: {
     color: colors.primary,
     fontSize: 15,
+    paddingBottom: 2,
   },
   year: {
     fontFamily: FONT_SEMI_BOLD,
     color: colors.black,
     fontSize: 14,
   },
-  nameView: { width: '60%' },
-  trustView: {
-    width: '40%',
-    marginHorizontal: 15,
+  volume: {
+    fontFamily: FONT_SEMI_BOLD,
+    color: colors.black,
+    fontSize: 13,
   },
 });
