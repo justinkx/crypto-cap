@@ -44,12 +44,14 @@ const titleFromParamsOptions = ({ route }) => ({
   title: route?.params?.title || '',
   headerStyle: transparentHeader,
   headerTintColor: colors.white,
+  headerBackTitleVisible: false,
 });
 
 const drawerIconOption = {
   headerLeft: ({ focused, size }) => (
     <HamburgerIcon size={size} focused={focused} />
   ),
+  headerBackTitleVisible: false,
 };
 
 function CoinStack() {

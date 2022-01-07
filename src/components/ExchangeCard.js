@@ -7,11 +7,13 @@ import {
   Image,
   useWindowDimensions,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { commonStyles, colors, FONT_SEMI_BOLD } from '../styles/CommonStyles';
 import TrustScore from './TrustScore';
 import ScrollRow from './ScrollRow';
 import { NumbFormat } from '../utils/helpers';
+import { EXCHANGE_DETAILS_SCREEN } from '../navigation/NavConstants';
 
 const ExchangeCard = ({
   name,
@@ -21,10 +23,15 @@ const ExchangeCard = ({
   trust_score,
   trust_score_rank,
   trade_volume_24h_btc,
+  id,
 }) => {
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
 
-  const handleClick = useCallback(() => {}, []);
+  const handleClick = useCallback(() => {
+    navigation.navigate(EXCHANGE_DETAILS_SCREEN, { title: name, id });
+  }, [navigation, name, id]);
+
   return (
     <View style={styles.container}>
       <ScrollView
