@@ -47,7 +47,6 @@ const titleFromParamsOptions = ({ route }) => ({
   headerStyle: transparentHeader,
   headerTintColor: colors.white,
   headerBackTitleVisible: false,
-  animation: 'none',
 });
 
 const drawerIconOption = {
@@ -66,6 +65,11 @@ function CoinStack() {
     <NativeStack.Navigator
       screenOptions={{
         headerTitleStyle,
+        cardStyle: {
+          backgroundColor: 'transparent',
+        },
+        headerShadowVisible: false,
+        headerTitleAlign: 'center',
       }}
     >
       <NativeStack.Screen
@@ -75,6 +79,7 @@ function CoinStack() {
           headerLeft: (props) => <HamburgerIcon {...props} />,
           headerTintColor: colors.white,
           headerLeftContainerStyle: { justifyContent: 'flex-start' },
+          detachPreviousScreen: false,
         }}
         name={COINS_SCREEN}
         component={Coins}
@@ -90,7 +95,16 @@ function CoinStack() {
 
 function ExchangeStack() {
   return (
-    <NativeStack.Navigator screenOptions={{ headerTitleStyle }}>
+    <NativeStack.Navigator
+      screenOptions={{
+        headerTitleStyle,
+        cardStyle: {
+          backgroundColor: 'transparent',
+        },
+        headerShadowVisible: false,
+        headerTitleAlign: 'center',
+      }}
+    >
       <NativeStack.Screen
         options={{
           headerStyle: transparentHeader,
@@ -123,6 +137,7 @@ function DrawerNavigation() {
         drawerInactiveTintColor: 'gray',
         drawerLabelStyle: { fontFamily: FONT_BOLD },
         drawerActiveBackgroundColor: colors.primaryFade,
+        headerTitleAlign: 'center',
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       detachInactiveScreens
