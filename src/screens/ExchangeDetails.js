@@ -1,14 +1,23 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Freeze } from 'react-freeze';
 import { StyleSheet } from 'react-native';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import Page from '../components/Page';
 import { useAfterInteractions } from '../hoc/useAfterInteractions';
 import { apiChain } from '../utils/helpers';
 import { EXCHANGE_DETAILS, EXCHANGE_VOLUME_CHART } from '../utils/api';
+import Header from '../components/ExchangeDetails/Header';
+import { getExchanges } from '../store/selectors/exchangeSelector';
 
 const ExchangeDetails = ({ route }) => {
   const { id } = route.params;
+
+  const [exchangeData] = useSelector(
+    (state) => getExchanges(state)([id]),
+    shallowEqual
+  );
+
   const [exchangeDetails, setDetails] = useState({
     details: {},
     volumeChart: [],
@@ -28,7 +37,13 @@ const ExchangeDetails = ({ route }) => {
   }, [id]);
   return (
     <Page scroll>
-      <Freeze>{shouldRender && <></>}</Freeze>
+      <Freeze>
+        {shouldRender && (
+          <>
+            <Header {...exchangeData} />
+          </>
+        )}
+      </Freeze>
     </Page>
   );
 };
