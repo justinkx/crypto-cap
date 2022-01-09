@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useMemo } from 'react';
+import React, { memo, useEffect, useState, useCallback } from 'react';
 import { Freeze } from 'react-freeze';
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -44,6 +44,11 @@ const ExchangeDetails = ({ route }) => {
 
   const { details = {} } = exchangeDetails;
 
+  const renderTickers = useCallback(
+    () => <Tickers tickers={details?.tickers || []} />,
+    [details]
+  );
+
   return (
     <Page scroll={false}>
       <Freeze>
@@ -68,7 +73,7 @@ const ExchangeDetails = ({ route }) => {
               <Tab.Screen
                 options={{ title: 'Tickers' }}
                 name="Tickers"
-                children={() => <Tickers tickers={details?.tickers || []} />}
+                children={renderTickers}
               />
               <Tab.Screen
                 options={{ title: 'Status Updates' }}
