@@ -24,7 +24,7 @@ import ExchangeDetails from '../screens/ExchangeDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
-import { colors, FONT_BOLD } from '../styles/CommonStyles';
+import { colors, FONT_BOLD, isIos } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
 const NativeStack = createNativeStackNavigator();
@@ -70,6 +70,7 @@ function CoinStack() {
         },
         headerShadowVisible: false,
         headerTitleAlign: 'center',
+        animation: isIos ? 'fade' : 'default',
       }}
     >
       <NativeStack.Screen
@@ -103,6 +104,7 @@ function ExchangeStack() {
         },
         headerShadowVisible: false,
         headerTitleAlign: 'center',
+        animation: isIos ? 'fade' : 'default',
       }}
     >
       <NativeStack.Screen

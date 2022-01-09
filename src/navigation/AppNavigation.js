@@ -18,6 +18,7 @@ const AppNavigator = () => {
       colors: {
         ...DefaultTheme.colors,
         background: 'transparent',
+        card: 'transparent',
       },
     }),
     []
