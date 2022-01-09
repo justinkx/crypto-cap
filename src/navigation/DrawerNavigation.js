@@ -25,7 +25,7 @@ import ExchangeDetails from '../screens/ExchangeDetails';
 import HamburgerIcon from '../components/HamburgerIcon';
 
 import DrawerContent from './DrawerContent';
-import { colors, FONT_BOLD, isIos } from '../styles/CommonStyles';
+import { colors, FONT_BOLD } from '../styles/CommonStyles';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();

@@ -46,9 +46,9 @@ export default memo(Header);
 
 const styles = StyleSheet.create({
   container: {
-    height: 70,
+    height: 56,
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 10,
   },
   image: {
     width: 40,

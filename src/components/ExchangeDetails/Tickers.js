@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 import { commonStyles } from '../../styles/CommonStyles';
 import TickerItem from './TickerItem';

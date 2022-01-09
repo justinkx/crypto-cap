@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState, useCallback } from 'react';
 import { Freeze } from 'react-freeze';
-import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -63,7 +62,9 @@ const ExchangeDetails = ({ route }) => {
                   color: colors.white,
                   textTransform: 'capitalize',
                 },
-                tabBarStyle: { backgroundColor: 'transparent' },
+                tabBarStyle: {
+                  backgroundColor: 'transparent',
+                },
                 tabBarActiveTintColor: colors.white,
                 tabBarInactiveTintColor: colors.exchangeTint,
                 tabBarIndicatorStyle: { backgroundColor: colors.white },
@@ -89,5 +90,3 @@ const ExchangeDetails = ({ route }) => {
 };
 
 export default memo(ExchangeDetails);
-
-const styles = StyleSheet.create({});

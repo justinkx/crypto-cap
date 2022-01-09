@@ -28,18 +28,26 @@ const TickerItem = ({
           {base} / {target}
         </Text>
         <View style={[styles.detailView, commonStyles.columnFlexEnd]}>
-          <Text style={styles.title}>Price</Text>
-          <Text style={styles.value}>{last}</Text>
+          <Text numberOfLines={1} style={styles.title}>
+            Price
+          </Text>
+          <Text numberOfLines={1} style={styles.value}>
+            {parseFloat(last).toFixed(2)}
+          </Text>
         </View>
         <View style={[styles.detailView, commonStyles.columnFlexEnd]}>
-          <Text style={styles.title}>Volume</Text>
-          <Text style={styles.value}>
+          <Text numberOfLines={1} style={styles.title}>
+            Volume
+          </Text>
+          <Text numberOfLines={1} style={styles.value}>
             {NumbFormat({ number: parseFloat(volume).toFixed(2) })}
           </Text>
         </View>
         <View style={[styles.detailView, commonStyles.columnFlexEnd]}>
-          <Text style={styles.title}>Spread</Text>
-          <Text style={styles.value}>
+          <Text numberOfLines={1} style={styles.title}>
+            Spread
+          </Text>
+          <Text numberOfLines={1} style={styles.value}>
             {parseFloat(bid_ask_spread_percentage).toFixed(2)} {' %'}
           </Text>
         </View>
