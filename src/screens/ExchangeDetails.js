@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, useMemo } from 'react';
 import { Freeze } from 'react-freeze';
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -43,6 +43,7 @@ const ExchangeDetails = ({ route }) => {
   }, [id]);
 
   const { details = {} } = exchangeDetails;
+
   return (
     <Page scroll={false}>
       <Freeze>
@@ -67,8 +68,7 @@ const ExchangeDetails = ({ route }) => {
               <Tab.Screen
                 options={{ title: 'Tickers' }}
                 name="Tickers"
-                component={Tickers}
-                tickers={details?.tickers || []}
+                children={() => <Tickers tickers={details?.tickers || []} />}
               />
               <Tab.Screen
                 options={{ title: 'Status Updates' }}

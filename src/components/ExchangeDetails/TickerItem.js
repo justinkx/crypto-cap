@@ -3,10 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { commonStyles, colors } from '../../styles/CommonStyles';
 
-const TickerItem = ({}) => {
+const TickerItem = ({ base, target, trust_score }) => {
+  console.log({ trust_score });
   return (
     <View>
-      <Text></Text>
+      <Text>
+        {base} / {target}
+      </Text>
     </View>
   );
 };

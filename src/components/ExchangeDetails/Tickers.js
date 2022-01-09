@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
-import { commonStyles, colors } from '../../styles/CommonStyles';
+import { commonStyles } from '../../styles/CommonStyles';
 import TickerItem from './TickerItem';
 
 const Tickers = ({ tickers = [] }) => {
