@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Freeze } from 'react-freeze';
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Page from '../components/Page';
 import { useAfterInteractions } from '../hoc/useAfterInteractions';
@@ -9,6 +10,11 @@ import { apiChain } from '../utils/helpers';
 import { EXCHANGE_DETAILS, EXCHANGE_VOLUME_CHART } from '../utils/api';
 import Header from '../components/ExchangeDetails/Header';
 import { getExchanges } from '../store/selectors/exchangeSelector';
+import StatusUpdates from '../components/ExchangeDetails/StatusUpdates';
+import Tickers from '../components/ExchangeDetails/Tickers';
+import { colors, FONT_BOLD } from '../styles/CommonStyles';
+
+const Tab = createMaterialTopTabNavigator();
 
 const ExchangeDetails = ({ route }) => {
   const { id } = route.params;
@@ -35,12 +41,41 @@ const ExchangeDetails = ({ route }) => {
 
     getDetails();
   }, [id]);
+
+  const { details = {} } = exchangeDetails;
   return (
-    <Page scroll>
+    <Page scroll={false}>
       <Freeze>
         {shouldRender && (
           <>
             <Header {...exchangeData} />
+            <Tab.Navigator
+              screenOptions={{
+                tabBarLabelStyle: {
+                  fontSize: 14,
+                  fontFamily: FONT_BOLD,
+                  color: colors.white,
+                  textTransform: 'capitalize',
+                },
+                tabBarStyle: { backgroundColor: 'transparent' },
+                tabBarActiveTintColor: colors.white,
+                tabBarInactiveTintColor: colors.exchangeTint,
+                tabBarIndicatorStyle: { backgroundColor: colors.white },
+                lazy: true,
+              }}
+            >
+              <Tab.Screen
+                options={{ title: 'Tickers' }}
+                name="Tickers"
+                component={Tickers}
+                tickers={details?.tickers || []}
+              />
+              <Tab.Screen
+                options={{ title: 'Status Updates' }}
+                name="StatusUpdates"
+                component={StatusUpdates}
+              />
+            </Tab.Navigator>
           </>
         )}
       </Freeze>
