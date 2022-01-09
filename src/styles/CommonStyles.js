@@ -72,6 +72,10 @@ export const commonStyles = StyleSheet.create({
   spaceBetween: {
     justifyContent: 'space-between',
   },
+  rowFlexEnd: {
+    justifyContent: 'flex-end',
+  },
+  columnFlexEnd: { alignItems: 'flex-end' },
   boxShadow: {
     shadowColor: '#000',
     shadowOffset: {

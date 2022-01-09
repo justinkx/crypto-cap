@@ -1,7 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import _toUpper from 'lodash/toUpper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
 
@@ -9,6 +8,7 @@ import { commonStyles, colors } from '../../styles/CommonStyles';
 import AssetIcon from '../AssetIcon';
 import PriceDirection from '../PriceDirection';
 import { NumbFormat } from '../../utils/helpers';
+import Rank from '../Rank';
 
 const Header = ({
   name,
@@ -67,16 +67,7 @@ const Header = ({
           </Text>
           <PriceDirection price={parseFloat(current_price).toFixed(2)} />
         </View>
-        <View style={styles.shield}>
-          <MaterialCommunityIcons
-            name="shield"
-            size={20}
-            color={colors.wallet}
-          />
-          <Text style={[commonStyles.fontBold, styles.market_cap_rank]}>
-            {market_cap_rank}
-          </Text>
-        </View>
+        <Rank rank={market_cap_rank} />
       </View>
     </View>
   );
@@ -102,17 +93,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   current_price: { fontSize: 12, color: colors.white, textAlign: 'auto' },
-  shield: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 4,
-  },
-  market_cap_rank: {
-    position: 'absolute',
-    color: colors.white,
-    fontSize: 10,
-  },
   title: {
     color: colors.primaryTint,
     fontSize: 12,

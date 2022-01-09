@@ -3,6 +3,8 @@ import memoizeOne from 'memoize-one';
 import _filter from 'lodash/filter';
 import _toLower from 'lodash/toLower';
 import _sortBy from 'lodash/sortBy';
+import _values from 'lodash/values';
+import _pick from 'lodash/pick';
 
 export const exchangeReducer = (state) => state.exchanges;
 
@@ -15,4 +17,8 @@ export const getCryptoExchanges = createSelector(exchangeReducer, (exchanges) =>
       (item) => parseFloat(item[sortBy])
     )
   )
+);
+
+export const getExchanges = createSelector(exchangeReducer, (exchanges) =>
+  memoizeOne((id = []) => _values(_pick(exchanges, id)))
 );
