@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import Page from '../components/Page';
 import { useAfterInteractions } from '../hoc/useAfterInteractions';
-import { apiChain, parseVolume } from '../utils/helpers';
+import { apiChain } from '../utils/helpers';
 import { EXCHANGE_DETAILS, EXCHANGE_VOLUME_CHART } from '../utils/api';
 import Header from '../components/ExchangeDetails/Header';
 import { getExchanges } from '../store/selectors/exchangeSelector';
@@ -36,8 +36,7 @@ const ExchangeDetails = ({ route }) => {
         fetch(EXCHANGE_DETAILS(id)),
         fetch(EXCHANGE_VOLUME_CHART(id)),
       ]);
-
-      setDetails({ details: _details, volumeChart: parseVolume(_volumeChart) });
+      setDetails({ details: _details, volumeChart: _volumeChart });
     }
 
     getDetails();

@@ -65,7 +65,7 @@ export const apiChain = async (promises = []) => {
   try {
     const res = await Promise.all(promises);
     const data = await Promise.all(res.map((r) => r.json()));
-    return data.flat();
+    return data;
   } catch (error) {
     throw error;
   }
