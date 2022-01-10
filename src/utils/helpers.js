@@ -79,3 +79,5 @@ export const listEmptyComponent = ({
     <ActivityIndicator size={size} color={color} />
   </View>
 );
+
+export const replaceEscape = (message = '') => message.replace(/\\/g, '\\\\');
