@@ -12,6 +12,7 @@ import { getExchanges } from '../store/selectors/exchangeSelector';
 import StatusUpdates from '../components/ExchangeDetails/StatusUpdates';
 import Tickers from '../components/ExchangeDetails/Tickers';
 import { colors, FONT_BOLD } from '../styles/CommonStyles';
+import Volume from '../components/ExchangeDetails/Volume';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,7 +42,7 @@ const ExchangeDetails = ({ route }) => {
     getDetails();
   }, [id]);
 
-  const { details = {} } = exchangeDetails;
+  const { details = {}, volumeChart = [] } = exchangeDetails;
 
   const renderTickers = useCallback(
     () => <Tickers tickers={details?.tickers || []} />,
@@ -56,6 +57,11 @@ const ExchangeDetails = ({ route }) => {
       />
     ),
     [details]
+  );
+
+  const renderVolumeChart = useCallback(
+    () => <Volume volumeChart={volumeChart} />,
+    [volumeChart]
   );
 
   return (
@@ -87,7 +93,12 @@ const ExchangeDetails = ({ route }) => {
                 children={renderTickers}
               />
               <Tab.Screen
-                options={{ title: 'Status Updates' }}
+                options={{ title: 'Volume' }}
+                name="Volume"
+                children={renderVolumeChart}
+              />
+              <Tab.Screen
+                options={{ title: 'Updates' }}
                 name="StatusUpdates"
                 component={renderStatusUpdates}
               />
