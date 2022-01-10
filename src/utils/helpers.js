@@ -1,4 +1,5 @@
 /* eslint-disable no-bitwise */
+import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { commonStyles, colors } from '../styles/CommonStyles';

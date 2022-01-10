@@ -48,6 +48,11 @@ const ExchangeDetails = ({ route }) => {
     [details]
   );
 
+  const renderStatusUpdates = useCallback(
+    () => <StatusUpdates statusUpdates={details?.status_updates || []} />,
+    [details]
+  );
+
   return (
     <Page scroll={false}>
       <Freeze>
@@ -79,7 +84,7 @@ const ExchangeDetails = ({ route }) => {
               <Tab.Screen
                 options={{ title: 'Status Updates' }}
                 name="StatusUpdates"
-                component={StatusUpdates}
+                component={renderStatusUpdates}
               />
             </Tab.Navigator>
           </>

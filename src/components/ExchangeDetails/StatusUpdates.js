@@ -1,16 +1,31 @@
-import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { memo, useCallback } from 'react';
+import { StyleSheet, FlatList } from 'react-native';
 
-import { commonStyles, colors } from '../../styles/CommonStyles';
+import { commonStyles } from '../../styles/CommonStyles';
+import StatusItem from './StatusItem';
+import { listEmptyComponent } from '../../utils/helpers';
 
-const StatusUpdates = () => {
+const StatusUpdates = ({ statusUpdates = [] }) => {
+  const renderItem = useCallback(({ item }) => <StatusItem {...item} />, []);
+
+  const keyExtractor = useCallback((_, index) => `${index}`, []);
+
   return (
-    <View>
-      <Text>StatusUpdates</Text>
-    </View>
+    <FlatList
+      style={commonStyles.flex}
+      contentContainerStyle={styles.flatList}
+      data={statusUpdates}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      ListEmptyComponent={listEmptyComponent}
+    />
   );
 };
 
 export default memo(StatusUpdates);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  flatList: {
+    padding: 15,
+  },
+});
