@@ -34,7 +34,7 @@ const Page = ({
           {children}
         </ScrollView>
       ) : (
-        <View style={commonStyles.flex}>{children}</View>
+        <>{children}</>
       )}
     </View>
   );
