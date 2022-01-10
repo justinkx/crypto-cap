@@ -1,5 +1,12 @@
-import React, { memo } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import React, { memo, useCallback } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import _get from 'lodash/get';
 
 import {
@@ -8,9 +15,11 @@ import {
   FONT_SEMI_BOLD,
   FONT_BOLD,
 } from '../../styles/CommonStyles';
+import { replaceEscape } from '../../utils/helpers';
 
-const StatusItem = ({ description, category, project = {}, user_title }) => {
+const StatusItem = ({ description, user, project = {}, user_title }) => {
   const large = _get(project, 'image.large', '');
+  const { width } = useWindowDimensions();
 
   return (
     <View style={[styles.container]}>
@@ -18,16 +27,17 @@ const StatusItem = ({ description, category, project = {}, user_title }) => {
         style={[commonStyles.row, commonStyles.center, styles.button]}
       >
         <Image source={{ uri: large }} style={styles.image} />
-        <View style={styles.contentView}>
+        <View style={[styles.contentView, { width: width - 130 }]}>
           <Text style={[styles.title, commonStyles.fontBold]}>
             {user_title}
           </Text>
+          <Text style={styles.user}>: {user}</Text>
           <Text
             style={[styles.description, commonStyles.fontSemibold]}
-            numberOfLines={3}
+            numberOfLines={2}
             ellipsizeMode={'tail'}
           >
-            {description}
+            {replaceEscape(description)}
           </Text>
         </View>
       </TouchableOpacity>
@@ -54,10 +64,9 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 10,
-    marginRight: 20,
   },
   contentView: {
-    flexWrap: 'wrap',
+    paddingLeft: 20,
   },
   title: {
     color: colors.primary,
@@ -65,5 +74,13 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 12,
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  user: {
+    marginVertical: 4,
+    fontSize: 11,
+    color: colors.black,
+    opacity: 0.7,
   },
 });
