@@ -81,3 +81,10 @@ export const listEmptyComponent = ({
 );
 
 export const replaceEscape = (message = '') => message.replace(/\\/g, '\\\\');
+
+export const parseVolume = (volume = []) =>
+  volume.reduce((accu, curr) => {
+    const [x, y] = curr;
+    accu.push({ x, y });
+    return accu;
+  }, []);

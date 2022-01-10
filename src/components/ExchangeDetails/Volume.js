@@ -1,10 +1,19 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryTheme,
+} from 'victory-native';
 
-const Volume = () => {
+const Volume = ({}) => {
+  const { width } = useWindowDimensions();
   return (
     <View>
-      <Text>Volume</Text>
+      <VictoryChart width={width - 20} height={200} padding={10}>
+        <VictoryBar style={{ data: { fill: '#c43a31' } }} />
+      </VictoryChart>
     </View>
   );
 };
