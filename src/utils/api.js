@@ -24,4 +24,4 @@ export const EXCHANGE_DETAILS = (id) =>
   `https://api.coingecko.com/api/v3/exchanges/${id}`;
 
 export const EXCHANGE_VOLUME_CHART = (id) =>
-  `https://api.coingecko.com/api/v3/exchanges/${id}/volume_chart?days=7`;
+  `https://api.coingecko.com/api/v3/exchanges/${id}/volume_chart?days=1`;

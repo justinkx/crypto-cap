@@ -1,4 +1,8 @@
 /* eslint-disable no-bitwise */
+import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
+
+import { commonStyles, colors } from '../styles/CommonStyles';
 
 export const chartColor = [
   '#AFB42B',
@@ -61,8 +65,26 @@ export const apiChain = async (promises = []) => {
   try {
     const res = await Promise.all(promises);
     const data = await Promise.all(res.map((r) => r.json()));
-    return data.flat();
+    return data;
   } catch (error) {
     throw error;
   }
 };
+
+export const listEmptyComponent = ({
+  size = 'large',
+  color = colors.white,
+}) => (
+  <View style={[commonStyles.flex, commonStyles.center]}>
+    <ActivityIndicator size={size} color={color} />
+  </View>
+);
+
+export const replaceEscape = (message = '') => message.replace(/\\/g, '\\\\');
+
+export const parseVolume = (volume = []) =>
+  volume.reduce((accu, curr) => {
+    const [x, y] = curr;
+    accu.push({ x, y });
+    return accu;
+  }, []);
