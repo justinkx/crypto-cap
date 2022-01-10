@@ -3,6 +3,7 @@ import { StyleSheet, FlatList } from 'react-native';
 
 import { commonStyles } from '../../styles/CommonStyles';
 import TickerItem from './TickerItem';
+import { listEmptyComponent } from '../../utils/helpers';
 
 const Tickers = ({ tickers = [] }) => {
   const renderItem = useCallback(({ item }) => <TickerItem {...item} />, []);
@@ -16,6 +17,7 @@ const Tickers = ({ tickers = [] }) => {
       data={tickers}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
+      ListEmptyComponent={listEmptyComponent}
     />
   );
 };

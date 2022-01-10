@@ -1,4 +1,7 @@
 /* eslint-disable no-bitwise */
+import { ActivityIndicator, View } from 'react-native';
+
+import { commonStyles, colors } from '../styles/CommonStyles';
 
 export const chartColor = [
   '#AFB42B',
@@ -66,3 +69,12 @@ export const apiChain = async (promises = []) => {
     throw error;
   }
 };
+
+export const listEmptyComponent = ({
+  size = 'large',
+  color = colors.white,
+}) => (
+  <View style={[commonStyles.flex, commonStyles.center]}>
+    <ActivityIndicator size={size} color={color} />
+  </View>
+);
