@@ -5,8 +5,11 @@ import { commonStyles } from '../../styles/CommonStyles';
 import StatusItem from './StatusItem';
 import { listEmptyComponent } from '../../utils/helpers';
 
-const StatusUpdates = ({ statusUpdates = [] }) => {
-  const renderItem = useCallback(({ item }) => <StatusItem {...item} />, []);
+const StatusUpdates = ({ statusUpdates = [], url = '' }) => {
+  const renderItem = useCallback(
+    ({ item }) => <StatusItem {...item} url={url} />,
+    [url]
+  );
 
   const keyExtractor = useCallback((_, index) => `${index}`, []);
 

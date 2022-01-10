@@ -8,23 +8,21 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import _get from 'lodash/get';
+import * as Linking from 'expo-linking';
 
-import {
-  commonStyles,
-  colors,
-  FONT_SEMI_BOLD,
-  FONT_BOLD,
-} from '../../styles/CommonStyles';
-import { replaceEscape } from '../../utils/helpers';
+import { commonStyles, colors } from '../../styles/CommonStyles';
 
-const StatusItem = ({ description, user, project = {}, user_title }) => {
+const StatusItem = ({ description, user, project = {}, user_title, url }) => {
   const large = _get(project, 'image.large', '');
   const { width } = useWindowDimensions();
+
+  const onPress = useCallback(() => Linking.openURL(url), [url]);
 
   return (
     <View style={[styles.container]}>
       <TouchableOpacity
         style={[commonStyles.row, commonStyles.center, styles.button]}
+        onPress={onPress}
       >
         <Image source={{ uri: large }} style={styles.image} />
         <View style={[styles.contentView, { width: width - 130 }]}>
@@ -37,7 +35,7 @@ const StatusItem = ({ description, user, project = {}, user_title }) => {
             numberOfLines={2}
             ellipsizeMode={'tail'}
           >
-            {replaceEscape(description)}
+            {description}
           </Text>
         </View>
       </TouchableOpacity>

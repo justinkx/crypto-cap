@@ -49,7 +49,12 @@ const ExchangeDetails = ({ route }) => {
   );
 
   const renderStatusUpdates = useCallback(
-    () => <StatusUpdates statusUpdates={details?.status_updates || []} />,
+    () => (
+      <StatusUpdates
+        statusUpdates={details?.status_updates || []}
+        url={details?.url}
+      />
+    ),
     [details]
   );
 
