@@ -10,16 +10,16 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, shallowEqual } from 'react-redux';
+import { MaterialIcons } from '@expo/vector-icons';
+import * as Linking from 'expo-linking';
 
-import {
-  commonStyles,
-  colors,
-  FONT_SEMI_BOLD,
-  FONT_BOLD,
-} from '../../styles/CommonStyles';
+import { commonStyles, colors } from '../../styles/CommonStyles';
 import { NumbFormat } from '../../utils/helpers';
 import ScrollRow from '../ScrollRow';
-import { EXCHANGE_DETAILS_SCREEN } from '../../navigation/NavConstants';
+import {
+  EXCHANGE_DETAILS_SCREEN,
+  EXCHANGE_STACK,
+} from '../../navigation/NavConstants';
 import { getExchanges } from '../../store/selectors/exchangeSelector';
 
 const TickerItem = ({
@@ -28,6 +28,7 @@ const TickerItem = ({
   market: { name = '', identifier = '' },
   last,
   volume,
+  trade_url,
 }) => {
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
@@ -35,13 +36,21 @@ const TickerItem = ({
   const [exchange] = useSelector((state) => getExchanges(state)([identifier]));
 
   const handleClick = useCallback(() => {
-    navigation.navigate(EXCHANGE_DETAILS_SCREEN);
-  }, [navigation]);
+    navigation.navigate(EXCHANGE_STACK, {
+      screen: EXCHANGE_DETAILS_SCREEN,
+      params: {
+        title: name,
+        id: identifier,
+      },
+      initial: true,
+    });
+  }, [navigation, name, identifier]);
+
+  const openInfo = useCallback(() => Linking.openURL(trade_url), [trade_url]);
 
   return (
     <View style={[styles.container]}>
       <ScrollView
-        pagingEnabled
         showsHorizontalScrollIndicator
         bounces
         horizontal
@@ -52,20 +61,21 @@ const TickerItem = ({
           onClick={handleClick}
           rowStyle={[commonStyles.row, styles.button]}
         >
-          <View
-            style={[
-              commonStyles.row,
-              { width: 0.55 * width, paddingRight: 10 },
-            ]}
-          >
+          <View style={[commonStyles.row, { width: 0.45 * width }]}>
             <Image
               source={{
                 uri: exchange?.image,
               }}
               style={styles.image}
             />
-            <View>
-              <Text style={[commonStyles.fontBold, styles.name]}>{name}</Text>
+            <View style={commonStyles.flex}>
+              <Text
+                ellipsizeMode={'tail'}
+                textBreakStrategy="highQuality"
+                style={[commonStyles.fontBold, styles.name]}
+              >
+                {name}
+              </Text>
               <Text style={[commonStyles.fontSemibold, styles.rank]}>
                 Rank: {exchange?.trust_score_rank}
               </Text>
@@ -79,10 +89,18 @@ const TickerItem = ({
               Price: ${parseFloat(last).toFixed(0)}
             </Text>
           </View>
-          <View style={[{ width: 0.3 * width }]}>
+          <View style={[{ width: 0.35 * width }]}>
             <Text style={[commonStyles.fontBold, styles.pair]}>
               Volume: ${NumbFormat({ number: volume })}
             </Text>
+            <TouchableOpacity style={styles.info} onPress={openInfo}>
+              <MaterialIcons name="info" size={16} color={colors.primary} />
+            </TouchableOpacity>
+          </View>
+          <View style={[{ width: 0.2 * width }]}>
+            <TouchableOpacity style={styles.tradeButton}>
+              <Text style={[styles.trade, commonStyles.fontBold]}>Trade</Text>
+            </TouchableOpacity>
           </View>
         </ScrollRow>
       </ScrollView>
@@ -113,6 +131,8 @@ const styles = StyleSheet.create({
   name: {
     color: colors.primary,
     fontSize: 14,
+    flex: 1,
+    paddingRight: 15,
   },
   rank: {
     color: colors.black,
@@ -126,5 +146,19 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 13,
     paddingTop: 2,
+  },
+  info: { marginTop: 2 },
+  tradeButton: {
+    backgroundColor: colors.success,
+    width: 80,
+    height: 35,
+    borderRadius: 10,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  trade: {
+    color: colors.white,
+    fontSize: 14,
   },
 });

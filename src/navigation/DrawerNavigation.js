@@ -73,6 +73,7 @@ function CoinStack() {
         headerShadowVisible: false,
         headerTitleAlign: 'center',
       }}
+      initialRouteName={COINS_SCREEN}
     >
       <Stack.Screen
         options={{
@@ -98,6 +99,7 @@ function CoinStack() {
 function ExchangeStack() {
   return (
     <Stack.Navigator
+      initialRouteName={EXCHANGE_SCREEN}
       screenOptions={{
         headerTitleStyle,
         cardStyle: {
@@ -143,6 +145,7 @@ function DrawerNavigation() {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       detachInactiveScreens
+      backBehavior={'history'}
     >
       <Drawer.Screen
         options={{
@@ -187,6 +190,7 @@ function DrawerNavigation() {
               color={focused ? colors.white : 'gray'}
             />
           ),
+          lazy: false,
         }}
         name={EXCHANGE_STACK}
         component={ExchangeStack}

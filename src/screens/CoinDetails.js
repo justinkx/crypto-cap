@@ -37,9 +37,7 @@ const CoinDetails = ({ route }) => {
       try {
         const { data: details } = await axios.get(COIN_DETAILS({ coin: id }));
         setDetails(details);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     init();
   }, [id]);

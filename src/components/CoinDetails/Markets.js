@@ -6,7 +6,6 @@ import TickerItem from './TickerItem';
 import { listEmptyComponent } from '../../utils/helpers';
 
 const Markets = ({ tickers = [] }) => {
-  console.log(tickers);
   const renderItem = useCallback(({ item }) => <TickerItem {...item} />, []);
 
   const keyExtractor = useCallback((_, index) => `${index}`, []);
