@@ -18,12 +18,11 @@ import {
 
 import { CANDLES, MARKET_CHART } from '../utils/api';
 import { colors, commonStyles, FONT_BOLD } from '../styles/CommonStyles';
-import { parseCandles, apiChain } from '../utils/helpers';
+import { apiChain } from '../utils/helpers';
 import { NumbFormat } from '../utils/helpers';
 
 const CandlesChart = ({ coin, containerStyle }) => {
-  const { width, height } = useWindowDimensions();
-  const SIZE = width - 20;
+  const { width } = useWindowDimensions();
 
   const [priceCandles, setPriceCandles] = useState([]);
   const [marketCapCandles, setMarketCapCandles] = useState([]);
