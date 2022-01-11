@@ -18,6 +18,11 @@ export const PRICES_SOCKET = 'wss://ws.coincap.io/prices?assets=ALL';
 export const CANDLES = ({ coin = '', days = 1 }) =>
   `https://api.coingecko.com/api/v3/coins/${_toLower(
     coin
+  )}/ohlc?vs_currency=usd&days=${days}`;
+
+export const MARKET_CHART = ({ coin = '', days = 1 }) =>
+  `https://api.coingecko.com/api/v3/coins/${_toLower(
+    coin
   )}/market_chart?vs_currency=usd&days=${days}`;
 
 export const EXCHANGE_DETAILS = (id) =>
@@ -25,3 +30,6 @@ export const EXCHANGE_DETAILS = (id) =>
 
 export const EXCHANGE_VOLUME_CHART = (id) =>
   `https://api.coingecko.com/api/v3/exchanges/${id}/volume_chart?days=1`;
+
+export const COIN_DETAILS = ({ coin = 'bitcoin' }) =>
+  `https://api.coingecko.com/api/v3/coins/${_toLower(coin)}?localization=false`;

@@ -17,12 +17,10 @@ const Header = ({
   market_cap_rank,
   market_cap,
   total_volume,
+  url,
 }) => {
-  const openInfo = useCallback(
-    () =>
-      Linking.openURL(`https://www.coingecko.com/en/coins/${_toUpper(name)}`),
-    [name]
-  );
+  const openInfo = useCallback(() => Linking.openURL(url), [url]);
+
   return (
     <View
       style={[
@@ -34,7 +32,7 @@ const Header = ({
     >
       <View style={commonStyles.row}>
         <AssetIcon symbol={symbol} iconStyle={styles.iconStyle} />
-        <View style={styles.nameView}>
+        <View style={[styles.nameView, commonStyles.spaceBetween]}>
           <Text style={[styles.name, commonStyles.fontBold, styles.padBottom]}>
             {name}
           </Text>
@@ -46,7 +44,7 @@ const Header = ({
           </View>
         </View>
       </View>
-      <View>
+      <View style={commonStyles.spaceBetween}>
         <Text style={[styles.title, styles.padBottom]}>
           Market Cap:{' '}
           <Text style={[styles.current_price, commonStyles.fontSemibold]}>
@@ -76,7 +74,7 @@ const Header = ({
 export default memo(Header);
 
 const styles = StyleSheet.create({
-  container: { alignItems: 'flex-start' },
+  container: { alignItems: 'stretch', marginBottom: 8 },
   iconStyle: {
     width: 40,
     height: 40,
@@ -98,5 +96,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   info: { marginLeft: 4 },
-  padBottom: { paddingBottom: 4 },
+  padBottom: { paddingBottom: 3 },
 });
