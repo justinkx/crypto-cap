@@ -6,22 +6,23 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
+import { format } from 'date-fns';
 import {
-  ChartDot,
-  ChartPath,
-  ChartPathProvider,
-  monotoneCubicInterpolation,
-  OpeningPositionHorizontalLine,
-  CurrentPositionVerticalLine,
-} from '@rainbow-me/animated-charts';
+  VictoryLine,
+  VictoryChart,
+  VictoryAxis,
+  VictoryCandlestick,
+  VictoryTheme,
+  VictoryZoomContainer,
+} from 'victory-native';
 
-import { CANDLES } from '../utils/api';
+import { CANDLES, MARKET_CHART } from '../utils/api';
 import { colors, commonStyles, FONT_BOLD } from '../styles/CommonStyles';
-import { parseCandles } from '../utils/helpers';
+import { parseCandles, apiChain } from '../utils/helpers';
+import { NumbFormat } from '../utils/helpers';
 
 const CandlesChart = ({ coin, containerStyle }) => {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const SIZE = width - 20;
 
   const [priceCandles, setPriceCandles] = useState([]);
@@ -29,16 +30,19 @@ const CandlesChart = ({ coin, containerStyle }) => {
   const [showPrice, setShowPrice] = useState(true);
 
   useEffect(() => {
-    async function fetch() {
+    async function init() {
       try {
-        const { data } = await axios.get(CANDLES({ coin }));
-        const { market_caps = [], prices = [] } = data;
-        setPriceCandles(parseCandles(prices));
-        setMarketCapCandles(parseCandles(market_caps));
+        const [candles, marketData] = await apiChain([
+          fetch(CANDLES({ coin })),
+          fetch(MARKET_CHART({ coin })),
+        ]);
+        const { market_caps = [] } = marketData;
+        setPriceCandles(candles);
+        setMarketCapCandles(market_caps);
       } catch (error) {}
     }
     if (coin) {
-      fetch();
+      init();
     }
   }, [coin]);
 
@@ -66,26 +70,64 @@ const CandlesChart = ({ coin, containerStyle }) => {
       </View>
 
       <View style={containerStyle}>
-        <ChartPathProvider
-          data={{
-            points: monotoneCubicInterpolation({
-              data: showPrice ? priceCandles : marketCapCandles,
-              range: 40,
-            }),
-            smoothingStrategy: 'bezier',
-          }}
+        <VictoryChart
+          width={width}
+          height={200}
+          padding={{ left: 50, bottom: 25, right: 40, top: 10 }}
+          containerComponent={<VictoryZoomContainer allowZoom />}
+          style={{ tickLabels: { fontSize: 8, fill: colors.white } }}
         >
-          <ChartPath height={SIZE / 2} stroke={colors.white} width={SIZE} />
-          <ChartDot style={{ backgroundColor: 'blue' }} />
-          <OpeningPositionHorizontalLine
-            color={colors.primaryTint}
-            length={SIZE}
+          <VictoryAxis
+            dependentAxis
+            style={{
+              tickLabels: { fontSize: 8, fill: colors.white },
+              axis: { stroke: colors.white },
+              grid: {
+                stroke: '#F4F5F7',
+                strokeWidth: StyleSheet.hairlineWidth,
+              },
+            }}
+            tickFormat={(tick) => NumbFormat({ number: tick })}
           />
-          <CurrentPositionVerticalLine
-            color={colors.errorTint}
-            length={SIZE / 2}
+          <VictoryAxis
+            style={{
+              tickLabels: { fontSize: 8, fill: colors.white },
+              axis: { stroke: colors.white },
+            }}
+            tickFormat={(tick) => format(tick, 'hh:mm ss')}
           />
-        </ChartPathProvider>
+          {showPrice ? (
+            <VictoryCandlestick
+              candleRatio={0.5}
+              animate
+              data={priceCandles}
+              x={0}
+              open={1}
+              close={4}
+              high={2}
+              low={3}
+              theme={VictoryTheme.material}
+              candleColors={{
+                positive: colors.success,
+                negative: colors.error,
+              }}
+            />
+          ) : (
+            <VictoryLine
+              animate
+              data={marketCapCandles}
+              x={0}
+              y={1}
+              theme={VictoryTheme.material}
+              style={{
+                data: {
+                  stroke: colors.success,
+                  strokeWidth: 2,
+                },
+              }}
+            />
+          )}
+        </VictoryChart>
       </View>
     </>
   );

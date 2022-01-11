@@ -70,6 +70,7 @@ const Volume = ({ volumeChart = [] }) => {
           style={{
             grid: { stroke: '#F4F5F7', strokeWidth: 0.5 },
             tickLabels: { fontSize: 8, fill: colors.white },
+            axis: { stroke: colors.white },
           }}
           animate={{ duration: 200 }}
           tickFormat={(tick) => NumbFormat({ number: tick })}
@@ -78,6 +79,7 @@ const Volume = ({ volumeChart = [] }) => {
           style={{
             grid: { stroke: '#F4F5F7', strokeWidth: 0.5 },
             tickLabels: { fontSize: 8, fill: colors.white },
+            axis: { stroke: colors.white },
           }}
           animate={{ duration: 200 }}
           tickFormat={(tick) => format(tick, 'hh:mm ss')}
