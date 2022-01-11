@@ -9,6 +9,7 @@ module.exports = () => {
       icon: './assets/icon.png',
       privacy: 'unlisted',
       backgroundColor: '#4f34b1',
+      jsEngine: 'hermes',
       splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
@@ -21,6 +22,7 @@ module.exports = () => {
       ios: {
         supportsTablet: true,
         bundleIdentifier: 'com.justinkx.cryptocap',
+        jsEngine: 'jsc',
       },
       android: {
         adaptiveIcon: {
@@ -43,6 +45,7 @@ module.exports = () => {
       icon: './assets/icon.png',
       privacy: 'unlisted',
       backgroundColor: '#4f34b1',
+      jsEngine: 'hermes',
       splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
@@ -55,6 +58,7 @@ module.exports = () => {
       ios: {
         supportsTablet: true,
         bundleIdentifier: 'com.justinkx.cryptocap-dev',
+        jsEngine: 'jsc',
       },
       android: {
         adaptiveIcon: {
