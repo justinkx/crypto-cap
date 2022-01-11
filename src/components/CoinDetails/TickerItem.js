@@ -33,7 +33,10 @@ const TickerItem = ({
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
 
-  const [exchange] = useSelector((state) => getExchanges(state)([identifier]));
+  const [exchange] = useSelector(
+    (state) => getExchanges(state)([identifier]),
+    shallowEqual
+  );
 
   const handleClick = useCallback(() => {
     navigation.navigate(EXCHANGE_STACK, {
