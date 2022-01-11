@@ -30,3 +30,6 @@ export const EXCHANGE_DETAILS = (id) =>
 
 export const EXCHANGE_VOLUME_CHART = (id) =>
   `https://api.coingecko.com/api/v3/exchanges/${id}/volume_chart?days=1`;
+
+export const COIN_DETAILS = ({ coin = 'bitcoin' }) =>
+  `https://api.coingecko.com/api/v3/coins/${_toLower(coin)}?localization=false`;

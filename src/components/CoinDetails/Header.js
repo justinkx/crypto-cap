@@ -17,12 +17,10 @@ const Header = ({
   market_cap_rank,
   market_cap,
   total_volume,
+  url,
 }) => {
-  const openInfo = useCallback(
-    () =>
-      Linking.openURL(`https://www.coingecko.com/en/coins/${_toUpper(name)}`),
-    [name]
-  );
+  const openInfo = useCallback(() => Linking.openURL(url), [url]);
+
   return (
     <View
       style={[
