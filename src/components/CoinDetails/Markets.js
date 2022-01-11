@@ -5,13 +5,14 @@ import { commonStyles, colors } from '../../styles/CommonStyles';
 import TickerItem from './TickerItem';
 import { listEmptyComponent } from '../../utils/helpers';
 
-const Markets = ({ tickers }) => {
+const Markets = ({ tickers = [] }) => {
+  console.log(tickers);
   const renderItem = useCallback(({ item }) => <TickerItem {...item} />, []);
 
   const keyExtractor = useCallback((_, index) => `${index}`, []);
 
   return (
-    <View>
+    <View style={commonStyles.flex}>
       <Text style={[styles.title, commonStyles.fontBold]}>Markets</Text>
       <FlatList
         data={tickers}
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    marginVertical: 10,
+    marginVertical: 20,
     marginHorizontal: 15,
-    color: colors.black,
+    color: colors.white,
   },
 });

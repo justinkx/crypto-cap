@@ -71,7 +71,7 @@ const CandlesChart = ({ coin, containerStyle }) => {
       <View style={containerStyle}>
         <VictoryChart
           width={width}
-          height={200}
+          height={180}
           padding={{ left: 50, bottom: 25, right: 40, top: 10 }}
           containerComponent={<VictoryZoomContainer allowZoom />}
           style={{ tickLabels: { fontSize: 8, fill: colors.white } }}
