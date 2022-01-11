@@ -98,7 +98,7 @@ const TickerItem = ({
             </TouchableOpacity>
           </View>
           <View style={[{ width: 0.2 * width }]}>
-            <TouchableOpacity style={styles.tradeButton}>
+            <TouchableOpacity onPress={handleClick} style={styles.tradeButton}>
               <Text style={[styles.trade, commonStyles.fontBold]}>Trade</Text>
             </TouchableOpacity>
           </View>

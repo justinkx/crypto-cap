@@ -145,7 +145,6 @@ function DrawerNavigation() {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       detachInactiveScreens
-      backBehavior={'history'}
     >
       <Drawer.Screen
         options={{
