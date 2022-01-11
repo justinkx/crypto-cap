@@ -11,6 +11,7 @@ import Header from '../components/CoinDetails/Header';
 import CandlesChart from '../components/CandlesChart';
 import { useAfterInteractions } from '../hoc/useAfterInteractions';
 import { COIN_DETAILS } from '../utils/api';
+import Markets from '../components/CoinDetails/Markets';
 
 const CoinDetails = ({ route }) => {
   const { shouldRender } = useAfterInteractions();
@@ -44,6 +45,7 @@ const CoinDetails = ({ route }) => {
   }, [id]);
 
   const homePage = _get(coinDetails, 'links.homepage', []);
+  const tickers = _get(coinDetails, 'tickers', []);
   const [url] = homePage;
 
   return (
@@ -61,6 +63,7 @@ const CoinDetails = ({ route }) => {
               url={url}
             />
             <CandlesChart coin={id} containerStyle={styles.chartStyle} />
+            <Markets tickers={tickers} />
           </>
         )}
       </Freeze>
