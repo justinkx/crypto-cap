@@ -10,10 +10,10 @@
     "eject": "expo eject",
     "lint": "eslint .",
     "prepare": "husky install",
-    "build_dev_android": "APP_ENV=development eas build -p android",
-    "build_dev_ios": "APP_ENV=development eas build -p ios",
-    "build_android": "APP_ENV=production eas build -p android",
-    "build_ios": "APP_ENV=production eas build -p ios"
+    "build_dev_android": "eas build --profile development -p android",
+    "build_dev_ios": "eas build --profile development -p ios",
+    "build_android": "eas build -p android",
+    "build_ios": "eas build -p ios"
   },
   "dependencies": {
     "@giantmachines/redux-websocket": "^1.5.1",
