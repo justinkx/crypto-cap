@@ -81,10 +81,12 @@ const CandlesChart = ({ coin, containerStyle }) => {
             style={{
               tickLabels: { fontSize: 8, fill: colors.white },
               axis: { stroke: colors.white },
-              grid: {
-                stroke: '#F4F5F7',
-                strokeWidth: StyleSheet.hairlineWidth,
-              },
+              grid: showPrice
+                ? {}
+                : {
+                    stroke: '#F4F5F7',
+                    strokeWidth: StyleSheet.hairlineWidth,
+                  },
             }}
             tickFormat={(tick) => NumbFormat({ number: tick })}
           />
@@ -97,7 +99,7 @@ const CandlesChart = ({ coin, containerStyle }) => {
           />
           {showPrice ? (
             <VictoryCandlestick
-              candleRatio={0.5}
+              candleRatio={0.9}
               animate
               data={priceCandles}
               x={0}
@@ -109,6 +111,12 @@ const CandlesChart = ({ coin, containerStyle }) => {
               candleColors={{
                 positive: colors.success,
                 negative: colors.error,
+              }}
+              style={{
+                data: {
+                  stroke: colors.white,
+                  strokeWidth: StyleSheet.hairlineWidth,
+                },
               }}
             />
           ) : (

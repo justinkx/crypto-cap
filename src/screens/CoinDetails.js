@@ -28,7 +28,7 @@ const CoinDetails = ({ route }) => {
   );
 
   return (
-    <Page scroll>
+    <Page scroll={false}>
       <Freeze>
         {shouldRender && (
           <>

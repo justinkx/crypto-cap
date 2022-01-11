@@ -46,7 +46,7 @@ export default memo(Header);
 
 const styles = StyleSheet.create({
   container: {
-    height: 56,
+    height: 60,
     paddingHorizontal: 15,
     paddingTop: 10,
   },
@@ -57,11 +57,12 @@ const styles = StyleSheet.create({
   name: {
     color: colors.white,
     fontSize: 15,
-    marginBottom: 4,
+    marginBottom: 6,
   },
   volume: {
     color: colors.primaryTint,
     fontSize: 13,
+    marginBottom: 3,
   },
   vol: {
     color: colors.white,
