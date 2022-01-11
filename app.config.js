@@ -57,7 +57,7 @@ module.exports = () => {
       assetBundlePatterns: ['**/*'],
       ios: {
         supportsTablet: true,
-        bundleIdentifier: 'com.justinkx.cryptocap-dev',
+        bundleIdentifier: 'com.justinkx.cryptocap.dev',
         jsEngine: 'jsc',
       },
       android: {
@@ -65,7 +65,7 @@ module.exports = () => {
           foregroundImage: './assets/adaptive-icon.png',
           backgroundColor: '#4f34b1',
         },
-        package: 'com.justinkx.cryptocap-dev',
+        package: 'com.justinkx.cryptocap.dev',
       },
       web: {
         favicon: './assets/favicon.png',
