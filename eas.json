@@ -9,13 +9,17 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "ios": {
-        "simulator": true
-      },
       "env": {
         "APP_ENV": "development"
       },
-      "releaseChannel": "development"
+      "releaseChannel": "development",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "simulator": true
+      }
     },
     "preview": {
       "releaseChannel": "staging",
