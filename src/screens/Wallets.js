@@ -111,9 +111,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   transferView: {
-    maxHeight: '20%',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    maxHeight: 150,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     backgroundColor: colors.white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.48,
+    shadowRadius: 11.95,
+    elevation: 18,
   },
 });
