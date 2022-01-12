@@ -5,28 +5,41 @@ import { LineChart } from 'react-native-svg-charts';
 import _toLower from 'lodash/toLower';
 import _toUpper from 'lodash/toUpper';
 import _isEqual from 'react-fast-compare';
+import { useNavigation } from '@react-navigation/native';
 
-import {
-  commonStyles,
-  colors,
-  FONT_BOLD,
-  FONT_MEDIUM,
-} from '../../styles/CommonStyles';
+import { commonStyles, colors, FONT_BOLD } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import PriceDirection from '../PriceDirection';
+import {
+  COINS_STACK,
+  COIN_DETAILS_SCREEN,
+} from '../../navigation/NavConstants';
 
 const BalanceCoin = ({ name, balance }) => {
   const [coinDetails] = useSelector(
     (state) => getCryptoAssets(state)(_toLower(name)),
     shallowEqual
   );
+  const navigation = useNavigation();
 
   const change24Hr = parseFloat(
     coinDetails?.price_change_percentage_24h
   ).toFixed(2);
   const isUp = change24Hr > 0;
 
-  const navigateCoinDetails = useCallback(() => {}, []);
+  const navigateCoinDetails = useCallback(
+    () =>
+      navigation.navigate(COINS_STACK, {
+        screen: COIN_DETAILS_SCREEN,
+        params: {
+          title: coinDetails?.name,
+          id: coinDetails?.id,
+        },
+        initial: true,
+      }),
+    [navigation, coinDetails]
+  );
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
