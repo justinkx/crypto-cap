@@ -1,5 +1,6 @@
 import _map from 'lodash/map';
 import _toLower from 'lodash/toLower';
+import _take from 'lodash/take';
 
 export const userData = {
   name: 'Liam Oliver',
@@ -29,9 +30,26 @@ export const balance = [
     equivalentUsd: 6832.42,
     volume: '5%',
   },
+  {
+    token: 'SOL',
+    name: 'Solna',
+    balance: 2.225,
+  },
+  {
+    token: 'ADA',
+    name: 'Cardano',
+    balance: 95.18334,
+  },
+  {
+    token: 'DOGE',
+    name: 'Dogecoin',
+    balance: 1344.9844,
+  },
 ];
 
-export const balanceCoins = _map(balance, (item) => _toLower(item.name));
+export const balanceCoins = _map(_take(balance, 3), (item) =>
+  _toLower(item.name)
+);
 
 export const transactions = [
   {

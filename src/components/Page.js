@@ -21,7 +21,9 @@ const Page = ({
           {children}
         </ScrollView>
       ) : (
-        <View style={commonStyles.flex}>{children}</View>
+        <View style={[commonStyles.flex, padding && commonStyles.page]}>
+          {children}
+        </View>
       )}
     </SafeAreaView>
   ) : (
@@ -34,7 +36,9 @@ const Page = ({
           {children}
         </ScrollView>
       ) : (
-        <>{children}</>
+        <View style={[commonStyles.flex, padding && commonStyles.page]}>
+          {children}
+        </View>
       )}
     </View>
   );
