@@ -32,7 +32,7 @@ export const balance = [
   },
   {
     token: 'SOL',
-    name: 'Solna',
+    name: 'Solana',
     balance: 2.225,
   },
   {

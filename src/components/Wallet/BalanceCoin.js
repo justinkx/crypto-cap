@@ -5,9 +5,11 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { LineChart } from 'react-native-svg-charts';
+import _toLower from 'lodash/toLower';
 
 import {
   commonStyles,
@@ -15,8 +17,14 @@ import {
   FONT_BOLD,
   FONT_MEDIUM,
 } from '../../styles/CommonStyles';
+import { getCryptoAssets } from '../../store/selectors/assetSelector';
 
-const BalanceCoin = () => {
+const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
+  const [coinDetails] = useSelector(
+    (state) => getCryptoAssets(state)(_toLower(name)),
+    shallowEqual
+  );
+
   return (
     <View style={styles.container}>
       <View
@@ -25,12 +33,16 @@ const BalanceCoin = () => {
           commonStyles.center,
           commonStyles.spaceBetween,
         ]}
-      ></View>
+      >
+        <View style={commonStyles.row}>
+          <Image style={styles.image} source={{ uri: coinDetails?.image }} />
+        </View>
+      </View>
     </View>
   );
 };
 
-export default BalanceCoin;
+export default memo(BalanceCoin);
 
 const styles = StyleSheet.create({
   container: {
@@ -40,5 +52,10 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     backgroundColor: colors.white,
+  },
+  image: {
+    width: 35,
+    height: 35,
+    marginRight: 4,
   },
 });
