@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,9 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
-import _size from 'lodash/size';
-import _get from 'lodash/get';
-import _map from 'lodash/map';
 import { LineChart } from 'react-native-svg-charts';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
