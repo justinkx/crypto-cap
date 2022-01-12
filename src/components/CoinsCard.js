@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import _toUpper from 'lodash/toUpper';
+import { LineChart } from 'react-native-svg-charts';
 
 import {
   commonStyles,
@@ -30,7 +31,10 @@ const CoinsCard = ({
   symbol,
   id,
   image,
+  sparkline_in_7d = {},
 }) => {
+  const { price = [] } = sparkline_in_7d;
+
   const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
   const isUp = change24Hr > 0;
   const priceChange = useSharedValue(colors.white);
@@ -103,6 +107,14 @@ const CoinsCard = ({
           </Text>
         </View>
         <View style={styles.priceChangeView}>
+          {price && (
+            <LineChart
+              style={{ height: 30, width: '100%' }}
+              data={price}
+              svg={{ stroke: isUp ? colors.success : colors.error }}
+              contentInset={{ top: 5, bottom: 5 }}
+            />
+          )}
           <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
             {change24Hr}% {isUp ? '▲' : '▼'}
           </Text>

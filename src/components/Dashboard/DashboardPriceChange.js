@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
-import axios from 'axios';
 import _size from 'lodash/size';
 import _get from 'lodash/get';
 import _map from 'lodash/map';
@@ -22,7 +21,6 @@ import {
 } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import { balanceCoins } from '../../utils/data';
-import { CRYPTO_COIN_24HR_CHANGE } from '../../utils/api';
 import PriceDirection from '../PriceDirection';
 import AssetIcon from '../AssetIcon';
 
