@@ -3,7 +3,7 @@ import { put, takeLatest, call, delay } from 'redux-saga/effects';
 
 import { saveAssets, fetchAssetsSuccess } from '../actions/assetActions';
 import { FETCH_INITIAL_DATA } from '../actions/appActions';
-import { CRYPTO_ASSETS } from '../../utils/api';
+import { CRYPTO_ASSETS, CRYPTO_ASSETS_SPARKLINE } from '../../utils/api';
 import { connectSocket } from '../actions/socketAction';
 
 const parseAssets = (accu, curr) => {
@@ -13,9 +13,9 @@ const parseAssets = (accu, curr) => {
   };
 };
 
-async function fetchAssets() {
+async function fetchAssets(url = CRYPTO_ASSETS) {
   try {
-    const { data } = await axios.get(CRYPTO_ASSETS);
+    const { data } = await axios.get(url);
     return data;
   } catch (error) {
     throw error;
@@ -25,7 +25,7 @@ async function fetchAssets() {
 function* fetchAssetsSaga() {
   while (true) {
     try {
-      const data = yield call(fetchAssets) || [];
+      const data = yield call(fetchAssets, CRYPTO_ASSETS) || [];
       if (data) {
         const parsedAssets = data.reduce(parseAssets, {});
         yield put(saveAssets(parsedAssets));
@@ -37,6 +37,15 @@ function* fetchAssetsSaga() {
   }
 }
 
+function* fetchSparkLineSagaq() {
+  const data = yield call(fetchAssets, CRYPTO_ASSETS_SPARKLINE) || [];
+  if (data) {
+    const parsedAssets = data.reduce(parseAssets, {});
+    yield put(saveAssets(parsedAssets));
+  }
+}
+
 export default function* assetsSaga() {
   yield takeLatest(FETCH_INITIAL_DATA, fetchAssetsSaga);
+  yield takeLatest(FETCH_INITIAL_DATA, fetchSparkLineSagaq);
 }

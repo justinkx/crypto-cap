@@ -5,8 +5,6 @@ import { CONNECT_SOCKET } from '../actions/socketAction';
 import { PRICES_SOCKET } from '../../utils/api';
 
 export default function* websocketConnectionSaga() {
-  while (true) {
-    yield take(CONNECT_SOCKET);
-    yield put(connect(PRICES_SOCKET));
-  }
+  yield take(CONNECT_SOCKET);
+  yield put(connect(PRICES_SOCKET));
 }
