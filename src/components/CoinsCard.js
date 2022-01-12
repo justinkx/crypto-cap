@@ -109,7 +109,7 @@ const CoinsCard = ({
         <View style={styles.priceChangeView}>
           {price && (
             <LineChart
-              style={{ height: 30, width: '100%' }}
+              style={{ height: 30, width: '95%' }}
               data={price}
               svg={{ stroke: isUp ? colors.success : colors.error }}
               contentInset={{ top: 5, bottom: 5 }}
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
   down: { color: colors.error },
   index: { fontFamily: FONT_BOLD, color: colors.black, fontSize: 10 },
   nameView: {
-    width: '50%',
+    width: '45%',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  priceView: { width: '35%' },
-  priceChangeView: { width: '15%', alignItems: 'flex-end' },
+  priceView: { width: '37%' },
+  priceChangeView: { width: '18%', alignItems: 'flex-end' },
   name: {
     fontFamily: FONT_BOLD,
     color: colors.primary,
