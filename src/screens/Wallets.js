@@ -1,5 +1,11 @@
-import React, { memo, useState, useCallback } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { memo, useState, useCallback, useMemo } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useSelector, shallowEqual } from 'react-redux';
 import Checkbox from 'expo-checkbox';
@@ -8,6 +14,7 @@ import Page from '../components/Page';
 import { commonStyles, colors } from '../styles/CommonStyles';
 import { balance, allBalanceCoins } from '../utils/data';
 import { pickCryptoAssets } from '../store/selectors/assetSelector';
+import { calculateBalanceTotals } from '../helpers/price';
 
 const Wallets = () => {
   const [isMarketTicker, setMarketTicker] = useState(true);
@@ -22,11 +29,20 @@ const Wallets = () => {
     []
   );
 
+  const balanceTotal = useMemo(() => calculateBalanceTotals(balance), []);
+
+  const balanceMarketTotal = useMemo(
+    () => calculateBalanceTotals(balance, balanceTickers),
+    [balanceTickers]
+  );
+
   return (
     <Page scroll={false} padding>
       <View style={[styles.balanceView, commonStyles.row, commonStyles.center]}>
         <View style={[commonStyles.row, commonStyles.center]}>
-          <Text>Total</Text>
+          <Text style={[styles.balanceTotal, commonStyles.fontBold]}>
+            {isMarketTicker ? balanceMarketTotal : balanceTotal}
+          </Text>
           <FontAwesome name="dollar" size={24} color={colors.white} />
         </View>
         <View style={styles.checkBoxView}>
@@ -43,6 +59,7 @@ const Wallets = () => {
           </TouchableOpacity>
         </View>
       </View>
+      {/* <FlatList style={commonStyles.flex} data={} /> */}
     </Page>
   );
 };
@@ -50,11 +67,10 @@ const Wallets = () => {
 export default memo(Wallets);
 
 const styles = StyleSheet.create({
-  balanceView: { marginVertical: 25, position: 'relative', height: 150 },
-  total: {},
+  balanceView: { marginVertical: 20, position: 'relative', height: 100 },
   checkBoxView: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -10,
     left: 0,
   },
   checkbox: {
@@ -63,5 +79,10 @@ const styles = StyleSheet.create({
   marketTicker: {
     fontSize: 14,
     color: colors.white,
+  },
+  balanceTotal: {
+    color: colors.white,
+    fontSize: 22,
+    paddingRight: 4,
   },
 });
