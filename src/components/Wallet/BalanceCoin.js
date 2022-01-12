@@ -19,6 +19,7 @@ import {
   FONT_MEDIUM,
 } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
+import PriceDirection from '../PriceDirection';
 
 const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
   const [coinDetails] = useSelector(
@@ -46,11 +47,19 @@ const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
             </Text>
           </View>
         </View>
-        <View style={styles.baanceView}>
+        <View style={styles.balanceView}>
           <Text style={[styles.balance, commonStyles.fontBold]}>{balance}</Text>
           <Text style={[styles.usdBalance, commonStyles.fontSemibold]}>
             {parseFloat(coinDetails?.current_price * balance).toFixed(2)} $
           </Text>
+        </View>
+        <View style={styles.changeView}>
+          <View style={[commonStyles.row]}>
+            <Text style={styles.price}>
+              {parseFloat(coinDetails?.current_price)}
+            </Text>
+            <PriceDirection price={coinDetails?.current_price} />
+          </View>
         </View>
       </View>
     </View>
@@ -94,7 +103,16 @@ const styles = StyleSheet.create({
     marginTop: 3,
     color: colors.primary,
   },
-  baanceView: {
-    width: '30%',
+  balanceView: {
+    width: '35%',
+  },
+  changeView: {
+    width: '25%',
+    alignItems: 'flex-end',
+  },
+  price: {
+    fontSize: 12,
+    color: colors.black,
+    opacity: 0.8,
   },
 });
