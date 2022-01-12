@@ -10,6 +10,7 @@ import {
 import { useSelector, shallowEqual } from 'react-redux';
 import { LineChart } from 'react-native-svg-charts';
 import _toLower from 'lodash/toLower';
+import _toUpper from 'lodash/toUpper';
 
 import {
   commonStyles,
@@ -36,6 +37,14 @@ const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
       >
         <View style={commonStyles.row}>
           <Image style={styles.image} source={{ uri: coinDetails?.image }} />
+          <View>
+            <Text style={[commonStyles.fontBold, styles.name]}>
+              {coinDetails?.name}
+            </Text>
+            <Text style={[commonStyles.fontSemibold, styles.symbol]}>
+              {_toUpper(coinDetails?.symbol)}
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -56,6 +65,15 @@ const styles = StyleSheet.create({
   image: {
     width: 35,
     height: 35,
-    marginRight: 4,
+    marginRight: 6,
+  },
+  name: {
+    fontSize: 15,
+    color: colors.black,
+  },
+  symbol: {
+    fontSize: 13,
+    marginTop: 3,
+    color: colors.primary,
   },
 });
