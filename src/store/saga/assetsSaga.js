@@ -23,29 +23,31 @@ async function fetchAssets(url = CRYPTO_ASSETS) {
 }
 
 function* fetchAssetsSaga() {
+  try {
+    const data = yield call(fetchAssets, CRYPTO_ASSETS) || [];
+    if (data) {
+      const parsedAssets = data.reduce(parseAssets, {});
+      yield put(saveAssets(parsedAssets));
+      yield put(fetchAssetsSuccess());
+      yield put(connectSocket());
+    }
+  } catch (error) {}
+}
+
+function* fetchSparkLineSaga() {
   while (true) {
     try {
-      const data = yield call(fetchAssets, CRYPTO_ASSETS) || [];
+      const data = yield call(fetchAssets, CRYPTO_ASSETS_SPARKLINE) || [];
       if (data) {
         const parsedAssets = data.reduce(parseAssets, {});
         yield put(saveAssets(parsedAssets));
-        yield put(fetchAssetsSuccess());
-        yield put(connectSocket());
       }
-    } catch (error) {}
+    } catch {}
     yield delay(10000);
-  }
-}
-
-function* fetchSparkLineSagaq() {
-  const data = yield call(fetchAssets, CRYPTO_ASSETS_SPARKLINE) || [];
-  if (data) {
-    const parsedAssets = data.reduce(parseAssets, {});
-    yield put(saveAssets(parsedAssets));
   }
 }
 
 export default function* assetsSaga() {
   yield takeLatest(FETCH_INITIAL_DATA, fetchAssetsSaga);
-  yield takeLatest(FETCH_INITIAL_DATA, fetchSparkLineSagaq);
+  yield takeLatest(FETCH_INITIAL_DATA, fetchSparkLineSaga);
 }
