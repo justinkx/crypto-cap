@@ -1,6 +1,11 @@
 import React, { memo } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { MaterialIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import {
+  MaterialIcons,
+  FontAwesome5,
+  FontAwesome,
+  Entypo,
+} from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 
@@ -9,7 +14,7 @@ import {
   COINS_STACK,
   TRANSACTIONS_SCREEN,
   EXCHANGE_SCREEN,
-  BUY_SELL_SCREEN,
+  WALLETS_SCREEN,
   COINS_SCREEN,
   COIN_DETAILS_SCREEN,
   EXCHANGE_DETAILS_SCREEN,
@@ -18,7 +23,7 @@ import {
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
 import Exchanges from '../screens/Exchanges';
-import BuySell from '../screens/BuySell';
+import Wallets from '../screens/Wallets';
 import Coins from '../screens/Coins';
 import CoinDetails from '../screens/CoinDetails';
 import ExchangeDetails from '../screens/ExchangeDetails';
@@ -189,25 +194,24 @@ function DrawerNavigation() {
               color={focused ? colors.white : 'gray'}
             />
           ),
-          lazy: false,
         }}
         name={EXCHANGE_STACK}
         component={ExchangeStack}
       />
       <Drawer.Screen
         options={{
-          title: 'Buy / Sell',
+          title: 'Wallets',
           ...drawerIconOption,
           drawerIcon: ({ focused, size }) => (
-            <FontAwesome5
-              name="exchange-alt"
+            <Entypo
+              name="wallet"
               size={size}
               color={focused ? colors.white : 'gray'}
             />
           ),
         }}
-        name={BUY_SELL_SCREEN}
-        component={BuySell}
+        name={WALLETS_SCREEN}
+        component={Wallets}
       />
       <Drawer.Screen
         options={{

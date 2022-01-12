@@ -22,6 +22,7 @@ const Transactions = () => {
         contentContainerStyle={commonStyles.page}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        bounces
       />
     </Page>
   );

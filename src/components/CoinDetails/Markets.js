@@ -20,6 +20,7 @@ const Markets = ({ tickers = [] }) => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         ListEmptyComponent={listEmptyComponent}
+        bounces
       />
     </View>
   );

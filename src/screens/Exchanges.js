@@ -41,6 +41,7 @@ const Exchanges = () => {
               contentContainerStyle={commonStyles.listPadding}
               initialNumToRender={10}
               removeClippedSubviews
+              bounces
             />
           </>
         )}

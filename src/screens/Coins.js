@@ -41,6 +41,7 @@ const Coins = () => {
               contentContainerStyle={commonStyles.listPadding}
               initialNumToRender={10}
               removeClippedSubviews
+              bounces
             />
           </>
         )}

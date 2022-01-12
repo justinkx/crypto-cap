@@ -18,6 +18,7 @@ const Tickers = ({ tickers = [] }) => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       ListEmptyComponent={listEmptyComponent}
+      bounces
     />
   );
 };

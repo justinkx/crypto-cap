@@ -21,6 +21,7 @@ const StatusUpdates = ({ statusUpdates = [], url = '' }) => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       ListEmptyComponent={listEmptyComponent}
+      bounces
     />
   );
 };

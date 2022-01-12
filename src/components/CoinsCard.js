@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import _toUpper from 'lodash/toUpper';
+import { LineChart } from 'react-native-svg-charts';
 
 import {
   commonStyles,
@@ -30,7 +31,10 @@ const CoinsCard = ({
   symbol,
   id,
   image,
+  sparkline_in_7d = {},
 }) => {
+  const { price = [] } = sparkline_in_7d;
+
   const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
   const isUp = change24Hr > 0;
   const priceChange = useSharedValue(colors.white);
@@ -103,6 +107,14 @@ const CoinsCard = ({
           </Text>
         </View>
         <View style={styles.priceChangeView}>
+          {price && (
+            <LineChart
+              style={styles.lineChart}
+              data={price}
+              svg={{ stroke: isUp ? colors.success : colors.error }}
+              contentInset={{ top: 5, bottom: 5 }}
+            />
+          )}
           <Text style={[styles.change24, isUp ? styles.up : styles.down]}>
             {change24Hr}% {isUp ? '▲' : '▼'}
           </Text>
@@ -129,12 +141,12 @@ const styles = StyleSheet.create({
   down: { color: colors.error },
   index: { fontFamily: FONT_BOLD, color: colors.black, fontSize: 10 },
   nameView: {
-    width: '50%',
+    width: '45%',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  priceView: { width: '35%' },
-  priceChangeView: { width: '15%', alignItems: 'flex-end' },
+  priceView: { width: '37%' },
+  priceChangeView: { width: '18%', alignItems: 'flex-end' },
   name: {
     fontFamily: FONT_BOLD,
     color: colors.primary,
@@ -168,5 +180,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT_BOLD,
     color: colors.black,
     fontSize: 11,
+  },
+  lineChart: {
+    height: 30,
+    width: '95%',
   },
 });

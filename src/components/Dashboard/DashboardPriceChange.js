@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,12 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
-import axios from 'axios';
-import _size from 'lodash/size';
-import _get from 'lodash/get';
-import _map from 'lodash/map';
 import { LineChart } from 'react-native-svg-charts';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   commonStyles,
@@ -22,9 +19,12 @@ import {
 } from '../../styles/CommonStyles';
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import { balanceCoins } from '../../utils/data';
-import { CRYPTO_COIN_24HR_CHANGE } from '../../utils/api';
 import PriceDirection from '../PriceDirection';
 import AssetIcon from '../AssetIcon';
+import {
+  COINS_STACK,
+  COIN_DETAILS_SCREEN,
+} from '../../navigation/NavConstants';
 
 const HEIGHT = 75;
 
@@ -45,6 +45,7 @@ const DashboardPriceChange = () => {
         data={balanceMarketChanges}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        bounces
       />
       <View style={[styles.bottomButton, commonStyles.row]}>
         <TouchableOpacity style={[commonStyles.row, commonStyles.center]}>
@@ -80,26 +81,33 @@ const DashboardPriceChange = () => {
 };
 
 const RenderBalance = memo(
-  ({ price_change_percentage_24h, name, current_price, symbol, image }) => {
+  ({
+    price_change_percentage_24h,
+    name,
+    current_price,
+    symbol,
+    image,
+    sparkline_in_7d = {},
+    id,
+  }) => {
+    const navigation = useNavigation();
     const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
     const isUp = change24Hr > 0;
-    const [prices, setPrices] = useState([]);
 
-    /* eslint-disable radix */
+    const { price = [] } = sparkline_in_7d;
 
-    useEffect(() => {
-      async function fetchPrices() {
-        try {
-          const { data } = await axios.get(CRYPTO_COIN_24HR_CHANGE(name));
-          const _prices24hr = _get(data, 'prices');
-          const _prices = _map(_prices24hr, ([_, price]) => parseInt(price));
-          setPrices(_prices);
-        } catch (error) {}
-      }
-      if (!_size(prices) && name) {
-        fetchPrices();
-      }
-    }, [name, prices]);
+    const handleBuy = useCallback(
+      () =>
+        navigation.navigate(COINS_STACK, {
+          screen: COIN_DETAILS_SCREEN,
+          params: {
+            title: name,
+            id: id,
+          },
+          initial: true,
+        }),
+      [name, id, navigation]
+    );
 
     return (
       <View
@@ -130,10 +138,10 @@ const RenderBalance = memo(
             </View>
           </View>
           <View style={styles.rightView}>
-            {prices && (
+            {price && (
               <LineChart
                 style={{ height: 50 }}
-                data={prices}
+                data={price}
                 svg={{ stroke: isUp ? colors.success : colors.error }}
                 contentInset={{ top: 20, bottom: 20 }}
               />
@@ -144,7 +152,10 @@ const RenderBalance = memo(
           </View>
         </View>
         <View style={[styles.boxShadow, styles.tickerBuy]}>
-          <TouchableOpacity style={[commonStyles.flex, commonStyles.center]}>
+          <TouchableOpacity
+            onPress={handleBuy}
+            style={[commonStyles.flex, commonStyles.center]}
+          >
             <Text style={[commonStyles.fontBold, commonStyles.primaryColor]}>
               BUY
             </Text>
