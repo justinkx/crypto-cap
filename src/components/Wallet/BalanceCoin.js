@@ -35,7 +35,7 @@ const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
           commonStyles.spaceBetween,
         ]}
       >
-        <View style={commonStyles.row}>
+        <View style={[commonStyles.row, styles.dataView]}>
           <Image style={styles.image} source={{ uri: coinDetails?.image }} />
           <View>
             <Text style={[commonStyles.fontBold, styles.name]}>
@@ -45,6 +45,12 @@ const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
               {_toUpper(coinDetails?.symbol)}
             </Text>
           </View>
+        </View>
+        <View style={styles.baanceView}>
+          <Text style={[styles.balance, commonStyles.fontBold]}>{balance}</Text>
+          <Text style={[styles.usdBalance, commonStyles.fontSemibold]}>
+            {parseFloat(coinDetails?.current_price * balance).toFixed(2)} $
+          </Text>
         </View>
       </View>
     </View>
@@ -62,18 +68,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  dataView: {
+    width: '40%',
+  },
   image: {
     width: 35,
     height: 35,
     marginRight: 6,
   },
   name: {
-    fontSize: 15,
+    fontSize: 14,
     color: colors.black,
   },
   symbol: {
     fontSize: 13,
     marginTop: 3,
     color: colors.primary,
+  },
+  balance: {
+    fontSize: 15,
+    color: colors.black,
+  },
+  usdBalance: {
+    fontSize: 13,
+    marginTop: 3,
+    color: colors.primary,
+  },
+  baanceView: {
+    width: '30%',
   },
 });
