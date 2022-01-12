@@ -15,6 +15,7 @@ import { commonStyles, colors } from '../styles/CommonStyles';
 import { balance, allBalanceCoins } from '../utils/data';
 import { pickCryptoAssets } from '../store/selectors/assetSelector';
 import { calculateBalanceTotals } from '../helpers/price';
+import BalanceCoin from '../components/Wallet/BalanceCoin';
 
 const Wallets = () => {
   const [isMarketTicker, setMarketTicker] = useState(true);
@@ -34,6 +35,13 @@ const Wallets = () => {
   const balanceMarketTotal = useMemo(
     () => calculateBalanceTotals(balance, balanceTickers),
     [balanceTickers]
+  );
+
+  const keyExtractor = useCallback((_, index) => `${index}`, []);
+
+  const renderItem = useCallback(
+    ({ item }) => <BalanceCoin {...item} isMarketTicker={isMarketTicker} />,
+    [isMarketTicker]
   );
 
   return (
@@ -59,7 +67,13 @@ const Wallets = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* <FlatList style={commonStyles.flex} data={} /> */}
+      <FlatList
+        style={commonStyles.flex}
+        data={balance}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        contentContainerStyle={styles.flatList}
+      />
     </Page>
   );
 };
@@ -84,5 +98,8 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 22,
     paddingRight: 4,
+  },
+  flatList: {
+    paddingVertical: 10,
   },
 });
