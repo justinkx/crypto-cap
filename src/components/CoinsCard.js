@@ -109,7 +109,7 @@ const CoinsCard = ({
         <View style={styles.priceChangeView}>
           {price && (
             <LineChart
-              style={{ height: 30, width: '95%' }}
+              style={styles.lineChart}
               data={price}
               svg={{ stroke: isUp ? colors.success : colors.error }}
               contentInset={{ top: 5, bottom: 5 }}
@@ -180,5 +180,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT_BOLD,
     color: colors.black,
     fontSize: 11,
+  },
+  lineChart: {
+    height: 30,
+    width: '95%',
   },
 });

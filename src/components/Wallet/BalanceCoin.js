@@ -1,16 +1,10 @@
 import React, { memo, useCallback } from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { LineChart } from 'react-native-svg-charts';
 import _toLower from 'lodash/toLower';
 import _toUpper from 'lodash/toUpper';
+import _isEqual from 'react-fast-compare';
 
 import {
   commonStyles,
@@ -21,15 +15,22 @@ import {
 import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import PriceDirection from '../PriceDirection';
 
-const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
+const BalanceCoin = ({ name, balance }) => {
   const [coinDetails] = useSelector(
     (state) => getCryptoAssets(state)(_toLower(name)),
     shallowEqual
   );
 
+  const change24Hr = parseFloat(
+    coinDetails?.price_change_percentage_24h
+  ).toFixed(2);
+  const isUp = change24Hr > 0;
+
+  const navigateCoinDetails = useCallback(() => {}, []);
   return (
     <View style={styles.container}>
-      <View
+      <TouchableOpacity
+        onPress={navigateCoinDetails}
         style={[
           commonStyles.row,
           commonStyles.center,
@@ -50,23 +51,33 @@ const BalanceCoin = ({ token, isMarketTicker, name, balance }) => {
         <View style={styles.balanceView}>
           <Text style={[styles.balance, commonStyles.fontBold]}>{balance}</Text>
           <Text style={[styles.usdBalance, commonStyles.fontSemibold]}>
-            {parseFloat(coinDetails?.current_price * balance).toFixed(2)} $
+            ${parseFloat(coinDetails?.current_price * balance).toFixed(2)}
           </Text>
         </View>
         <View style={styles.changeView}>
+          <LineChart
+            style={styles.lineChart}
+            data={coinDetails?.sparkline_in_7d?.price || []}
+            svg={{ stroke: isUp ? colors.success : colors.error }}
+            contentInset={{ top: 5, bottom: 5 }}
+          />
           <View style={[commonStyles.row]}>
-            <Text style={styles.price}>
+            <Text style={[styles.price]}>
               {parseFloat(coinDetails?.current_price)}
             </Text>
             <PriceDirection price={coinDetails?.current_price} />
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default memo(BalanceCoin);
+export default memo(
+  BalanceCoin,
+  (prevProps, nextProps) =>
+    !nextProps.isMarketTicker || _isEqual(nextProps, prevProps)
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -112,7 +123,10 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 12,
-    color: colors.black,
-    opacity: 0.8,
+    fontFamily: FONT_BOLD,
+  },
+  lineChart: {
+    height: 30,
+    width: '95%',
   },
 });
