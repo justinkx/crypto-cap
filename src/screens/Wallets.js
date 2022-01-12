@@ -16,6 +16,7 @@ import { balance, allBalanceCoins } from '../utils/data';
 import { pickCryptoAssets } from '../store/selectors/assetSelector';
 import { calculateBalanceTotals } from '../helpers/price';
 import BalanceCoin from '../components/Wallet/BalanceCoin';
+import WalletTransfer from '../components/Wallet/WalletTransfer';
 
 const Wallets = () => {
   const [isMarketTicker, setMarketTicker] = useState(true);
@@ -76,7 +77,9 @@ const Wallets = () => {
         bounces
         zoomable
       />
-      <View style={[styles.transferView, commonStyles.flex]}></View>
+      <View style={[styles.transferView, commonStyles.flex]}>
+        <WalletTransfer />
+      </View>
     </Page>
   );
 };
@@ -111,7 +114,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   transferView: {
-    maxHeight: 150,
+    maxHeight: 120,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: colors.white,
@@ -123,5 +126,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.48,
     shadowRadius: 11.95,
     elevation: 18,
+    padding: 25,
+    justifyContent: 'center',
   },
 });
