@@ -2,6 +2,13 @@
   "name": "crypto-cap",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "description": "A React-Native crypto trade platform implementation making use of coingecko-api, expo, redux and redux-saga",
+  "homepage": "https://github.com/justinkx/crypto-cap.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justinkx/crypto-cap.git"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -61,6 +68,14 @@
     "husky": "^7.0.0",
     "redux-devtools-extension": "^2.13.9"
   },
+  "keywords": [
+    "react",
+    "react-native",
+    "expo",
+    "redux",
+    "redux-saga",
+    "react-native-svg"
+  ],
   "resolutions": {
     "react-native-gesture-handler": "^2"
   },
