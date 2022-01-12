@@ -1,6 +1,11 @@
 import React, { memo } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { MaterialIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import {
+  MaterialIcons,
+  FontAwesome5,
+  FontAwesome,
+  Entypo,
+} from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 
@@ -199,8 +204,8 @@ function DrawerNavigation() {
           title: 'Wallets',
           ...drawerIconOption,
           drawerIcon: ({ focused, size }) => (
-            <FontAwesome5
-              name="exchange-alt"
+            <Entypo
+              name="wallet"
               size={size}
               color={focused ? colors.white : 'gray'}
             />
