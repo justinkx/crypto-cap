@@ -40,6 +40,7 @@ const DashboardPriceChange = () => {
         data={balanceMarketChanges}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        bounces
       />
       <View style={[styles.bottomButton, commonStyles.row]}>
         <TouchableOpacity style={[commonStyles.row, commonStyles.center]}>

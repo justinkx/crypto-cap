@@ -67,6 +67,7 @@ const BalanceWallets = () => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         horizontal
+        bounces
       />
     </View>
   );

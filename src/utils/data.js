@@ -45,6 +45,21 @@ export const balance = [
     name: 'Dogecoin',
     balance: 1344.9844,
   },
+  {
+    token: 'OKB',
+    name: 'OKB',
+    balance: 41.998,
+  },
+  {
+    token: 'LTC',
+    name: 'Litecoin',
+    balance: 109.121,
+  },
+  {
+    token: 'FIL',
+    name: 'Filecoin',
+    balance: 3.33,
+  },
 ];
 
 export const allBalanceCoins = _map(balance, (item) => _toLower(item.name));

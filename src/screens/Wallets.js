@@ -45,7 +45,7 @@ const Wallets = () => {
   );
 
   return (
-    <Page scroll={false} padding>
+    <Page scroll={false}>
       <View style={[styles.balanceView, commonStyles.row, commonStyles.center]}>
         <View style={[commonStyles.row, commonStyles.center]}>
           <Text style={[styles.balanceTotal, commonStyles.fontBold]}>
@@ -73,7 +73,10 @@ const Wallets = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={styles.flatList}
+        bounces
+        zoomable
       />
+      <View style={[styles.transferView, commonStyles.flex]}></View>
     </Page>
   );
 };
@@ -81,7 +84,11 @@ const Wallets = () => {
 export default memo(Wallets);
 
 const styles = StyleSheet.create({
-  balanceView: { marginVertical: 20, position: 'relative', height: 100 },
+  balanceView: {
+    margin: 20,
+    position: 'relative',
+    height: 100,
+  },
   checkBoxView: {
     position: 'absolute',
     bottom: -10,
@@ -101,5 +108,12 @@ const styles = StyleSheet.create({
   },
   flatList: {
     paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  transferView: {
+    maxHeight: '20%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    backgroundColor: colors.white,
   },
 });
