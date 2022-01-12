@@ -194,7 +194,6 @@ function DrawerNavigation() {
               color={focused ? colors.white : 'gray'}
             />
           ),
-          lazy: false,
         }}
         name={EXCHANGE_STACK}
         component={ExchangeStack}
