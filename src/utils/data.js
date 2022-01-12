@@ -64,7 +64,7 @@ export const balance = [
 
 export const allBalanceCoins = _map(balance, (item) => _toLower(item.name));
 
-export const balanceCoins = _map(_take(balance, 3), (item) =>
+export const balanceCoins = _map(_take(balance, 4), (item) =>
   _toLower(item.name)
 );
 

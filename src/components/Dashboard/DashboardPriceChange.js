@@ -9,6 +9,7 @@ import {
 import { useSelector, shallowEqual } from 'react-redux';
 import { LineChart } from 'react-native-svg-charts';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   commonStyles,
@@ -20,6 +21,10 @@ import { getCryptoAssets } from '../../store/selectors/assetSelector';
 import { balanceCoins } from '../../utils/data';
 import PriceDirection from '../PriceDirection';
 import AssetIcon from '../AssetIcon';
+import {
+  COINS_STACK,
+  COIN_DETAILS_SCREEN,
+} from '../../navigation/NavConstants';
 
 const HEIGHT = 75;
 
@@ -83,11 +88,26 @@ const RenderBalance = memo(
     symbol,
     image,
     sparkline_in_7d = {},
+    id,
   }) => {
+    const navigation = useNavigation();
     const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
     const isUp = change24Hr > 0;
 
     const { price = [] } = sparkline_in_7d;
+
+    const handleBuy = useCallback(
+      () =>
+        navigation.navigate(COINS_STACK, {
+          screen: COIN_DETAILS_SCREEN,
+          params: {
+            title: name,
+            id: id,
+          },
+          initial: true,
+        }),
+      [name, id, navigation]
+    );
 
     return (
       <View
@@ -132,7 +152,10 @@ const RenderBalance = memo(
           </View>
         </View>
         <View style={[styles.boxShadow, styles.tickerBuy]}>
-          <TouchableOpacity style={[commonStyles.flex, commonStyles.center]}>
+          <TouchableOpacity
+            onPress={handleBuy}
+            style={[commonStyles.flex, commonStyles.center]}
+          >
             <Text style={[commonStyles.fontBold, commonStyles.primaryColor]}>
               BUY
             </Text>
