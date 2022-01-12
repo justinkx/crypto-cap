@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import { Text, View } from 'react-native';
 
-const BuySell = () => {
+const Wallets = () => {
   return (
     <View>
-      <Text>BuySell</Text>
+      <Text>Wallets</Text>
     </View>
   );
 };
 
-export default memo(BuySell);
+export default memo(Wallets);

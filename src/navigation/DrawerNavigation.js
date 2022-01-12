@@ -9,7 +9,7 @@ import {
   COINS_STACK,
   TRANSACTIONS_SCREEN,
   EXCHANGE_SCREEN,
-  BUY_SELL_SCREEN,
+  WALLETS_SCREEN,
   COINS_SCREEN,
   COIN_DETAILS_SCREEN,
   EXCHANGE_DETAILS_SCREEN,
@@ -18,7 +18,7 @@ import {
 import DashBoard from '../screens/DashBoard';
 import Transactions from '../screens/Transactions';
 import Exchanges from '../screens/Exchanges';
-import BuySell from '../screens/BuySell';
+import Wallets from '../screens/Wallets';
 import Coins from '../screens/Coins';
 import CoinDetails from '../screens/CoinDetails';
 import ExchangeDetails from '../screens/ExchangeDetails';
@@ -196,7 +196,7 @@ function DrawerNavigation() {
       />
       <Drawer.Screen
         options={{
-          title: 'Buy / Sell',
+          title: 'Wallets',
           ...drawerIconOption,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome5
@@ -206,8 +206,8 @@ function DrawerNavigation() {
             />
           ),
         }}
-        name={BUY_SELL_SCREEN}
-        component={BuySell}
+        name={WALLETS_SCREEN}
+        component={Wallets}
       />
       <Drawer.Screen
         options={{
