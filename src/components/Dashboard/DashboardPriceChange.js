@@ -80,26 +80,18 @@ const DashboardPriceChange = () => {
 };
 
 const RenderBalance = memo(
-  ({ price_change_percentage_24h, name, current_price, symbol, image }) => {
+  ({
+    price_change_percentage_24h,
+    name,
+    current_price,
+    symbol,
+    image,
+    sparkline_in_7d = {},
+  }) => {
     const change24Hr = parseFloat(price_change_percentage_24h).toFixed(2);
     const isUp = change24Hr > 0;
-    const [prices, setPrices] = useState([]);
 
-    /* eslint-disable radix */
-
-    useEffect(() => {
-      async function fetchPrices() {
-        try {
-          const { data } = await axios.get(CRYPTO_COIN_24HR_CHANGE(name));
-          const _prices24hr = _get(data, 'prices');
-          const _prices = _map(_prices24hr, ([_, price]) => parseInt(price));
-          setPrices(_prices);
-        } catch (error) {}
-      }
-      if (!_size(prices) && name) {
-        fetchPrices();
-      }
-    }, [name, prices]);
+    const { price = [] } = sparkline_in_7d;
 
     return (
       <View
@@ -130,10 +122,10 @@ const RenderBalance = memo(
             </View>
           </View>
           <View style={styles.rightView}>
-            {prices && (
+            {price && (
               <LineChart
                 style={{ height: 50 }}
-                data={prices}
+                data={price}
                 svg={{ stroke: isUp ? colors.success : colors.error }}
                 contentInset={{ top: 20, bottom: 20 }}
               />
